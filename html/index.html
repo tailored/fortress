@@ -1,0 +1,64 @@
+<html>
+<head>
+  <title>Firewall</title>
+  <script src="jquery-ui/jquery-1.10.2.js" type="text/javascript"></script>
+  <script src="jquery-ui/ui/jquery-ui.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="jquery-ui/themes/base/minified/jquery-ui.min.css"/>
+  <link rel="stylesheet" href="main.css"/>
+  <script>
+    $(function () {
+      $("#tabs").tabs();
+      $("#accordion").accordion();
+      $( "#sortable" ).sortable();
+      $( "#sortable" ).disableSelection();
+    });
+  </script>
+</head>
+<body>
+<div id="tabs">
+  <ul>
+    <li><a href="#tabs-rules">Rules</a></li>
+    <li><a href="#tabs-settings">Settings</a></li>
+    <li><a href="#tabs-about">About</a></li>
+  </ul>
+  <div id="tabs-rules">
+    <div id="rulesMenu">
+      <div id="accordion">
+        <h3>TCP/UDP</h3>
+
+        <div>
+        </div>
+
+        <h3>ICMP</h3>
+
+        <div>
+        </div>
+
+      </div>
+    </div>
+    <div id="rulesList">
+      <ul id="sortable">
+        <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 1</li>
+        <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 2</li>
+        <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 3</li>
+        <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 4</li>
+        <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 5</li>
+        <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 6</li>
+        <li class="ui-state-default"><span class="ui-icon ui-icon-arrowthick-2-n-s"></span>Item 7</li>
+      </ul>
+    </div>
+  </div>
+  <div id="tabs-settings">
+    settings
+  </div>
+  <div id="tabs-about">
+    <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis
+      scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus
+      eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in
+      eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut
+      posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque
+      pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
+  </div>
+</div>
+</body>
+</html>

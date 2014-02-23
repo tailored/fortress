@@ -1,0 +1,53 @@
+body {
+  background: lightgray;
+  margin: 0;
+  padding: 0;
+}
+
+#tabs-settings,
+#tabs-about,
+#tabs-rules {
+  position: relative;
+  overflow: auto;
+  height: 90%;
+
+}
+
+#rulesMenu {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20%;
+  border-left: 1px solid lightgray;
+  margin: 20px 10px 20px 10px;
+  padding: 5px;
+}
+
+#rulesList {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 77%;
+  margin: 20px 10px 20px 10px;
+  padding: 5px;
+}
+
+#sortable {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 60%;
+}
+
+#sortable li {
+  margin: 0 3px 3px 3px;
+  padding: 0.4em;
+  padding-left: 1.5em;
+  font-size: 1.4em;
+  height: 18px;
+}
+
+#sortable li span {
+  position: absolute;
+  margin-left: -1.3em;
+}
