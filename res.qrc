@@ -330,5 +330,7 @@
         <file>html/jquery-ui/ui/minified/i18n/jquery.ui.datepicker-zh-HK.min.js</file>
         <file>html/jquery-ui/ui/minified/i18n/jquery.ui.datepicker-zh-TW.min.js</file>
         <file>html/main.css</file>
+        <file>html/functions.js</file>
+        <file>html/qtwrapper.js</file>
     </qresource>
 </RCC>

@@ -60,9 +60,10 @@
     <enum>TopToolBarArea</enum>
    </attribute>
    <attribute name="toolBarBreak">
-    <bool>true</bool>
+    <bool>false</bool>
    </attribute>
    <addaction name="actionDeploy"/>
+   <addaction name="actionInstallStartupScript"/>
    <addaction name="separator"/>
    <addaction name="actionQuit"/>
   </widget>
@@ -78,6 +79,11 @@
   <action name="actionDeploy">
    <property name="text">
     <string>Deploy</string>
+   </property>
+  </action>
+  <action name="actionInstallStartupScript">
+   <property name="text">
+    <string>Install Startup Script</string>
    </property>
   </action>
  </widget>
