@@ -26,6 +26,16 @@
       $("#sortable").droppable({
         drop: function (event, ui) {
           $(this).effect('highlight');
+          if ($(ui.draggable).hasClass('icmpRule')) {
+            $(ui.draggable).append('<div>foobar</div>');
+            $(ui.draggable).removeClass('icmpRule');
+            $(ui.draggable).addClass('icmpRuleActive');
+          }
+          if ($(ui.draggable).hasClass('tcpUdpRule')) {
+            $(ui.draggable).append('<div>foobar</div>');
+            $(ui.draggable).removeClass('tcpUdpRule');
+            $(ui.draggable).addClass('tcpUdpRuleActive');
+          }
           //.addClass("ui-state-highlight")
           //.find("p")
           //.html("Dropped!");
@@ -48,10 +58,10 @@
 
         <div>
           <ul id="newRuleList" class="ui-sortable">
-            <li id="tcpUdpDrag" class="ui-state-default">
+            <li id="tcpUdpDrag" class="ui-state-default tcpUdpRule">
               <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>TCP/UDP-Rule
             </li>
-            <li id="icmpDrag" class="ui-state-default">
+            <li id="icmpDrag" class="ui-state-default icmpRule">
               <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>ICMP-Rule
             </li>
           </ul>
@@ -63,12 +73,16 @@
         <h3>Presets</h3>
 
         <div>
-          <div class="centerSmall"><small><b>Note:</b> Applying one of these Presets will overwrite all defined rules!</small></div>
+          <div class="centerSmall">
+            <small><b>Note:</b> Applying one of these Presets will overwrite all defined rules!</small>
+          </div>
         </div>
         <h3>User-Presets</h3>
 
         <div>
-          <div class="centerSmall"><small><b>Note:</b> Applying one of these Presets will overwrite all defined rules!</small></div>
+          <div class="centerSmall">
+            <small><b>Note:</b> Applying one of these Presets will overwrite all defined rules!</small>
+          </div>
         </div>
       </div>
     </div>
