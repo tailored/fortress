@@ -1,3 +1,30 @@
 body {
   padding: 10px 0 0 0;
 }
+
+.div-content {
+  border-radius: 5px;
+  border: 1px solid lightgrey !important;
+  padding: 5px;
+  margin: 5px;
+}
+
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
+
+.eightypercent {
+  width: 79%;
+}
+
+.twentypercent {
+  width: 19%;
+}
+
+.paddingfive {
+  padding: 5px;
+}
