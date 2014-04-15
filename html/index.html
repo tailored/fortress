@@ -1,109 +1,36 @@
 <html>
 <head>
   <title>Firewall</title>
-  <script src="jquery-ui/jquery-1.10.2.js" type="text/javascript"></script>
-  <script src="jquery-ui/ui/jquery-ui.js" type="text/javascript"></script>
-  <script src="functions.js" type="text/javascript"></script>
-  <script src="qtwrapper.js" type="text/javascript"></script>
-  <link rel="stylesheet" href="jquery-ui/themes/base/minified/jquery-ui.min.css"/>
-  <link rel="stylesheet" href="main.css"/>
-  <script>
-    $(function () {
-      $("#tabs").tabs();
-      $("#accordion").accordion();
-      $("#sortable").sortable();
-      $("#sortable").disableSelection();
-      $("#tcpUdpDrag").draggable({
-        connectToSortable: "#sortable",
-        helper: "clone",
-        revert: "invalid"
-      });
-      $("#icmpDrag").draggable({
-        connectToSortable: "#sortable",
-        helper: "clone",
-        revert: "invalid"
-      });
-      $("#sortable").droppable({
-        drop: function (event, ui) {
-          $(this).effect('highlight');
-          if ($(ui.draggable).hasClass('icmpRule')) {
-            $(ui.draggable).append('<div>foobar</div>');
-            $(ui.draggable).removeClass('icmpRule');
-            $(ui.draggable).addClass('icmpRuleActive');
-          }
-          if ($(ui.draggable).hasClass('tcpUdpRule')) {
-            $(ui.draggable).append('<div>foobar</div>');
-            $(ui.draggable).removeClass('tcpUdpRule');
-            $(ui.draggable).addClass('tcpUdpRuleActive');
-          }
-          //.addClass("ui-state-highlight")
-          //.find("p")
-          //.html("Dropped!");
-        }
-      });
-    });
-  </script>
+  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="custom.css">
+  <script type="text/javascript" src="bootstrap/js/jquery-2.1.0.min.js"></script>
+  <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 </head>
 <body>
-<div id="tabs">
-  <ul>
-    <li><a href="#tabs-rules">Rules</a></li>
-    <li><a href="#tabs-settings">Settings</a></li>
-    <li><a href="#tabs-about">About</a></li>
+<div class="page">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#rules" data-toggle="tab">Rules</a></li>
+    <li><a href="#settings" data-toggle="tab">Settings</a></li>
+    <li><a href="#about" data-toggle="tab">About</a></li>
   </ul>
-  <div id="tabs-rules">
-    <div id="rulesMenu">
-      <div id="accordion">
-        <h3>Rules</h3>
-
-        <div>
-          <ul id="newRuleList" class="ui-sortable">
-            <li id="tcpUdpDrag" class="ui-state-default tcpUdpRule">
-              <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>TCP/UDP-Rule
-            </li>
-            <li id="icmpDrag" class="ui-state-default icmpRule">
-              <span class="ui-icon ui-icon-arrowthick-2-n-s"></span>ICMP-Rule
-            </li>
-          </ul>
-          <div class="centerSmall">
-            <small>To create a new rule drag it to the rules list on the left!</small>
-          </div>
-        </div>
-
-        <h3>Presets</h3>
-
-        <div>
-          <div class="centerSmall">
-            <small><b>Note:</b> Applying one of these Presets will overwrite all defined rules!</small>
-          </div>
-        </div>
-        <h3>User-Presets</h3>
-
-        <div>
-          <div class="centerSmall">
-            <small><b>Note:</b> Applying one of these Presets will overwrite all defined rules!</small>
-          </div>
-        </div>
+  <div class="tab-content">
+    <div class="tab-pane fade in active" id="rules">
+      <div class="container">
+        rules
       </div>
     </div>
-    <div id="rulesList" class="ui-sortable">
-      <ul id="sortable" class="contentDiv">
-      </ul>
-      <small><br/>Drop your rules in the box above!</small>
+    <div class="tab-pane fade in" id="settings">
+      <div class="container">
+        settings
+      </div>
     </div>
-  </div>
-  <div id="tabs-settings">
-    <div class="contentDiv">
-      settings
+    <div class="tab-pane fade in" id="about">
+      <div class="container">
+        about
+      </div>
     </div>
-  </div>
-  <div id="tabs-about">
-    <p>Morbi tincidunt, dui sit amet facilisis feugiat, odio metus gravida ante, ut pharetra massa metus id nunc. Duis
-      scelerisque molestie turpis. Sed fringilla, massa eget luctus malesuada, metus eros molestie lectus, ut tempus
-      eros massa ut dolor. Aenean aliquet fringilla sem. Suspendisse sed ligula in ligula suscipit aliquam. Praesent in
-      eros vestibulum mi adipiscing adipiscing. Morbi facilisis. Curabitur ornare consequat nunc. Aenean vel metus. Ut
-      posuere viverra nulla. Aliquam erat volutpat. Pellentesque convallis. Maecenas feugiat, tellus pellentesque
-      pretium posuere, felis lorem euismod felis, eu ornare leo nisi vel felis. Mauris consectetur tortor et purus.</p>
   </div>
 </div>
 </body>
