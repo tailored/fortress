@@ -3,6 +3,10 @@
 
 #include <QMainWindow>
 #include <QResizeEvent>
+#include <QWebView>
+#include <QWebFrame>
+
+#include "functionwrapper.h"
 
 namespace Ui {
 class fireWallWindow;
@@ -15,9 +19,15 @@ class fireWallWindow : public QMainWindow
 public:
     explicit fireWallWindow(QWidget *parent = 0);
     ~fireWallWindow();
+    void updateWebView();
+
+private slots:
+    void on_fireWallWebView_loadFinished(bool arg1);
 
 private:
     Ui::fireWallWindow *ui;
+    functionWrapper *fwrapper;
+    QWebView *firewallWebView;
 };
 
 #endif // FIREWALLWINDOW_H

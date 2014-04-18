@@ -10,6 +10,11 @@
     <height>673</height>
    </rect>
   </property>
+  <property name="font">
+   <font>
+    <family>Sans Serif</family>
+   </font>
+  </property>
   <property name="mouseTracking">
    <bool>false</bool>
   </property>
