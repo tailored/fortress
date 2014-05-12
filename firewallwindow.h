@@ -5,8 +5,11 @@
 #include <QResizeEvent>
 #include <QWebView>
 #include <QWebFrame>
+#include <QDebug>
 
 #include "functionwrapper.h"
+#include "settingsmanager.h"
+#include "defines.h"
 
 namespace Ui {
 class fireWallWindow;

@@ -19,7 +19,7 @@
    <bool>false</bool>
   </property>
   <property name="windowTitle">
-   <string>fireWallWindow</string>
+   <string>Fortress</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <property name="sizePolicy">

@@ -14,10 +14,13 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         firewallwindow.cpp \
-    functionwrapper.cpp
+    functionwrapper.cpp \
+    settingsmanager.cpp
 
 HEADERS  += firewallwindow.h \
-    functionwrapper.h
+    functionwrapper.h \
+    settingsmanager.h \
+    defines.h
 
 FORMS    += firewallwindow.ui
 

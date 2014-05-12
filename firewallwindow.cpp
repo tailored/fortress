@@ -5,6 +5,9 @@ fireWallWindow::fireWallWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::fireWallWindow)
 {
+    QCoreApplication::setOrganizationName(FORTRESS_ORGANISATION);
+    QCoreApplication::setOrganizationDomain(FORTRESS_ORGANISATION_DOMAIN);
+    QCoreApplication::setApplicationName(FORTRESS_APPLICATION);
     ui->setupUi(this);
     this->fwrapper = new functionWrapper;
     this->firewallWebView = ui->fireWallWebView;
@@ -19,6 +22,7 @@ fireWallWindow::~fireWallWindow()
 void fireWallWindow::updateWebView() {
     qDebug("webView: adding javascript wrapper");
     this->firewallWebView->page()->mainFrame()->addToJavaScriptWindowObject("fwrapper",this->fwrapper);
+    this->firewallWebView->page()->mainFrame()->addToJavaScriptWindowObject("smanager", SettingsManager::getSharedInstance());
 }
 
 

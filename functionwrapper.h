@@ -5,6 +5,8 @@
 #include <QApplication>
 #include <QString>
 
+#include "defines.h"
+
 class functionWrapper : public QObject
 {
     Q_OBJECT

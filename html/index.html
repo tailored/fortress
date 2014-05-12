@@ -57,7 +57,7 @@
             </div>
           </div>
           <div class="panel panel-danger">
-            <div class="panel-heading">
+            <div class="panel panel-heading">
               <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseRules">
                   Rules
@@ -79,11 +79,24 @@
     </div>
     <div class="tab-pane fade in paddingfive" id="settings">
       <div class="modal-header">
-        settings
+        <div class="panel panel-heading">Settings</div>
+        <div class="panel">
+          <div class="form">
+            <div class="form-group">
+              <label for="settings/sudoprovider" class="form">Sudo Command:</label>
+              <input class="form-control" type="text" name="settings/sudoprovider" value="foo">
+            </div>
+            <div class="form-group">
+              <input type="submit" value="Save" class="btn btn-info">
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="tab-pane fade in paddingfive" id="help">
-      <div class="modal-header eightypercent float-left">Help</div>
+      <div class="modal-header eightypercent float-left">
+        <div class="panel panel-heading">Help</div>
+      </div>
       <div class="float-right twentypercent panel panel-info bg-info">
         <div class="panel-heading">Contents</div>
         <ul class="nav bg-info paddingfive">
@@ -98,7 +111,9 @@
       </div>
     </div>
     <div class="tab-pane fade in paddingfive" id="about">
-      <div class="modal-header">About</div>
+      <div class="modal-header">
+        <div class="panel panel-heading">About</div>
+      </div>
     </div>
   </div>
 </div>
