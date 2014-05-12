@@ -8,6 +8,7 @@
   <script type="text/javascript" src="bootstrap/js/jquery-2.1.0.min.js"></script>
   <script type="text/javascript" src="js/jquery-ui-1.10.4.min.js"></script>
   <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="functions.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 </head>
 <body>
@@ -27,7 +28,8 @@
           </ul>
       </div>
       <div class="float-left twentypercent paddingfive">
-        <div class="panel-group" id="accordion">
+        <div class="panel-group" id="acco    qDebug() << output;
+rdion">
           <div class="panel panel-success">
             <div class="panel-heading">
               <h4 class="panel-title">
@@ -76,6 +78,7 @@
                       data-placement="bottom" title="<-- paste tooltip here -->"></span>
               </h4>
             </div>
+
             <div id="collapseRules" class="panel-collapse collapse">
               <div class="panel-body bg-danger">
                   <ul id="lst-rules" class="connectedSortable list-group">
@@ -93,13 +96,19 @@
       <div class="modal-header">
         <div class="panel panel-heading">Settings</div>
         <div class="panel">
+          <div class="alert alert-danger" id="settingsError"></div>
           <div class="form">
             <div class="form-group">
-              <label for="settings/sudoprovider" class="form">Sudo Command:</label>
-              <input class="form-control" type="text" name="settings/sudoprovider" value="foo">
+              <label for="settings-sudoprovider" class="form">path to graphical sudo provider:</label>
+              <input class="form-control" type="text" id="settings-sudoprovider">
             </div>
             <div class="form-group">
-              <input type="submit" value="Save" class="btn btn-info">
+              <label for="settings-iptables" class="form">path to iptables:</label>
+              <input class="form-control" type="text" id="settings-iptables">
+            </div>
+            <div class="form-group">
+              <input type="button" value="Save" class="btn btn-info" onclick="setSettings()">
+              <input type="button" value="Autodetect" class="btn btn-danger" onclick="autoDetectSettings()">
             </div>
           </div>
         </div>
@@ -130,7 +139,8 @@
   </div>
 </div>
 <script type="text/javascript">
-  $('#ruleslist').append(fwrapper.getDebugOutput());
+  //$('#ruleslist').append(fwrapper.getDebugOutput());
+  $().ready(readyFunc());
   $('#toolTipPresets').tooltip();
   $('#toolTipUserPresets').tooltip();
   $('#toolTipRules').tooltip();
