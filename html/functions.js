@@ -4,14 +4,14 @@
 function getSettings() {
   $("#settings-sudoprovider").val(smanager.getValue("settings/sudoprovider"));
   $("#settings-iptables").val(smanager.getValue("settings/iptables"));
-  var stashesList = JSON.parse(smanager.getStashesList());
   var currentStashUrl = smanager.getValue("settings/stashurl");
-  var curretnStashName = smanager.getValue("settings/stashname");
+  var currentStashName = smanager.getValue("settings/stashname");
+  var stashesList = JSON.parse(smanager.getStashesList());
   if (stashesList.hasOwnProperty("stashes")) {
-    var retVal = "<select name=\"settings-stashurl\" id=\"settings-stashurl\" class=\"form-control\">";
+    retVal = "<select name=\"settings-stashurl\" id=\"settings-stashurl\" class=\"form-control\">";
     for (var i = 0; i < stashesList.stashes.length; i++) {
       retVal += "<option value=\"" + stashesList.stashes[i].url + "\"";
-      if (currentStashUrl == stashesList.stashes[i].url && curretnStashName == stashesList.stashes[i].name)
+      if (currentStashUrl == stashesList.stashes[i].url && currentStashName == stashesList.stashes[i].name)
         retVal += " selected=\"selected\" ";
       retVal += ">" + stashesList.stashes[i].name + "</option>";
     }
@@ -36,14 +36,18 @@ function setSettings() {
 
 function autoDetectSettings() {
   smanager.initConfig();
-  var stashesList = JSON.parse(smanager.getStashesList());
-  if (stashesList.hasOwnProperty("stashes")) {
-    smanager.setValue("settings/stashurl", stashesList.stashes[0].url);
-    smanager.setValue("settings/stashname", stashesList.stashes[0].name);
-    smanager.setValue("settings/fetchstashes", "true");
+  var stashesListString = smanager.getStashesList();
+  if (stashesListString.length > 0) {
+    var stashesList = JSON.parse(stashesListString);
+    if (stashesList.hasOwnProperty("stashes")) {
+      smanager.setValue("settings/stashurl", stashesList.stashes[0].url);
+      smanager.setValue("settings/stashname", stashesList.stashes[0].name);
+      smanager.setValue("settings/fetchstashes", "true");
+    }
+    validateSettings();
+    getSettings();
+  } else {
   }
-  validateSettings();
-  getSettings();
 }
 
 function validateSettings() {
@@ -56,16 +60,4 @@ function validateSettings() {
     errorDiv.html("");
     errorDiv.hide();
   }
-}
-
-function testInit() {
-  if (smanager.getValue("settings/stashurl").length < 1) {
-    autoDetectSettings();
-  }
-  getSettings();
-}
-
-function readyFunc() {
-  window.setTimeout(testInit(), 1);
-  getSettings();
 }

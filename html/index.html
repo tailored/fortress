@@ -15,7 +15,7 @@
 <div class="page">
   <ul class="nav nav-tabs topnav">
     <li class="active"><a href="#rules" data-toggle="tab">Rules</a></li>
-    <li><a href="#settings" data-toggle="tab" onclick="getSettings()">Settings</a></li>
+    <li id="settingsTab"><a href="#settings" data-toggle="tab" onclick="getSettings(); validateSettings();">Settings</a></li>
     <li><a href="#help" data-toggle="tab">Help</a></li>
     <li><a href="#about" data-toggle="tab">About</a></li>
   </ul>
@@ -28,8 +28,7 @@
         </ul>
       </div>
       <div class="float-left twentypercent paddingfive">
-        <div class="panel-group" id="acco    qDebug() << output;
-rdion">
+        <div class="panel-group" id="accordion">
           <div class="panel panel-success">
             <div class="panel-heading">
               <h4 class="panel-title">
@@ -115,12 +114,14 @@ rdion">
             </div>
             <div class="form-group">
               <label for="settings-stashurl">remote preset stash</label>
+
               <div id="settings-stashlist-wrapper"></div>
             </div>
             <div class="form-group">
               <div class="checkbox">
                 <label class="form">
-                  <input type="checkbox" id="settings-fetchstashes" class="checkbox">fetch remote preset stash on startup
+                  <input type="checkbox" id="settings-fetchstashes" class="checkbox">fetch remote preset stash on
+                  startup
                 </label>
               </div>
             </div>
@@ -158,7 +159,6 @@ rdion">
   </div>
 </div>
 <script type="text/javascript">
-  $(document).ready(readyFunc());
   $('#toolTipPresets').tooltip();
   $('#toolTipUserPresets').tooltip();
   $('#toolTipRules').tooltip();
@@ -166,6 +166,14 @@ rdion">
     $("#lst-activerules, #lst-userpresets, #lst-rules, #lst-presets").sortable({
       connectWith: ".connectedSortable"
     }).disableSelection();
+  });
+  $(document).ready(function () {
+    if (smanager.getValue("settings/firstrun").length < 1) {
+      alert("Fortress has not been configured yet, please go to settings and run autodetect or configure manually!");
+      $("#settingsTab").highlight();
+      validateSettings();
+    }
+    getSettings();
   });
 </script>
 </body>
