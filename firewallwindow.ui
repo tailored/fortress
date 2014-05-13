@@ -31,6 +31,11 @@
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
      <widget class="QWebView" name="fireWallWebView">
+      <property name="font">
+       <font>
+        <family>Sans Serif</family>
+       </font>
+      </property>
       <property name="url">
        <url>
         <string>qrc:/html/html/index.html</string>
@@ -68,7 +73,6 @@
     <bool>false</bool>
    </attribute>
    <addaction name="actionDeploy"/>
-   <addaction name="actionInstallStartupScript"/>
    <addaction name="separator"/>
    <addaction name="actionQuit"/>
   </widget>
@@ -84,11 +88,6 @@
   <action name="actionDeploy">
    <property name="text">
     <string>Deploy</string>
-   </property>
-  </action>
-  <action name="actionInstallStartupScript">
-   <property name="text">
-    <string>Install Startup Script</string>
    </property>
   </action>
  </widget>

@@ -1,33 +1,51 @@
 #include "firewallwindow.h"
 #include "ui_firewallwindow.h"
 
+/**
+ * @brief fireWallWindow::fireWallWindow
+ * @param parent
+ */
 fireWallWindow::fireWallWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::fireWallWindow)
 {
-    QCoreApplication::setOrganizationName(FORTRESS_ORGANISATION);
-    QCoreApplication::setOrganizationDomain(FORTRESS_ORGANISATION_DOMAIN);
-    QCoreApplication::setApplicationName(FORTRESS_APPLICATION);
     ui->setupUi(this);
     this->fwrapper = new functionWrapper;
     this->firewallWebView = ui->fireWallWebView;
+    this->firewallWebView->setContextMenuPolicy(Qt::NoContextMenu);
+    fdl = new FileDownloader(QUrl::fromUserInput(FORTRESS_GITHUB_STASHLIST_URL), this);
+    connect(fdl,SIGNAL(downloaded()),SLOT(setStashesList()));
     this->updateWebView();
 }
 
+/**
+ * @brief fireWallWindow::~fireWallWindow
+ */
 fireWallWindow::~fireWallWindow()
 {
     delete ui;
 }
 
+/**
+ * @brief fireWallWindow::updateWebView
+ */
 void fireWallWindow::updateWebView() {
-    qDebug("webView: adding javascript wrapper");
     this->firewallWebView->page()->mainFrame()->addToJavaScriptWindowObject("fwrapper",this->fwrapper);
     this->firewallWebView->page()->mainFrame()->addToJavaScriptWindowObject("smanager", SettingsManager::getSharedInstance());
 }
 
-
+/**
+ * @brief fireWallWindow::on_fireWallWebView_loadFinished
+ * @param arg1
+ */
 void fireWallWindow::on_fireWallWebView_loadFinished(bool arg1)
 {
-    qDebug("webView: load completed");
-    this->updateWebView();
+    if(arg1) this->updateWebView();
+}
+
+/**
+ * @brief fireWallWindow::setStashesList
+ */
+void fireWallWindow::setStashesList() {
+    SettingsManager::getSharedInstance()->setStashesList(fdl->downloadedData());
 }

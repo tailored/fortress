@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui webkit
+QT       += core gui webkit network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets webkitwidgets
 
@@ -15,12 +15,14 @@ TEMPLATE = app
 SOURCES += main.cpp\
         firewallwindow.cpp \
     functionwrapper.cpp \
-    settingsmanager.cpp
+    settingsmanager.cpp \
+    filedownloader.cpp
 
 HEADERS  += firewallwindow.h \
     functionwrapper.h \
     settingsmanager.h \
-    defines.h
+    defines.h \
+    filedownloader.h
 
 FORMS    += firewallwindow.ui
 

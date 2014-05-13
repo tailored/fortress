@@ -1,6 +1,6 @@
 #include "settingsmanager.h"
 
-static SettingsManager* instance = NULL;
+static SettingsManager* settingsMangerInstance = NULL;
 
 /**
  * @brief SettingsManager::SettingsManager
@@ -10,7 +10,8 @@ SettingsManager::SettingsManager(QObject *parent) :
     QObject(parent)
 {
     this->settings = new QSettings(FORTRESS_ORGANISATION, FORTRESS_APPLICATION);
-    if(this->getValue("settings/sudoprovider").compare("") == 0) this->initConfig();
+    if(this->getValue("settings/firstrun").compare("false") != 0) this->initConfig();
+    this->getStashesList();
 }
 
 /**
@@ -18,8 +19,8 @@ SettingsManager::SettingsManager(QObject *parent) :
  * @return
  */
 SettingsManager* SettingsManager::getSharedInstance() {
-    if(instance == NULL) instance = new SettingsManager;
-    return instance;
+    if(settingsMangerInstance == NULL) settingsMangerInstance = new SettingsManager;
+    return settingsMangerInstance;
 }
 
 /**
@@ -48,13 +49,14 @@ bool SettingsManager::setValue(QString key, QString val) {
 void SettingsManager::initConfig() {
     this->detectSudoProvider();
     this->detectIptables();
+    this->setValue("settings/firstrun", "false");
 }
 
 /**
  * @brief SettingsManager::detectSudoProvider
  * @return
  */
-bool SettingsManager::detectSudoProvider() {
+bool SettingsManager::detectSudoProvider(bool writeConfig) {
     bool detected = false;
     QProcess process;
     QString output;
@@ -68,7 +70,7 @@ bool SettingsManager::detectSudoProvider() {
             process.waitForFinished(20);
             output = process.readAllStandardOutput();
             output.remove(QRegExp("[\\n\\t\\r]"));
-            this->setValue("settings/sudoprovider", output);
+            if(writeConfig) this->setValue("settings/sudoprovider", output);
             detected = true;
         } else {
             break;
@@ -81,7 +83,7 @@ bool SettingsManager::detectSudoProvider() {
  * @brief SettingsManager::detectIptables
  * @return
  */
-bool SettingsManager::detectIptables() {
+bool SettingsManager::detectIptables(bool writeConfig) {
     bool detected = false;
     QStringList tmpList;
     tmpList << "/sbin/iptables" << "/usr/sbin/iptables" << "/usr/bin/iptables" << "/usr/local/sbin/iptables" << "/usr/local/bin/iptables";
@@ -90,7 +92,7 @@ bool SettingsManager::detectIptables() {
             QFileInfo tmpInfo(tmpList.at(i));
             if(tmpInfo.isExecutable()) {
                 detected = true;
-                this->setValue("settings/iptables", tmpList.at(i));
+                if(writeConfig) this->setValue("settings/iptables", tmpList.at(i));
             }
         } else {
             break;
@@ -126,21 +128,60 @@ bool SettingsManager::checkFileExists(QString file) {
 QString SettingsManager::validateSettings() {
     bool errorFound = false;
     QString retVal;
-    if(!this->checkFileExists(this->getValue("settings/sudoprovider"))) {
-        retVal.append(ERROR_SUDOPROVIDER_NOT_FOUND).append(GENERIC_HTML_LINEBREAK);
+    // errors for graphical sudoprovider installation
+    if(this->getValue("settings/sudoprovider").compare("") == 0 || !this->detectSudoProvider(FALSE)) {
+        retVal.append("<li>").append(ERROR_SUDOPROVIDER_NOT_INSTALLED).append("</li>");
         errorFound = true;
     }
-    if(!this->checkFileExecutable(this->getValue("settings/sudoprovider"))) {
-        retVal.append(ERROR_SUDOPROVIDER_NOT_EXECUTABLE).append(GENERIC_HTML_LINEBREAK);
+    if((this->getValue("settings/sudoprovider").compare("") != 0 || this->detectSudoProvider(FALSE))) {
+        if(!this->checkFileExists(this->getValue("settings/sudoprovider"))) {
+            retVal.append("<li>").append(ERROR_SUDOPROVIDER_NOT_FOUND).append("</li>");
+            errorFound = true;
+        }
+        if(!this->checkFileExecutable(this->getValue("settings/sudoprovider"))) {
+            retVal.append("<li>").append(ERROR_SUDOPROVIDER_NOT_EXECUTABLE).append("</li>");
+            errorFound = true;
+        }
+    }
+
+    // errors for iptables installation
+    if(this->getValue("settings/iptables").compare("") == 0 || !this->detectIptables(FALSE)) {
+        retVal.append("<li>").append(ERROR_IPTABLES_NOT_INSTALLED).append("</li>");
         errorFound = true;
     }
-    if(!this->checkFileExists(this->getValue("settings/iptables"))) {
-        retVal.append(ERROR_IPTABLES_NOT_FOUND).append(GENERIC_HTML_LINEBREAK);
-        errorFound = true;
+    if(this->getValue("settings/iptables").compare("") != 0 || this->detectIptables(FALSE)) {
+        if(!this->checkFileExists(this->getValue("settings/iptables"))) {
+            retVal.append("<li>").append(ERROR_IPTABLES_NOT_FOUND).append("</li>");
+            errorFound = true;
+        }
+        if(!this->checkFileExecutable(this->getValue("settings/iptables"))) {
+            retVal.append("<li>").append(ERROR_IPTABLES_NOT_EXECUTABLE).append("</li>");
+        }
     }
-    if(!this->checkFileExecutable(this->getValue("settings/iptables"))) {
-        retVal.append(ERROR_IPTABLES_NOT_EXECUTABLE).append(GENERIC_HTML_LINEBREAK);
+    // append generic error message
+    if(errorFound)  {
+        QString tmp = "<b>ERROR:</b><ul>";
+        retVal.append("<li>").append(ERROR_CHECK_ENTRIES).append("</li>");
+        tmp.append(retVal);
+        tmp.append("</ul>");
+        retVal = tmp;
     }
-    if(errorFound) retVal.append(ERROR_CHECK_ENTRIES).append(GENERIC_HTML_LINEBREAK);
+    // return error(s))
     return retVal;
+}
+
+/**
+ * @brief SettingsManager::getStashesList
+ * @return
+ */
+QString SettingsManager::getStashesList() {
+    return this->stashesList;
+}
+
+/**
+ * @brief SettingsManager::setStashesList
+ * @param slist
+ */
+void SettingsManager::setStashesList(QByteArray slist) {
+    this->stashesList = slist;
 }

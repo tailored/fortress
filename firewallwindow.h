@@ -10,6 +10,8 @@
 #include "functionwrapper.h"
 #include "settingsmanager.h"
 #include "defines.h"
+#include "filedownloader.h"
+#include "settingsmanager.h"
 
 namespace Ui {
 class fireWallWindow;
@@ -26,11 +28,12 @@ public:
 
 private slots:
     void on_fireWallWebView_loadFinished(bool arg1);
-
+    void setStashesList();
 private:
     Ui::fireWallWindow *ui;
     functionWrapper *fwrapper;
     QWebView *firewallWebView;
+    FileDownloader *fdl;
 };
 
 #endif // FIREWALLWINDOW_H

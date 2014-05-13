@@ -15,17 +15,17 @@
 <div class="page">
   <ul class="nav nav-tabs topnav">
     <li class="active"><a href="#rules" data-toggle="tab">Rules</a></li>
-    <li><a href="#settings" data-toggle="tab">Settings</a></li>
+    <li><a href="#settings" data-toggle="tab" onclick="getSettings()">Settings</a></li>
     <li><a href="#help" data-toggle="tab">Help</a></li>
     <li><a href="#about" data-toggle="tab">About</a></li>
   </ul>
   <div class="tab-content">
     <div class="tab-pane fade in active" id="rules">
       <div class="div-content float-left eightypercent" id="ruleslist">
-          <ul id="lst-activerules" class="connectedSortable list-group">
-              <li class="list-group-item">Item 1</li>
-              <li class="list-group-item">Item 2</li>
-          </ul>
+        <ul id="lst-activerules" class="connectedSortable list-group">
+          <li class="list-group-item">Item 1</li>
+          <li class="list-group-item">Item 2</li>
+        </ul>
       </div>
       <div class="float-left twentypercent paddingfive">
         <div class="panel-group" id="acco    qDebug() << output;
@@ -42,10 +42,10 @@ rdion">
             </div>
             <div id="collapesPresets" class="panel-collapse collapse in">
               <div class="panel-body bg-success">
-                  <ul id="lst-presets" class="connectedSortable list-group">
-                      <li class="list-group-item">Preset 1</li>
-                      <li class="list-group-item">Preset 2</li>
-                  </ul>
+                <ul id="lst-presets" class="connectedSortable list-group">
+                  <li class="list-group-item">Preset 1</li>
+                  <li class="list-group-item">Preset 2</li>
+                </ul>
               </div>
             </div>
           </div>
@@ -61,10 +61,10 @@ rdion">
             </div>
             <div id="collapseUserPresets" class="panel-collapse collapse">
               <div class="panel-body bg-warning">
-                  <ul id="lst-userpresets" class="connectedSortable list-group">
-                      <li class="list-group-item">User 1</li>
-                      <li class="list-group-item">User 2</li>
-                  </ul>
+                <ul id="lst-userpresets" class="connectedSortable list-group">
+                  <li class="list-group-item">User 1</li>
+                  <li class="list-group-item">User 2</li>
+                </ul>
               </div>
             </div>
           </div>
@@ -81,10 +81,10 @@ rdion">
 
             <div id="collapseRules" class="panel-collapse collapse">
               <div class="panel-body bg-danger">
-                  <ul id="lst-rules" class="connectedSortable list-group">
-                      <li class="list-group-item">Rule 1</li>
-                      <li class="list-group-item">Rule 2</li>
-                  </ul>
+                <ul id="lst-rules" class="connectedSortable list-group">
+                  <li class="list-group-item">Rule 1</li>
+                  <li class="list-group-item">Rule 2</li>
+                </ul>
               </div>
             </div>
           </div>
@@ -92,6 +92,7 @@ rdion">
 
       </div>
     </div>
+    <!-- TODO: add whats this symbol to each form field -->
     <div class="tab-pane fade in paddingfive" id="settings">
       <div class="modal-header">
         <div class="panel panel-heading">Settings</div>
@@ -99,16 +100,34 @@ rdion">
           <div class="alert alert-danger" id="settingsError"></div>
           <div class="form">
             <div class="form-group">
-              <label for="settings-sudoprovider" class="form">path to graphical sudo provider:</label>
+              <label for="settings-sudoprovider" class="form">path to graphical sudo gui</label>
               <input class="form-control" type="text" id="settings-sudoprovider">
+
+              <div class="form-control-feedback"><b>Note:</b><br/>
+                If you are attempting to use <i>kdesudo</i> outside an kde
+                environment, it is likely that it won't work, we recommend using <i>gksudo</i>.<br/>
+                If <i>kdesudo</i> is the only sudo gui installed on your system, fortress will detect it nonetheless!
+              </div>
             </div>
             <div class="form-group">
-              <label for="settings-iptables" class="form">path to iptables:</label>
+              <label for="settings-iptables" class="form">path to iptables</label>
               <input class="form-control" type="text" id="settings-iptables">
             </div>
             <div class="form-group">
-              <input type="button" value="Save" class="btn btn-info" onclick="setSettings()">
-              <input type="button" value="Autodetect" class="btn btn-danger" onclick="autoDetectSettings()">
+              <label for="settings-stashurl">remote preset stash</label>
+              <div id="settings-stashlist-wrapper"></div>
+            </div>
+            <div class="form-group">
+              <div class="checkbox">
+                <label class="form">
+                  <input type="checkbox" id="settings-fetchstashes" class="checkbox">fetch remote preset stash on startup
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <input type="button" value="Save" class="btn btn-warning" onclick="setSettings()">
+              <input type="button" value="Autodetect" class="btn btn-info" onclick="autoDetectSettings()">
             </div>
           </div>
         </div>
@@ -139,15 +158,14 @@ rdion">
   </div>
 </div>
 <script type="text/javascript">
-  //$('#ruleslist').append(fwrapper.getDebugOutput());
-  $().ready(readyFunc());
+  $(document).ready(readyFunc());
   $('#toolTipPresets').tooltip();
   $('#toolTipUserPresets').tooltip();
   $('#toolTipRules').tooltip();
-  $(function() {
-      $( "#lst-activerules, #lst-userpresets, #lst-rules, #lst-presets" ).sortable({
-          connectWith: ".connectedSortable"
-      }).disableSelection();
+  $(function () {
+    $("#lst-activerules, #lst-userpresets, #lst-rules, #lst-presets").sortable({
+      connectWith: ".connectedSortable"
+    }).disableSelection();
   });
 </script>
 </body>
