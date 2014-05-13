@@ -48,4 +48,5 @@ void fireWallWindow::on_fireWallWebView_loadFinished(bool arg1)
  */
 void fireWallWindow::setStashesList() {
     SettingsManager::getSharedInstance()->setStashesList(fdl->downloadedData());
+    this->updateWebView();
 }

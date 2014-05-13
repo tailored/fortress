@@ -10,7 +10,7 @@ SettingsManager::SettingsManager(QObject *parent) :
     QObject(parent)
 {
     this->settings = new QSettings(FORTRESS_ORGANISATION, FORTRESS_APPLICATION);
-    if(this->getValue("settings/firstrun").compare("false") != 0) this->initConfig();
+    //if(this->getValue("settings/firstrun").compare("false") != 0) this->initConfig();
     this->getStashesList();
 }
 

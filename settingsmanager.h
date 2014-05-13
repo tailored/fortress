@@ -8,6 +8,7 @@
 #include <QProcess>
 #include <QStringList>
 #include <QFileInfo>
+#include <QThread>
 
 
 #include "defines.h"
@@ -25,11 +26,10 @@ public:
     Q_INVOKABLE void initConfig();
     Q_INVOKABLE QString validateSettings();
     Q_INVOKABLE QString getStashesList();
-
+    Q_INVOKABLE bool detectSudoProvider(bool writeConfig = TRUE);
+    Q_INVOKABLE bool detectIptables(bool writeConfig = TRUE);
 
 private:
-    bool detectSudoProvider(bool writeConfig = TRUE);
-    bool detectIptables(bool writeConfig = TRUE);
     bool checkFileExists(QString file);
     bool checkFileExecutable(QString file);
     QString stashesList;
