@@ -14,12 +14,10 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         firewallwindow.cpp \
-    functionwrapper.cpp \
     settingsmanager.cpp \
     filedownloader.cpp
 
 HEADERS  += firewallwindow.h \
-    functionwrapper.h \
     settingsmanager.h \
     defines.h \
     filedownloader.h

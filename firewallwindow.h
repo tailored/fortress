@@ -7,7 +7,6 @@
 #include <QWebFrame>
 #include <QDebug>
 
-#include "functionwrapper.h"
 #include "settingsmanager.h"
 #include "defines.h"
 #include "filedownloader.h"
@@ -31,7 +30,6 @@ private slots:
     void setStashesList();
 private:
     Ui::fireWallWindow *ui;
-    functionWrapper *fwrapper;
     QWebView *firewallWebView;
     FileDownloader *fdl;
 };

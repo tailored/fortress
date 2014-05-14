@@ -10,7 +10,6 @@ fireWallWindow::fireWallWindow(QWidget *parent) :
     ui(new Ui::fireWallWindow)
 {
     ui->setupUi(this);
-    this->fwrapper = new functionWrapper;
     this->firewallWebView = ui->fireWallWebView;
     this->firewallWebView->setContextMenuPolicy(Qt::NoContextMenu);
     fdl = new FileDownloader(QUrl::fromUserInput(FORTRESS_GITHUB_STASHLIST_URL), this);
@@ -30,7 +29,6 @@ fireWallWindow::~fireWallWindow()
  * @brief fireWallWindow::updateWebView
  */
 void fireWallWindow::updateWebView() {
-    this->firewallWebView->page()->mainFrame()->addToJavaScriptWindowObject("fwrapper",this->fwrapper);
     this->firewallWebView->page()->mainFrame()->addToJavaScriptWindowObject("smanager", SettingsManager::getSharedInstance());
 }
 

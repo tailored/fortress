@@ -2,7 +2,6 @@
     <qresource prefix="/html">
         <file>html/functions.js</file>
         <file>html/index.html</file>
-        <file>html/qtwrapper.js</file>
         <file>html/bootstrap/css/bootstrap-theme.css</file>
         <file>html/bootstrap/css/bootstrap-theme.css.map</file>
         <file>html/bootstrap/css/bootstrap-theme.min.css</file>
