@@ -126,48 +126,57 @@ bool SettingsManager::checkFileExists(QString file) {
  * @return
  */
 QString SettingsManager::validateSettings() {
-    bool errorFound = false;
-    QString retVal;
+    bool errorFound = false, serializerSuccess;
+    QVariantMap errors;
+    QJson::Serializer serializer;
+    QByteArray json;
+    QVariantList tmpJsonList;
     // errors for graphical sudoprovider installation
     if(this->getValue("settings/sudoprovider").compare("") == 0 || !this->detectSudoProvider(FALSE)) {
-        retVal.append("<li>").append(ERROR_SUDOPROVIDER_NOT_INSTALLED).append("</li>");
+        QVariantMap tmpMap; tmpMap.insert(FORTRESS_KEYWORD_ERROR, FORTRESS_ERROR_SUDOPROVIDER_NOT_INSTALLED);
+        tmpJsonList.append(tmpMap);
         errorFound = true;
     }
     if((this->getValue("settings/sudoprovider").compare("") != 0 || this->detectSudoProvider(FALSE))) {
         if(!this->checkFileExists(this->getValue("settings/sudoprovider"))) {
-            retVal.append("<li>").append(ERROR_SUDOPROVIDER_NOT_FOUND).append("</li>");
+            QVariantMap tmpMap; tmpMap.insert(FORTRESS_KEYWORD_ERROR, FORTRESS_ERROR_SUDOPROVIDER_NOT_FOUND);
+            tmpJsonList.append(tmpMap);
             errorFound = true;
         }
         if(!this->checkFileExecutable(this->getValue("settings/sudoprovider"))) {
-            retVal.append("<li>").append(ERROR_SUDOPROVIDER_NOT_EXECUTABLE).append("</li>");
+            QVariantMap tmpMap; tmpMap.insert(FORTRESS_KEYWORD_ERROR, FORTRESS_ERROR_SUDOPROVIDER_NOT_EXECUTABLE);
+            tmpJsonList.append(tmpMap);
             errorFound = true;
         }
     }
 
     // errors for iptables installation
     if(this->getValue("settings/iptables").compare("") == 0 || !this->detectIptables(FALSE)) {
-        retVal.append("<li>").append(ERROR_IPTABLES_NOT_INSTALLED).append("</li>");
+        QVariantMap tmpMap; tmpMap.insert(FORTRESS_KEYWORD_ERROR, FORTRESS_ERROR_IPTABLES_NOT_INSTALLED);
+        tmpJsonList.append(tmpMap);
         errorFound = true;
     }
     if(this->getValue("settings/iptables").compare("") != 0 || this->detectIptables(FALSE)) {
         if(!this->checkFileExists(this->getValue("settings/iptables"))) {
-            retVal.append("<li>").append(ERROR_IPTABLES_NOT_FOUND).append("</li>");
+            QVariantMap tmpMap; tmpMap.insert(FORTRESS_KEYWORD_ERROR, FORTRESS_ERROR_IPTABLES_NOT_FOUND);
+            tmpJsonList.append(tmpMap);
             errorFound = true;
         }
         if(!this->checkFileExecutable(this->getValue("settings/iptables"))) {
-            retVal.append("<li>").append(ERROR_IPTABLES_NOT_EXECUTABLE).append("</li>");
+            QVariantMap tmpMap; tmpMap.insert(FORTRESS_KEYWORD_ERROR, FORTRESS_ERROR_IPTABLES_NOT_EXECUTABLE);
+            tmpJsonList.append(tmpMap);
+            errorFound = true;
         }
     }
     // append generic error message
     if(errorFound)  {
-        QString tmp = "<b>ERROR:</b><ul>";
-        retVal.append("<li>").append(ERROR_CHECK_ENTRIES).append("</li>");
-        tmp.append(retVal);
-        tmp.append("</ul>");
-        retVal = tmp;
+        QVariantMap tmpMap; tmpMap.insert(FORTRESS_KEYWORD_WARNING, FORTRESS_ERROR_CHECK_ENTRIES);
+        tmpJsonList.append(tmpMap);
+
+        errors.insert(FORTRESS_KEYWORD_USERFEEDBACK, tmpJsonList);
+        json = serializer.serialize(errors, &serializerSuccess);
     }
-    // return error(s))
-    return retVal;
+    return json;
 }
 
 /**

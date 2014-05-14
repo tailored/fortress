@@ -20,7 +20,6 @@ function getSettings() {
   $("#settings-stashlist-wrapper").html(retVal);
   var checkme = smanager.getValue("settings/fetchstashes") == "true";
   $("#settings-fetchstashes").prop("checked", checkme);
-  validateSettings();
 }
 
 function setSettings() {
@@ -30,8 +29,8 @@ function setSettings() {
   smanager.setValue("settings/stashurl", selectedStashUrl.val());
   smanager.setValue("settings/stashname", selectedStashUrl.find("option:selected").text());
   smanager.setValue("settings/fetchstashes", $("#settings-fetchstashes").is(":checked"));
-  getSettings();
   validateSettings();
+  getSettings();
 }
 
 function autoDetectSettings() {
@@ -44,20 +43,38 @@ function autoDetectSettings() {
       smanager.setValue("settings/stashname", stashesList.stashes[0].name);
       smanager.setValue("settings/fetchstashes", "true");
     }
-    validateSettings();
-    getSettings();
-  } else {
   }
+  validateSettings();
+  getSettings();
 }
 
 function validateSettings() {
-  var error = smanager.validateSettings();
+  var tmpData = smanager.validateSettings();
   var errorDiv = $("#settingsError");
-  if (error.length > 0) {
-    errorDiv.html(error);
-    errorDiv.show("highlight");
+  var errorDivWrapper = $("#settingsErrorWrapper");
+  errorDiv.html("");
+  if (tmpData.length > 0) {
+    var parseData = JSON.parse(tmpData);
+    if (parseData.hasOwnProperty("userfeedback")) {
+      parseData = parseData.userfeedback;
+      if (parseData.length > 0) {
+        for (var i = 0; i < parseData.length; i++) {
+          if (parseData[i].hasOwnProperty("error")) {
+            errorDiv.append("<div class=\"alert alert-danger\">" + parseData[i].error + "</div>");
+          }
+          if (parseData[i].hasOwnProperty("warning")) {
+            errorDiv.append("<div class=\"alert alert-warning\">" + parseData[i].warning + "</div>");
+          }
+          if (parseData[i].hasOwnProperty("info")) {
+            errorDiv.append("<div class=\"alert alert-info\">" + parseData[i].info + "</div>");
+          }
+          errorDivWrapper.show("highlight");
+        }
+      } else {
+        errorDivWrapper.hide();
+      }
+    }
   } else {
-    errorDiv.html("");
-    errorDiv.hide();
+    errorDivWrapper.hide();
   }
 }

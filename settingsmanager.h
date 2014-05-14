@@ -9,7 +9,7 @@
 #include <QStringList>
 #include <QFileInfo>
 #include <QThread>
-
+#include <qjson/serializer.h>
 
 #include "defines.h"
 #include "filedownloader.h"
