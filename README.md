@@ -4,6 +4,13 @@ fortress
 Fortress is a WIP GUI to configure iptables under Linux.
 <i>Stay tuned for more information</i>
 
-License
+dependencies
+============
+
+- <a href="http://qjson.sourceforge.net/" target="_blank">QJson</a>
+
+license
 =======
-The project is licensed under <a href="LICENSE">GPLv3</a>.<br>
+The project is licensed under <a href="LICENSE">GPLv2</a>.<br>
+
+The bundled Twitter Bootstap uses <a href="https://raw.githubusercontent.com/twbs/bootstrap/master/LICENSE">MIT - Licence</a>
