@@ -30,18 +30,6 @@
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QPushButton" name="pushButton">
-      <property name="font">
-       <font>
-        <family>Sans Serif</family>
-       </font>
-      </property>
-      <property name="text">
-       <string>PushButton</string>
-      </property>
-     </widget>
-    </item>
-    <item>
      <widget class="QWebView" name="fireWallWebView">
       <property name="font">
        <font>
@@ -115,7 +103,7 @@
  <connections>
   <connection>
    <sender>actionQuit</sender>
-   <signal>triggered()</signal>
+   <signal>activated()</signal>
    <receiver>fireWallWindow</receiver>
    <slot>close()</slot>
    <hints>
