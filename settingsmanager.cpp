@@ -61,7 +61,7 @@ bool SettingsManager::detectSudoProvider(bool writeConfig) {
     QProcess process;
     QString output;
     QStringList sudoProviders;
-    sudoProviders << "gksu" << "kdesu";
+    sudoProviders << "gksu" << "pkexec" << "kdesu";
     for(int i = 0; i < sudoProviders.size(); ++i) {
         if(!detected) {
             QString tmpString = "which ";
