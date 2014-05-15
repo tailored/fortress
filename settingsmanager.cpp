@@ -171,7 +171,7 @@ QString SettingsManager::validateSettings() {
     // append generic error message
     if(errorFound)  {
         QVariantMap tmpMap; tmpMap.insert(FORTRESS_KEYWORD_WARNING, FORTRESS_ERROR_CHECK_ENTRIES);
-        tmpJsonList.append(tmpMap);
+        tmpJsonList.insert(tmpJsonList.begin(), tmpMap);
 
         errors.insert(FORTRESS_KEYWORD_USERFEEDBACK, tmpJsonList);
         json = serializer.serialize(errors, &serializerSuccess);
