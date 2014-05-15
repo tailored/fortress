@@ -26,8 +26,8 @@ public:
     Q_INVOKABLE void initConfig();
     Q_INVOKABLE QString validateSettings();
     Q_INVOKABLE QString getStashesList();
-    Q_INVOKABLE bool detectSudoProvider(bool writeConfig = TRUE);
-    Q_INVOKABLE bool detectIptables(bool writeConfig = TRUE);
+    Q_INVOKABLE bool detectSudoProvider(bool writeConfig = true);
+    Q_INVOKABLE bool detectIptables(bool writeConfig = true);
 
 private:
     bool checkFileExists(QString file);

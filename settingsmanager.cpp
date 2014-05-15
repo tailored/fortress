@@ -132,12 +132,12 @@ QString SettingsManager::validateSettings() {
     QByteArray json;
     QVariantList tmpJsonList;
     // errors for graphical sudoprovider installation
-    if(this->getValue("settings/sudoprovider").compare("") == 0 || !this->detectSudoProvider(FALSE)) {
+    if(this->getValue("settings/sudoprovider").compare("") == 0 || !this->detectSudoProvider(false)) {
         QVariantMap tmpMap; tmpMap.insert(FORTRESS_KEYWORD_ERROR, FORTRESS_ERROR_SUDOPROVIDER_NOT_INSTALLED);
         tmpJsonList.append(tmpMap);
         errorFound = true;
     }
-    if((this->getValue("settings/sudoprovider").compare("") != 0 || this->detectSudoProvider(FALSE))) {
+    if((this->getValue("settings/sudoprovider").compare("") != 0 || this->detectSudoProvider(false))) {
         if(!this->checkFileExists(this->getValue("settings/sudoprovider"))) {
             QVariantMap tmpMap; tmpMap.insert(FORTRESS_KEYWORD_ERROR, FORTRESS_ERROR_SUDOPROVIDER_NOT_FOUND);
             tmpJsonList.append(tmpMap);
@@ -151,12 +151,12 @@ QString SettingsManager::validateSettings() {
     }
 
     // errors for iptables installation
-    if(this->getValue("settings/iptables").compare("") == 0 || !this->detectIptables(FALSE)) {
+    if(this->getValue("settings/iptables").compare("") == 0 || !this->detectIptables(false)) {
         QVariantMap tmpMap; tmpMap.insert(FORTRESS_KEYWORD_ERROR, FORTRESS_ERROR_IPTABLES_NOT_INSTALLED);
         tmpJsonList.append(tmpMap);
         errorFound = true;
     }
-    if(this->getValue("settings/iptables").compare("") != 0 || this->detectIptables(FALSE)) {
+    if(this->getValue("settings/iptables").compare("") != 0 || this->detectIptables(false)) {
         if(!this->checkFileExists(this->getValue("settings/iptables"))) {
             QVariantMap tmpMap; tmpMap.insert(FORTRESS_KEYWORD_ERROR, FORTRESS_ERROR_IPTABLES_NOT_FOUND);
             tmpJsonList.append(tmpMap);
@@ -174,7 +174,7 @@ QString SettingsManager::validateSettings() {
         tmpJsonList.insert(tmpJsonList.begin(), tmpMap);
 
         errors.insert(FORTRESS_KEYWORD_USERFEEDBACK, tmpJsonList);
-        json = serializer.serialize(errors, &serializerSuccess);
+        //json = serializer.serialize(errors, &serializerSuccess);
     }
     return json;
 }
