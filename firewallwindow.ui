@@ -68,7 +68,7 @@
    </property>
    <widget class="QMenu" name="menuFirewall">
     <property name="title">
-     <string>Firewall</string>
+     <string>Fortress</string>
     </property>
     <addaction name="actionQuit"/>
    </widget>
