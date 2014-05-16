@@ -78,3 +78,13 @@ function validateSettings() {
     errorDivWrapper.hide();
   }
 }
+
+/**
+ *
+ * @param sourceDivObject
+ * @param ruleType
+ */
+function onRuleDrop(sourceDivObject, ruleType) {
+  //var form = callToSomeCPPFunctionWhichProvidesFormData(ruleType);
+  $(sourceDivObject).html("i will paste the form here acording to type");
+}

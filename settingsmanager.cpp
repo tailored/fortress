@@ -174,7 +174,7 @@ QString SettingsManager::validateSettings() {
         tmpJsonList.insert(tmpJsonList.begin(), tmpMap);
 
         errors.insert(FORTRESS_KEYWORD_USERFEEDBACK, tmpJsonList);
-        //json = serializer.serialize(errors, &serializerSuccess);
+        json = serializer.serialize(errors, &serializerSuccess);
     }
     return json;
 }
