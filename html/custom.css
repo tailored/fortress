@@ -49,11 +49,7 @@ body {
   padding: 20px 20px 5px 20px;
 }
 
-.list-group {
+#lst-activerules {
     min-height: 82px;
     padding: 5px;
-}
-
-.panel-body {
-    padding: 3px;
 }
