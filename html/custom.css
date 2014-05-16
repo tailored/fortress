@@ -48,3 +48,12 @@ body {
 #settingsError {
   padding: 20px 20px 5px 20px;
 }
+
+.list-group {
+    min-height: 82px;
+    padding: 5px;
+}
+
+.panel-body {
+    padding: 3px;
+}
