@@ -10,6 +10,7 @@
 #include <QFileInfo>
 #include <QThread>
 #include <qjson/serializer.h>
+#include <QNetworkInterface>
 
 #include "defines.h"
 #include "filedownloader.h"
@@ -26,6 +27,7 @@ public:
     Q_INVOKABLE void initConfig();
     Q_INVOKABLE QString validateSettings();
     Q_INVOKABLE QString getStashesList();
+    Q_INVOKABLE QString getNetWorkInterfaces();
     Q_INVOKABLE bool detectSudoProvider(bool writeConfig = true);
     Q_INVOKABLE bool detectIptables(bool writeConfig = true);
 

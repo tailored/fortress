@@ -50,6 +50,7 @@ void SettingsManager::initConfig() {
     this->detectSudoProvider();
     this->detectIptables();
     this->setValue("settings/firstrun", "false");
+    this->setValue("settings/interface", "Any");
 }
 
 /**
@@ -185,6 +186,28 @@ QString SettingsManager::validateSettings() {
  */
 QString SettingsManager::getStashesList() {
     return this->stashesList;
+}
+
+/**
+ * @brief SettingsManager::getNetWorkInterfaces
+ * @return
+ */
+QString SettingsManager::getNetWorkInterfaces() {
+    QJson::Serializer serializer;
+    bool serializerSuccess;
+    QVariantMap interfaceMap;
+    QVariantList interfaceList;
+    QByteArray json;
+    QVariantMap tmpMap; tmpMap.insert(FORTRESS_KEYWORD_NETWORK_INTERFACES_INTERFACE_NAME, "Any");
+    interfaceList.append(tmpMap);
+    QList<QNetworkInterface> tmpInterfaceList = QNetworkInterface::allInterfaces();
+    foreach (QNetworkInterface iface, tmpInterfaceList) {
+        QVariantMap tmpMap; tmpMap.insert(FORTRESS_KEYWORD_NETWORK_INTERFACES_INTERFACE_NAME, iface.humanReadableName());
+        interfaceList.append(tmpMap);
+    }
+    interfaceMap.insert(FORTRESS_KEYWORD_NETWORK_INTERFACES_LIST, interfaceList);
+    json = serializer.serialize(interfaceMap, &serializerSuccess);
+    return json;
 }
 
 /**
