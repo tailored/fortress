@@ -2,6 +2,7 @@ body {
   padding: 10px 0 0 0;
   -webkit-user-select: none;
   cursor: pointer;
+  overflow-x: hidden;
 }
 
 .div-content {
@@ -38,7 +39,7 @@ body {
 #settingsErrorWrapper {
   display: block;
   position: absolute;
-  top:80px;
+  top: 80px;
   right: 40px;
   z-index: 9999999;
   padding: 0;
@@ -50,10 +51,19 @@ body {
 }
 
 #lst-activerules {
-    min-height: 82px;
-    padding: 5px;
+  min-height: 82px;
+  padding: 5px;
+  margin: 0 !important;
+  height: 100%;
 }
 
-#collapseRules > div > ul > li > div {
+#collapseRules > div > ul > li > div.ruleConfigForm {
   display: none;
+}
+
+#ruleslist {
+  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 90%;
 }
