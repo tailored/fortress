@@ -26,7 +26,7 @@
       <div class="div-content float-left eightypercent" id="ruleslist">
         <ul id="lst-activerules" class="connectedSortable list-group">
           <!--<li class="list-group-item">Item 1</li>-->
-          <li class="list-group-item">Deny from all
+          <li class="list-group-item list-group-item-info">Deny from all
             <div class="ruleConfigForm">This is the initial rule, designed to block <b>every</b> external access to your
               machine.
             </div>
@@ -189,7 +189,10 @@
       revert: "invalid"
     }).disableSelection();
 
-    $("#lst-activerules").sortable().disableSelection();
+    $("#lst-activerules").sortable({
+//        cancel: ".list-group-item-info"
+        items: "li:not(.list-group-item-info)"
+    }).disableSelection();
 
 
     validateSettings();
