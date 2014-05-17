@@ -66,3 +66,7 @@ body {
   overflow-x: hidden;
   height: 90%;
 }
+
+#lst-rules {
+  margin: 0 !important;
+}

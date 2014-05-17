@@ -2,6 +2,18 @@
  * Created by chaser on 2/24/14.
  */
 function getSettings() {
+  var ifaces = JSON.parse(smanager.getNetWorkInterfaces());
+  var currentIface = smanager.getValue("settings/interface");
+  if (ifaces.hasOwnProperty("networkInterfaces")) {
+    retVal = "<select name=\"settings-networkinterfacelist\" id=\"settings-networkinterfacelist\" class=\"form-control\">";
+    for (var i = 0; i < ifaces.networkInterfaces.length; i++) {
+      retVal += "<option value=\"" + ifaces.networkInterfaces[i].networkInterfaceName + "\"";
+      if (currentIface == ifaces.networkInterfaces[i].networkInterfaceName) retVal += " selected=\"selected\" ";
+      retVal += ">" + ifaces.networkInterfaces[i].networkInterfaceName + "</option>"
+    }
+    retVal += "</select>";
+    $("#settings-networkinterface").html(retVal);
+  }
   $("#settings-sudoprovider").val(smanager.getValue("settings/sudoprovider"));
   $("#settings-iptables").val(smanager.getValue("settings/iptables"));
   var currentStashUrl = smanager.getValue("settings/stashurl");
@@ -24,6 +36,7 @@ function getSettings() {
 
 function setSettings() {
   var selectedStashUrl = $("#settings-stashurl");
+  smanager.setValue("settings/interface", $("#settings-networkinterfacelist").val());
   smanager.setValue("settings/sudoprovider", $("#settings-sudoprovider").val());
   smanager.setValue("settings/iptables", $("#settings-iptables").val());
   smanager.setValue("settings/stashurl", selectedStashUrl.val());

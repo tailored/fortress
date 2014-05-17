@@ -135,6 +135,22 @@
                             <label for="settings-sudoprovider" class="form">path to graphical sudo gui</label>
                             <input class="form-control" type="text" id="settings-sudoprovider">
 
+      </div>
+    </div>
+    <!-- TODO: add whats this symbol to each form field -->
+    <div class="tab-pane fade in paddingfive" id="settings">
+      <div class="modal-header">
+        <div class="panel panel-heading">Settings</div>
+        <div class="panel">
+          <div class="form">
+            <div class="form-group">
+              <label for="settings-networkinterface" class="form">network interface to protect</label>
+              <div id="settings-networkinterface"></div>
+              <div class="form-control-feedback"><b>Note:</b><br/>If in doubt use <i>Any!</i></div>
+            </div>
+            <div class="form-group">
+              <label for="settings-sudoprovider" class="form">path to graphical sudo gui</label>
+              <input class="form-control" type="text" id="settings-sudoprovider">
                             <div class="form-control-feedback"><b>Note:</b><br/>
                                 If you are attempting to use <i>kdesudo</i> outside an kde
                                 environment, it is likely that it won't work, we recommend using <i>gksudo</i>.<br/>
@@ -172,6 +188,13 @@
         <div class="tab-pane fade in paddingfive" id="help">
             <div class="modal-header eightypercent float-left">
                 <div class="panel panel-heading">Help</div>
+            <div class="form-group">
+              <div class="checkbox">
+                <label class="form">
+                  <input type="checkbox" id="settings-fetchstashes" class="checkbox">automatically fetch remote
+                  preset stash contents
+                </label>
+              </div>
             </div>
             <div class="float-right twentypercent panel panel-info bg-info">
                 <div class="panel-heading">Contents</div>
