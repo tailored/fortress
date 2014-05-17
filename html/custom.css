@@ -67,3 +67,7 @@ body {
   overflow-y: auto;
   height: 90%;
 }
+
+#lst-rules {
+  margin: 0 !important;
+}
