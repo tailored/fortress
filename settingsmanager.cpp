@@ -50,7 +50,7 @@ void SettingsManager::initConfig() {
     this->detectSudoProvider();
     this->detectIptables();
     this->setValue("settings/firstrun", "false");
-    this->setValue("settings/interface", "Any");
+    this->setValue("settings/interface", FORTRESS_KEYWORD_NETWORK_INTERFACES_ALL_INTERFACES);
 }
 
 /**
@@ -198,7 +198,7 @@ QString SettingsManager::getNetWorkInterfaces() {
     QVariantMap interfaceMap;
     QVariantList interfaceList;
     QByteArray json;
-    QVariantMap tmpMap; tmpMap.insert(FORTRESS_KEYWORD_NETWORK_INTERFACES_INTERFACE_NAME, "Any");
+    QVariantMap tmpMap; tmpMap.insert(FORTRESS_KEYWORD_NETWORK_INTERFACES_INTERFACE_NAME, FORTRESS_KEYWORD_NETWORK_INTERFACES_ALL_INTERFACES);
     interfaceList.append(tmpMap);
     QList<QNetworkInterface> tmpInterfaceList = QNetworkInterface::allInterfaces();
     foreach (QNetworkInterface iface, tmpInterfaceList) {
