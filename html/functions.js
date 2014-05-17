@@ -84,9 +84,8 @@ function validateSettings() {
  * @param sourceDivObject
  * @param ruleType
  */
-function onRuleDrop(sourceDivObject, ruleType) {
+function onRuleDrop() {
   //var form = callToSomeCPPFunctionWhichProvidesFormData(ruleType);
-  // - retVal will be json object describing required form
   // - form target will trigger another c++ function to store form value to ruleset according to ruletype
   // - ruletype can be either tcp, udp or icmp
   // - i'll implement this tomorrow i am tired now :)

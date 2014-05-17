@@ -53,3 +53,7 @@ body {
     min-height: 82px;
     padding: 5px;
 }
+
+#collapseRules > div > ul > li > div {
+  display: none;
+}
