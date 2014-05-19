@@ -57,8 +57,29 @@ body {
   height: 100%;
 }
 
+#lst-activerules > li {
+  padding-left: 30px;
+}
+
 #collapseRules > div > ul > li > div.ruleConfigForm {
   display: none;
+}
+
+#collapseRules > div > ul > li > div.ruleMoveButton {
+  display: none;
+}
+
+.ruleMoveButton {
+  color: #cccccc;
+  position: absolute;
+  top: 13px;
+  left: 10px;
+  font-size: 20px;
+  height: 70%;
+}
+
+.ruleMoveButton:hover {
+  color: #000000;
 }
 
 #ruleslist {
