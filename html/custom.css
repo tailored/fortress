@@ -72,10 +72,14 @@ body {
 .ruleMoveButton {
   color: #cccccc;
   position: absolute;
-  top: 13px;
-  left: 10px;
+  top: 0;
+  left: 0;
   font-size: 20px;
-  height: 70%;
+  width: 30px;
+  text-align: center;
+  height: 100%;
+  float: left;
+  padding: 5px;
 }
 
 .ruleMoveButton:hover {
