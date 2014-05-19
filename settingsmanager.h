@@ -31,6 +31,8 @@ public:
     Q_INVOKABLE bool detectSudoProvider(bool writeConfig = true);
     Q_INVOKABLE bool detectIptables(bool writeConfig = true);
 
+    QString getFullSettingsPath();
+
 private:
     bool checkFileExists(QString file);
     bool checkFileExecutable(QString file);
