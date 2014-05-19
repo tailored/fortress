@@ -29,6 +29,15 @@
     </sizepolicy>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="spacing">
+     <number>0</number>
+    </property>
+    <property name="sizeConstraint">
+     <enum>QLayout::SetMaximumSize</enum>
+    </property>
+    <property name="margin">
+     <number>0</number>
+    </property>
     <item>
      <widget class="QWebView" name="fireWallWebView">
       <property name="font">
@@ -76,7 +85,6 @@
    <addaction name="separator"/>
    <addaction name="actionQuit"/>
   </widget>
-  <widget class="QStatusBar" name="statusBar"/>
   <action name="actionQuit">
    <property name="text">
     <string>Quit</string>

@@ -11,6 +11,8 @@
 #include "defines.h"
 #include "filedownloader.h"
 #include "settingsmanager.h"
+#include "fortressgenerator.h"
+#include "rulesmanager.h"
 
 namespace Ui {
 class fireWallWindow;
@@ -32,6 +34,9 @@ private:
     Ui::fireWallWindow *ui;
     QWebView *firewallWebView;
     FileDownloader *fdl;
+
+protected:
+    void resizeEvent(QResizeEvent *);
 };
 
 #endif // FIREWALLWINDOW_H

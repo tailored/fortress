@@ -15,12 +15,16 @@ TEMPLATE = app
 SOURCES += main.cpp\
         firewallwindow.cpp \
     settingsmanager.cpp \
-    filedownloader.cpp
+    filedownloader.cpp \
+    fortressgenerator.cpp \
+    rulesmanager.cpp
 
 HEADERS  += firewallwindow.h \
     settingsmanager.h \
     defines.h \
-    filedownloader.h
+    filedownloader.h \
+    fortressgenerator.h \
+    rulesmanager.h
 
 FORMS    += firewallwindow.ui
 

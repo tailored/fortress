@@ -50,7 +50,7 @@ void SettingsManager::initConfig() {
     this->detectSudoProvider();
     this->detectIptables();
     this->setValue("settings/firstrun", "false");
-    this->setValue("settings/interface", FORTRESS_KEYWORD_NETWORK_INTERFACES_ALL_INTERFACES);
+    //this->setValue("settings/interface", FORTRESS_KEYWORD_NETWORK_INTERFACES_ALL_INTERFACES);
 }
 
 /**
@@ -216,4 +216,14 @@ QString SettingsManager::getNetWorkInterfaces() {
  */
 void SettingsManager::setStashesList(QByteArray slist) {
     this->stashesList = slist;
+}
+
+/**
+ * @brief SettingsManager::getFullSettingsPath
+ * @return
+ */
+QString SettingsManager::getFullSettingsPath() {
+    QFileInfo tmp(this->settings->fileName());
+    tmp.makeAbsolute();
+    return tmp.path();
 }

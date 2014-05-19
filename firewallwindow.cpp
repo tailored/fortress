@@ -15,6 +15,8 @@ fireWallWindow::fireWallWindow(QWidget *parent) :
     fdl = new FileDownloader(QUrl::fromUserInput(FORTRESS_GITHUB_STASHLIST_URL), this);
     connect(fdl,SIGNAL(downloaded()),SLOT(setStashesList()));
     this->updateWebView();
+    FortressGenerator::getSharedInstance();
+    RulesManager::getSharedInstance();
 }
 
 /**
@@ -47,4 +49,15 @@ void fireWallWindow::on_fireWallWebView_loadFinished(bool arg1)
 void fireWallWindow::setStashesList() {
     SettingsManager::getSharedInstance()->setStashesList(fdl->downloadedData());
     this->updateWebView();
+}
+
+/**
+ * @brief fireWallWindow::resizeEvent
+ * @param event
+ */
+void fireWallWindow::resizeEvent(QResizeEvent *event) {
+    QMainWindow::resizeEvent(event);
+    QSize tmpSize = event->size();
+    tmpSize.setHeight(tmpSize.height()-(this->ui->mainToolBar->height() + this->ui->menuBar->height()));
+    this->ui->fireWallWebView->resize(tmpSize);
 }
