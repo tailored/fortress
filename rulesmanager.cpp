@@ -1,5 +1,7 @@
 #include "rulesmanager.h"
-
+/**
+ * @brief rulesMangerInstance
+ */
 static RulesManager* rulesMangerInstance = NULL;
 
 
@@ -11,9 +13,12 @@ RulesManager::RulesManager(QObject *parent) :
     QObject(parent)
 {
     this->configBasePath = SettingsManager::getSharedInstance()->getFullSettingsPath();
-    this->fullRulePath = SettingsManager::getSharedInstance()->getFullSettingsPath() + FORTRESS_RULES_MANAGER_RULES_REL_PATH;
-    this->userPresetPath = SettingsManager::getSharedInstance()->getFullSettingsPath() + FORTRESS_RULES_MANAGER_RULES_REL_PATH_USER_PRESETS;
-    this->stashesPresetPath = SettingsManager::getSharedInstance()->getFullSettingsPath() + FORTRESS_RULES_MANAGER_RULES_REL_PATH_STASHES_DATA;
+    this->fullRulePath = SettingsManager::getSharedInstance()->getFullSettingsPath()
+            + FORTRESS_RULES_MANAGER_RULES_REL_PATH;
+    this->userPresetPath = SettingsManager::getSharedInstance()->getFullSettingsPath()
+            + FORTRESS_RULES_MANAGER_RULES_REL_PATH_USER_PRESETS;
+    this->stashesPresetPath = SettingsManager::getSharedInstance()->getFullSettingsPath()
+            + FORTRESS_RULES_MANAGER_RULES_REL_PATH_STASHES_DATA;
     this->checkDirs();
 }
 
@@ -32,15 +37,7 @@ RulesManager* RulesManager::getSharedInstance() {
  * @return
  */
 QString RulesManager::GenarateScriptFromRule(QString rule) {
-    return NULL;
-}
-
-/**
- * @brief RulesManager::LoadRule
- * @param rule
- * @return
- */
-QString RulesManager::LoadRule(QString rule) {
+    // ToDo: this needs implementation
     return NULL;
 }
 
@@ -84,6 +81,45 @@ int RulesManager::SaveStashPreset(QString ruleName, QString rule) {
 }
 
 /**
+ * @brief RulesManager::LoadRule
+ * @param rule
+ * @return
+ */
+QString RulesManager::LoadRule(QString rulePath) {
+    QFileInfo tmpRulePath(rulePath);
+    if(!tmpRulePath.exists() || tmpRulePath.isReadable())
+        return NULL;
+    QFile rule(rulePath);
+    if(rule.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        QByteArray dump = rule.readAll();
+        return dump;
+    }
+    return NULL;
+}
+
+/**
+ * @brief RulesManager::LoadUserPreset
+ * @param rule
+ * @return
+ */
+QString RulesManager::LoadUserPreset(QString ruleName) {
+    QString tmp;
+    tmp.append(this->userPresetPath).append(ruleName);
+    return this->LoadRule(tmp);
+}
+
+/**
+ * @brief RulesManager::LoadStashPreset
+ * @param rule
+ * @return
+ */
+QString RulesManager::LoadStashPreset(QString ruleName) {
+    QString tmp;
+    tmp.append(this->stashesPresetPath).append(ruleName);
+    return this->LoadRule(tmp);
+}
+
+/**
  * @brief RulesManager::ClearStashPresets
  * @return
  */
@@ -113,4 +149,12 @@ void RulesManager::checkDirs() {
             tmpProcess.waitForFinished(10);
         }
     }
+}
+
+/**
+ * @brief RulesManager::FetchRemoteStashes
+ * @return
+ */
+bool RulesManager::FetchRemoteStashes() {
+    return false;
 }
