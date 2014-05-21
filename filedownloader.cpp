@@ -1,5 +1,10 @@
 #include "filedownloader.h"
 
+/**
+ * @brief FileDownloader::FileDownloader
+ * @param imageUrl
+ * @param parent
+ */
 FileDownloader::FileDownloader(QUrl imageUrl, QObject *parent) :
     QObject(parent)
 {
@@ -10,11 +15,18 @@ FileDownloader::FileDownloader(QUrl imageUrl, QObject *parent) :
     m_WebCtrl.get(request);
 }
 
+/**
+ * @brief FileDownloader::~FileDownloader
+ */
 FileDownloader::~FileDownloader()
 {
 
 }
 
+/**
+ * @brief FileDownloader::fileDownloaded
+ * @param pReply
+ */
 void FileDownloader::fileDownloaded(QNetworkReply* pReply)
 {
     m_DownloadedData = pReply->readAll();
@@ -23,6 +35,10 @@ void FileDownloader::fileDownloaded(QNetworkReply* pReply)
     emit downloaded();
 }
 
+/**
+ * @brief FileDownloader::downloadedData
+ * @return
+ */
 QByteArray FileDownloader::downloadedData() const
 {
     return m_DownloadedData;

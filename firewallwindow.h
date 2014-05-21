@@ -6,6 +6,7 @@
 #include <QWebView>
 #include <QWebFrame>
 #include <QDebug>
+#include <QStyle>
 
 #include "settingsmanager.h"
 #include "defines.h"
@@ -32,7 +33,6 @@ private slots:
     void setStashesList();
 private:
     Ui::fireWallWindow *ui;
-    QWebView *firewallWebView;
     FileDownloader *fdl;
 
 protected:

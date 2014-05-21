@@ -1,5 +1,8 @@
 #include "fortressgenerator.h"
 
+/**
+ * @brief fortressGeneratorInstance
+ */
 static FortressGenerator* fortressGeneratorInstance = NULL;
 
 /**
@@ -7,7 +10,6 @@ static FortressGenerator* fortressGeneratorInstance = NULL;
  * @return
  */
 FortressGenerator* FortressGenerator::getSharedInstance() {
-    // TODO: evaluate if this makes sense here!
     if(fortressGeneratorInstance == NULL) fortressGeneratorInstance = new FortressGenerator;
     return fortressGeneratorInstance;
 }

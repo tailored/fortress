@@ -10,11 +10,21 @@ fireWallWindow::fireWallWindow(QWidget *parent) :
     ui(new Ui::fireWallWindow)
 {
     ui->setupUi(this);
-    this->firewallWebView = ui->fireWallWebView;
-    this->firewallWebView->setContextMenuPolicy(Qt::NoContextMenu);
+    // disable context menus
+    this->ui->fireWallWebView->setContextMenuPolicy(Qt::NoContextMenu);
+    // download stashes list
     fdl = new FileDownloader(QUrl::fromUserInput(FORTRESS_GITHUB_STASHLIST_URL), this);
     connect(fdl,SIGNAL(downloaded()),SLOT(setStashesList()));
+    // init the webview
     this->updateWebView();
+    // some gfx stuff
+    this->ui->actionDeploy->setIcon(this->style()->standardIcon(QStyle::SP_DesktopIcon));
+    this->ui->actionExport->setIcon(this->style()->standardIcon(QStyle::SP_ComputerIcon));
+    this->ui->actionQuit->setIcon(this->style()->standardIcon(QStyle::SP_DirClosedIcon));
+    this->ui->mainToolBar->setFloatable(FALSE);
+    this->ui->mainToolBar->setMovable(FALSE);
+
+    // this is for debug remove!
     FortressGenerator::getSharedInstance();
     RulesManager::getSharedInstance();
 }
@@ -31,7 +41,7 @@ fireWallWindow::~fireWallWindow()
  * @brief fireWallWindow::updateWebView
  */
 void fireWallWindow::updateWebView() {
-    this->firewallWebView->page()->mainFrame()->addToJavaScriptWindowObject("smanager", SettingsManager::getSharedInstance());
+    this->ui->fireWallWebView->page()->mainFrame()->addToJavaScriptWindowObject("smanager", SettingsManager::getSharedInstance());
 }
 
 /**

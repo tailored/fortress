@@ -1,5 +1,8 @@
 #include "settingsmanager.h"
 
+/**
+ * @brief settingsMangerInstance
+ */
 static SettingsManager* settingsMangerInstance = NULL;
 
 /**
