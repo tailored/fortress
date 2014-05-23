@@ -62,11 +62,14 @@ body {
   overflow: hidden;
 }
 
-#collapseRules > div > ul > li > div.ruleConfigForm {
+#collapseRules > div > ul > li > div.ruleConfigForm,
+#collapseStashRules > div > ul > li > div.ruleConfigForm {
   display: none;
 }
 
-#collapseRules > div > ul > li > div.ruleMoveButton {
+#collapseRules > div > ul > li > div.ruleMoveButton,
+#collapesPresets > div > ul > li > div.ruleMoveButton,
+#collapseStashRules > div > ul > li > div.ruleMoveButton {
   display: none;
 }
 
