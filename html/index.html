@@ -219,7 +219,8 @@
 //        cancel: ".list-group-item-info"
         items: "li:not(.list-group-item-info)",
         distance: 10,
-        handle: ".ruleMoveButton"
+        handle: ".ruleMoveButton",
+        receive: function( event, ui ) {alert("ALL YOUR RULES ARE BELONG TO US!")}
       }).disableSelection();
 
     $('#lst-activerules').on('click.collapse-next.data-api', '[data-toggle=collapse-next]', function (e) {

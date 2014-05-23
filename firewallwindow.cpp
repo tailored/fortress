@@ -21,8 +21,8 @@ fireWallWindow::fireWallWindow(QWidget *parent) :
     this->ui->actionDeploy->setIcon(this->style()->standardIcon(QStyle::SP_DesktopIcon));
     this->ui->actionExport->setIcon(this->style()->standardIcon(QStyle::SP_ComputerIcon));
     this->ui->actionQuit->setIcon(this->style()->standardIcon(QStyle::SP_DirClosedIcon));
-    this->ui->mainToolBar->setFloatable(FALSE);
-    this->ui->mainToolBar->setMovable(FALSE);
+    this->ui->mainToolBar->setFloatable(false);
+    this->ui->mainToolBar->setMovable(false);
 
     // this is for debug remove!
     FortressGenerator::getSharedInstance();
