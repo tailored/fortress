@@ -136,11 +136,8 @@
             </h4>
           </div>
           <div id="collapseStashRules" class="panel-collapse collapse">
-            <div class="panel-body bg-info">
-              <!--<ul id="lst-userpresets" class="connectedSortable list-group">
-                  <li class="list-group-item">User 1</li>
-                  <li class="list-group-item">User 2</li>
-              </ul>-->
+            <div class="panel-body bg-info" id="stashRulesContent">
+
             </div>
           </div>
         </div>
@@ -153,12 +150,6 @@
       <div class="panel panel-heading">Settings</div>
       <div class="panel">
         <div class="form">
-          <!--<div class="form-group">
-            <label for="settings-networkinterface" class="form">network interface to protect</label>
-
-            <div id="settings-networkinterface"></div>
-            <div class="form-control-feedback"><b>Note:</b><br/>If in doubt use <i>Any!</i></div>
-          </div>-->
           <div class="form-group">
             <label for="settings-sudoprovider" class="form">path to graphical sudo gui</label>
             <input class="form-control" type="text" id="settings-sudoprovider">
@@ -220,7 +211,7 @@
         items: "li:not(.list-group-item-info)",
         distance: 10,
         handle: ".ruleMoveButton",
-        stop: function( event, ui ) {alert("ALL YOUR RULES ARE BELONG TO US!")}
+        stop: function( event, ui ) {onRuleDrop()}
       }).disableSelection();
 
     $('#lst-activerules').on('click.collapse-next.data-api', '[data-toggle=collapse-next]', function (e) {

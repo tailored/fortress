@@ -5,17 +5,17 @@ function getSettings() {
   //var ifaces = JSON.parse(smanager.getNetWorkInterfaces());
   //var currentIface = smanager.getValue("settings/interface");
   /*
-  if (ifaces.hasOwnProperty("networkInterfaces")) {
-    retVal = "<select name=\"settings-networkinterfacelist\" id=\"settings-networkinterfacelist\" class=\"form-control\">";
-    for (var i = 0; i < ifaces.networkInterfaces.length; i++) {
-      retVal += "<option value=\"" + ifaces.networkInterfaces[i].networkInterfaceName + "\"";
-      if (currentIface == ifaces.networkInterfaces[i].networkInterfaceName) retVal += " selected=\"selected\" ";
-      retVal += ">" + ifaces.networkInterfaces[i].networkInterfaceName + "</option>"
-    }
-    retVal += "</select>";
-    $("#settings-networkinterface").html(retVal);
-  }
-  */
+   if (ifaces.hasOwnProperty("networkInterfaces")) {
+   retVal = "<select name=\"settings-networkinterfacelist\" id=\"settings-networkinterfacelist\" class=\"form-control\">";
+   for (var i = 0; i < ifaces.networkInterfaces.length; i++) {
+   retVal += "<option value=\"" + ifaces.networkInterfaces[i].networkInterfaceName + "\"";
+   if (currentIface == ifaces.networkInterfaces[i].networkInterfaceName) retVal += " selected=\"selected\" ";
+   retVal += ">" + ifaces.networkInterfaces[i].networkInterfaceName + "</option>"
+   }
+   retVal += "</select>";
+   $("#settings-networkinterface").html(retVal);
+   }
+   */
   $("#settings-sudoprovider").val(smanager.getValue("settings/sudoprovider"));
   $("#settings-iptables").val(smanager.getValue("settings/iptables"));
   var currentStashUrl = smanager.getValue("settings/stashurl");
@@ -61,6 +61,7 @@ function autoDetectSettings() {
   }
   validateSettings();
   getSettings();
+  mwindow.updateStashesContent();
 }
 
 function validateSettings() {
@@ -104,7 +105,7 @@ function onRuleDrop() {
   // - form target will trigger another c++ function to store form value to ruleset according to ruletype
   // - ruletype can be either tcp, udp or icmp
   // - i'll implement this tomorrow i am tired now :)
-  $(sourceDivObject).html("i will paste the form here acording to type");
+  alert("DROP DA BASE!");
 }
 
 /**
@@ -112,10 +113,10 @@ function onRuleDrop() {
  */
 function callBackUpdatePresets() {
   var presetJson = rmanager.LoadStashPresets();
-  if(presetJson.length > 0) {
+  if (presetJson.length > 0) {
     presetJson = JSON.parse(presetJson);
-    if((typeof presetJson == 'object')) {
-      alert(typeof presetJson);
+    if ((typeof presetJson == 'object')) {
+      //alert(typeof presetJson);
     }
   }
 }
@@ -125,10 +126,25 @@ function callBackUpdatePresets() {
  */
 function callBackUpdateRules() {
   var rulesJson = rmanager.LoadStashRules();
-  if(rulesJson.length > 0) {
+  var target = $('#stashRulesContent');
+  if (rulesJson.length > 0) {
     rulesJson = JSON.parse(rulesJson);
-    if((typeof rulesJson) == 'object') {
-      alert(typeof rulesJson);
+    if ((typeof rulesJson) == 'object') {
+      if (rulesJson.hasOwnProperty('rules')) {
+        var htmlCode = "";
+        htmlCode += '<ul class="connectedSortable list-group">\n';
+        for (var i = 0; i < rulesJson.rules.length; i++) {
+          htmlCode += '<li class="list-group-item">\n';
+          htmlCode += '<a class="accordion-toggle" data-toggle="collapse-next">\n';
+          htmlCode += '<div class="list-group-item-heading">' + rulesJson.rules[i].name + '</div>\n';
+          htmlCode += '</a>\n';
+          htmlCode += '<div class="glyphicon glyphicon-resize-vertical ruleMoveButton"></div>\n';
+          htmlCode += '<div class="list-group-item-text ruleConfigForm collapse in">foobar</div>\n';
+          htmlCode += '</li>\n';
+        }
+        htmlCode += "</ul>";
+        target.html(htmlCode);
+      }
     }
   }
 }

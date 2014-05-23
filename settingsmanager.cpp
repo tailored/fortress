@@ -53,7 +53,6 @@ void SettingsManager::initConfig() {
     this->detectSudoProvider();
     this->detectIptables();
     this->setValue("settings/firstrun", "false");
-    //this->setValue("settings/interface", FORTRESS_KEYWORD_NETWORK_INTERFACES_ALL_INTERFACES);
 }
 
 /**

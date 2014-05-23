@@ -17,8 +17,6 @@ RulesManager::RulesManager(QObject *parent) :
             + FORTRESS_RULES_MANAGER_RULES_REL_PATH;
     this->userPresetPath = SettingsManager::getSharedInstance()->getFullSettingsPath()
             + FORTRESS_RULES_MANAGER_RULES_REL_PATH_USER_PRESETS;
-    this->stashesPresetPath = SettingsManager::getSharedInstance()->getFullSettingsPath()
-            + FORTRESS_RULES_MANAGER_RULES_REL_PATH_STASHES_DATA;
     this->checkDirs();
 }
 
@@ -46,38 +44,41 @@ QString RulesManager::GenarateScriptFromRule(QString rule) {
  * @param rule
  * @return
  */
-int RulesManager::SaveRule(QString path, QString rule) {
+int RulesManager::SaveRule(QString path, QString rule, bool overwrite) {
     QFileInfo tmpFileInfo(path);
-    if(tmpFileInfo.exists()) return FORTRESS_RULES_MANAGER_SAVE_RULE_EXISTS;
+    if(!overwrite && tmpFileInfo.exists()) return FORTRESS_RULES_MANAGER_SAVE_RULE_EXISTS;
     QFile tmpFile(path);
     if(tmpFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
         QTextStream out(&tmpFile);
         out << rule;
+        tmpFile.close();
         return FORTRESS_RULES_MANAGER_SAVE_OK;
     } else return FORTRESS_RULES_MANAGER_SAVE_RULE_ACCESS_DENIED;
 
 }
 
 /**
- * @brief RulesManager::SaveUserPreset
- * @param rule
+ * @brief RulesManager::SaveRulesFromStash
+ * @param rules
  * @return
  */
-int RulesManager::SaveUserPreset(QString ruleName, QString rule) {
+int RulesManager::SaveRulesFromStash(QString rules) {
     QString tmp;
-    tmp.append(this->userPresetPath).append(ruleName);
-    return this->SaveRule(tmp, rule);
+    tmp.append(this->fullRulePath);
+    tmp.append(FORTRESS_STASHES_RULES_FILENAME);
+    return this->SaveRule(tmp, rules, true);
 }
 
 /**
- * @brief RulesManager::SaveStashPreset
- * @param rule
+ * @brief RulesManager::SavePresetsFromStash
+ * @param presets
  * @return
  */
-int RulesManager::SaveStashPreset(QString ruleName, QString rule) {
+int RulesManager::SavePresetsFromStash(QString presets) {
     QString tmp;
-    tmp.append(this->stashesPresetPath).append(ruleName);
-    return this->SaveRule(tmp, rule);
+    tmp.append(this->fullRulePath);
+    tmp.append(FORTRESS_STASHES_PRESETS_FILENAME);
+    return this->SaveRule(tmp, presets, true);
 }
 
 /**
@@ -86,9 +87,6 @@ int RulesManager::SaveStashPreset(QString ruleName, QString rule) {
  * @return
  */
 QString RulesManager::LoadRule(QString rulePath) {
-    QFileInfo tmpRulePath(rulePath);
-    if(!tmpRulePath.exists() || tmpRulePath.isReadable())
-        return NULL;
     QFile rule(rulePath);
     if(rule.open(QIODevice::ReadOnly | QIODevice::Text)) {
         QByteArray dump = rule.readAll();
@@ -98,25 +96,21 @@ QString RulesManager::LoadRule(QString rulePath) {
 }
 
 /**
- * @brief RulesManager::LoadUserPreset
- * @param rule
+ * @brief RulesManager::LoadStashRules
  * @return
  */
-QString RulesManager::LoadUserPreset(QString ruleName) {
-    QString tmp;
-    tmp.append(this->userPresetPath).append(ruleName);
-    return this->LoadRule(tmp);
+QString RulesManager::LoadStashRules() {
+    QString tmp(this->fullRulePath);
+    return this->LoadRule(tmp.append(FORTRESS_STASHES_RULES_FILENAME));
 }
 
 /**
- * @brief RulesManager::LoadStashPreset
- * @param rule
+ * @brief RulesManager::LoadStashPresets
  * @return
  */
-QString RulesManager::LoadStashPreset(QString ruleName) {
-    QString tmp;
-    tmp.append(this->stashesPresetPath).append(ruleName);
-    return this->LoadRule(tmp);
+QString RulesManager::LoadStashPresets() {
+    QString tmp(this->fullRulePath);
+    return this->LoadRule(tmp.append(FORTRESS_STASHES_PRESETS_FILENAME));
 }
 
 /**
@@ -140,7 +134,7 @@ int RulesManager::ClearStashPresets() {
  */
 void RulesManager::checkDirs() {
     QStringList paths;
-    paths << this->fullRulePath << this->userPresetPath << this->stashesPresetPath;
+    paths << this->fullRulePath << this->userPresetPath;
     for(int i = 0; i < paths.size(); ++i) {
         QFileInfo tmp(paths.at(i));
         if(!tmp.exists() || !tmp.isDir()) {
@@ -149,13 +143,4 @@ void RulesManager::checkDirs() {
             tmpProcess.waitForFinished(10);
         }
     }
-}
-
-/**
- * @brief RulesManager::FetchRemoteStashes
- * @return
- */
-bool RulesManager::FetchRemoteStashes() {
-    // TODO: implement this
-    return false;
 }

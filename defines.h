@@ -6,6 +6,9 @@
 #define FORTRESS_APPLICATION "Fortress"
 #define FORTRESS_GITHUB_STASHLIST_URL "https://raw.githubusercontent.com/ipv6Watch/fortress-preset-stash/master/stashes.json"
 
+#define FORTRESS_STASHES_RULES_FILENAME "rules.json"
+#define FORTRESS_STASHES_PRESETS_FILENAME "presets.json"
+
 #define FORTRESS_WEBVIEW_STARTPAGE "qrc:/html/html/index.html"
 
 #define FORTRESS_ERROR_CHECK_ENTRIES "<b><a href=\"#settings\" data-toggle=\"tab\" onclick=\"$('#settingsTabLink').click();\">Please check entries or run autodetect!</a></b>"
@@ -32,7 +35,6 @@
 #define FORTRESS_RULES_MANAGER_SAVE_RULE_DOES_NOT_EXIST 3
 #define FORTRESS_RULES_MANAGER_RULES_REL_PATH "/rules/";
 #define FORTRESS_RULES_MANAGER_RULES_REL_PATH_USER_PRESETS "/rules/userpresets/"
-#define FORTRESS_RULES_MANAGER_RULES_REL_PATH_STASHES_DATA "/rules/stashes/"
 
 #define FORTRESS_DIALOG_EXPORT "Export firewallscript"
 #endif // DEFINES_H
