@@ -156,5 +156,6 @@ void RulesManager::checkDirs() {
  * @return
  */
 bool RulesManager::FetchRemoteStashes() {
+    // TODO: implement this
     return false;
 }

@@ -34,4 +34,5 @@
 #define FORTRESS_RULES_MANAGER_RULES_REL_PATH_USER_PRESETS "/rules/userpresets/"
 #define FORTRESS_RULES_MANAGER_RULES_REL_PATH_STASHES_DATA "/rules/stashes/"
 
+#define FORTRESS_DIALOG_EXPORT "Export firewallscript"
 #endif // DEFINES_H

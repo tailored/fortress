@@ -53,3 +53,18 @@ QString FortressGenerator::injectCode(QString code) {
     retVal.replace(FORTRESS_GENERATOR_REPLACE_TOKEN, code);
     return retVal;
 }
+
+/**
+ * @brief FortressGenerator::exportFirewallScript
+ * @param fn
+ * @return
+ */
+bool FortressGenerator::exportFirewallScript(QString fn) {
+    QFile fp(fn);
+    if(fp.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text)) {
+        QTextStream out(&fp);
+        out << this->injectCode("//TODO IMPLEMENT FETCHING OF CURRENT RULESET IN RulesManager->exportFirewallScript(QString)");
+        fp.close();
+        return true;
+    } else return false;
+}

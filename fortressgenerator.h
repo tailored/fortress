@@ -7,6 +7,7 @@
 #include <QUrl>
 
 #include "defines.h"
+#include "rulesmanager.h"
 
 class FortressGenerator : public QObject
 {
@@ -16,6 +17,7 @@ public:
     static FortressGenerator* getSharedInstance();
     QString getFortressTemplateString();
     QString injectCode(QString);
+    bool exportFirewallScript(QString);
 
 private:
     QString fortressTemplateString;

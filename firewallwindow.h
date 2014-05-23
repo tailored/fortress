@@ -7,6 +7,8 @@
 #include <QWebFrame>
 #include <QDebug>
 #include <QStyle>
+#include <QFileDialog>
+#include <QMessageBox>
 
 #include "settingsmanager.h"
 #include "defines.h"
@@ -31,6 +33,9 @@ public:
 private slots:
     void on_fireWallWebView_loadFinished(bool arg1);
     void setStashesList();
+    void on_actionExport_triggered();
+    void exportFileChoosen(QString);
+
 private:
     Ui::fireWallWindow *ui;
     FileDownloader *fdl;

@@ -71,3 +71,31 @@ void fireWallWindow::resizeEvent(QResizeEvent *event) {
     tmpSize.setHeight(tmpSize.height()-(this->ui->mainToolBar->height() + this->ui->menuBar->height()));
     this->ui->fireWallWebView->resize(tmpSize);
 }
+
+/**
+ * @brief fireWallWindow::on_actionExport_triggered
+ */
+void fireWallWindow::on_actionExport_triggered()
+{
+    QFileDialog *qf = new QFileDialog(this, FORTRESS_DIALOG_EXPORT, getenv("HOME"),tr("Shell-Script (*.sh)"));
+    qf->setWindowModality(Qt::WindowModal);
+    qf->setAcceptMode(QFileDialog::AcceptSave);
+    qf->show();
+    connect(qf,SIGNAL(fileSelected(QString)),this,SLOT(exportFileChoosen(QString)));
+}
+
+/**
+ * @brief fireWallWindow::exportFileChoosen
+ * @param fn
+ */
+void fireWallWindow::exportFileChoosen(QString fn) {
+    // if extension missing add .sh
+    QRegExp rx(".sh$");
+    if(rx.indexIn(fn) < 0) fn.append(".sh");
+    if(!FortressGenerator::getSharedInstance()->exportFirewallScript(fn)) {
+        QMessageBox *mb = new QMessageBox();
+        mb->setText("Fortress failed to export the firewallscript!");
+        mb->setIcon(QMessageBox::Warning);
+        mb->show();
+    }
+}
