@@ -42,6 +42,8 @@ fireWallWindow::~fireWallWindow()
  */
 void fireWallWindow::updateWebView() {
     this->ui->fireWallWebView->page()->mainFrame()->addToJavaScriptWindowObject("smanager", SettingsManager::getSharedInstance());
+    this->ui->fireWallWebView->page()->mainFrame()->addToJavaScriptWindowObject("rmanager", RulesManager::getSharedInstance());
+    this->updateStashesContent();
 }
 
 /**
@@ -59,6 +61,34 @@ void fireWallWindow::on_fireWallWebView_loadFinished(bool arg1)
 void fireWallWindow::setStashesList() {
     SettingsManager::getSharedInstance()->setStashesList(fdl->downloadedData());
     this->updateWebView();
+}
+
+/**
+ * @brief fireWallWindow::updateStashesContent
+ */
+void fireWallWindow::updateStashesContent() {
+    QFileInfo tmp(SettingsManager::getSharedInstance()->getValue("settings/stashurl"));
+    rDl = new FileDownloader(tmp.path().append('/').append(FORTRESS_STASHES_RULES_FILENAME));
+    connect(rDl,SIGNAL(downloaded()),SLOT(setRulesList()));
+    pDl = new FileDownloader(tmp.path().append('/').append(FORTRESS_STASHES_PRESETS_FILENAME));
+    connect(pDl,SIGNAL(downloaded()),SLOT(setPresetsList()));
+}
+
+/**
+ * @brief fireWallWindow::setRulesList
+ */
+void fireWallWindow::setRulesList() {
+    RulesManager::getSharedInstance()->SaveRulesFromStash(this->rDl->downloadedData());
+    this->ui->fireWallWebView->page()->mainFrame()->evaluateJavaScript("callBackUpdateRules()");
+}
+
+/**
+ * @brief fireWallWindow::setPresetsList
+ */
+void fireWallWindow::setPresetsList() {
+    //qDebug() << this->pDl->downloadedData();
+    RulesManager::getSharedInstance()->SavePresetsFromStash(this->pDl->downloadedData());
+    this->ui->fireWallWebView->page()->mainFrame()->evaluateJavaScript("callBackUpdatePresets()");
 }
 
 /**
@@ -99,3 +129,5 @@ void fireWallWindow::exportFileChoosen(QString fn) {
         mb->show();
     }
 }
+
+

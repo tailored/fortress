@@ -106,3 +106,29 @@ function onRuleDrop() {
   // - i'll implement this tomorrow i am tired now :)
   $(sourceDivObject).html("i will paste the form here acording to type");
 }
+
+/**
+ *
+ */
+function callBackUpdatePresets() {
+  var presetJson = rmanager.LoadStashPresets();
+  if(presetJson.length > 0) {
+    presetJson = JSON.parse(presetJson);
+    if((typeof presetJson == 'object')) {
+      alert(typeof presetJson);
+    }
+  }
+}
+
+/**
+ *
+ */
+function callBackUpdateRules() {
+  var rulesJson = rmanager.LoadStashRules();
+  if(rulesJson.length > 0) {
+    rulesJson = JSON.parse(rulesJson);
+    if((typeof rulesJson) == 'object') {
+      alert(typeof rulesJson);
+    }
+  }
+}
