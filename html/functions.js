@@ -132,7 +132,6 @@ function callBackUpdateRules() {
     if ((typeof rulesJson) == 'object') {
       if (rulesJson.hasOwnProperty('rules')) {
         var htmlCode = "";
-        htmlCode += '<ul class="connectedSortable list-group">\n';
         for (var i = 0; i < rulesJson.rules.length; i++) {
           htmlCode += '<li class="list-group-item">\n';
           htmlCode += '<a class="accordion-toggle" data-toggle="collapse-next">\n';
@@ -142,7 +141,6 @@ function callBackUpdateRules() {
           htmlCode += '<div class="list-group-item-text ruleConfigForm collapse in">foobar</div>\n';
           htmlCode += '</li>\n';
         }
-        htmlCode += "</ul>";
         target.html(htmlCode);
       }
     }

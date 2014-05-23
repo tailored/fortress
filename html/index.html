@@ -136,8 +136,8 @@
             </h4>
           </div>
           <div id="collapseStashRules" class="panel-collapse collapse">
-            <div class="panel-body bg-info" id="stashRulesContent">
-
+            <div class="panel-body bg-info">
+              <ul class="connectedSortable list-group" id="stashRulesContent"></ul>
             </div>
           </div>
         </div>
@@ -211,7 +211,9 @@
         items: "li:not(.list-group-item-info)",
         distance: 10,
         handle: ".ruleMoveButton",
-        stop: function( event, ui ) {onRuleDrop()}
+        stop: function (event, ui) {
+          onRuleDrop()
+        }
       }).disableSelection();
 
     $('#lst-activerules').on('click.collapse-next.data-api', '[data-toggle=collapse-next]', function (e) {
