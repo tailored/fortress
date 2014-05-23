@@ -113,10 +113,27 @@ function onRuleDrop() {
  */
 function callBackUpdatePresets() {
   var presetJson = rmanager.LoadStashPresets();
+  var target = $("#lst-presets");
   if (presetJson.length > 0) {
     presetJson = JSON.parse(presetJson);
     if ((typeof presetJson == 'object')) {
-      //alert(typeof presetJson);
+      if (presetJson.hasOwnProperty('rulesets')) {
+        var htmlCode = "";
+        for (var i = 0; i < presetJson.rulesets.length; i++) {
+          htmlCode += '<li class="list-group-item">\n';
+          htmlCode += '<a class="accordion-toggle" data-toggle="collapse-next">\n';
+          htmlCode += '<div class="list-group-item-heading">' + presetJson.rulesets[i].name + '</div>\n';
+          htmlCode += '</a>\n';
+          htmlCode += '<div class="glyphicon glyphicon-resize-vertical ruleMoveButton"></div>\n';
+          htmlCode += '<div class="list-group-item-text ruleConfigForm collapse in">';
+          htmlCode += '<textarea style="display:none;">{"rules":' + JSON.stringify(presetJson.rulesets[i].rules) + '}</textarea>\n';
+          htmlCode += '<a href="#" class="btn btn-success">Use</a>';
+          htmlCode += '</div>\n';
+          htmlCode += '</li>\n';
+        }
+        target.html(htmlCode);
+        updateDraggables();
+      }
     }
   }
 }
@@ -138,11 +155,24 @@ function callBackUpdateRules() {
           htmlCode += '<div class="list-group-item-heading">' + rulesJson.rules[i].name + '</div>\n';
           htmlCode += '</a>\n';
           htmlCode += '<div class="glyphicon glyphicon-resize-vertical ruleMoveButton"></div>\n';
-          htmlCode += '<div class="list-group-item-text ruleConfigForm collapse in">foobar</div>\n';
+          htmlCode += '<div class="list-group-item-text ruleConfigForm collapse in">\n';
+          htmlCode += '</div>\n';
           htmlCode += '</li>\n';
         }
         target.html(htmlCode);
+        updateDraggables();
       }
     }
   }
+}
+
+/**
+ *
+ */
+function updateDraggables() {
+  $("#lst-userpresets li, #lst-rules li, #stashRulesContent li").draggable({
+    connectToSortable: "#lst-activerules",
+    helper: "clone",
+    revert: "invalid"
+  }).disableSelection();
 }
