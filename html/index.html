@@ -215,6 +215,16 @@
         }
       }).disableSelection();
 
+
+    $('#waste').droppable({
+      accept: "#lst-activerules li",
+      hoverClass: "waste-hover",
+      focusClass: "panel-danger",
+
+    drop: function( event, ui ) {
+        ui.draggable.remove();
+      }}).disableSelection();
+
     $('#lst-activerules').on('click.collapse-next.data-api', '[data-toggle=collapse-next]', function (e) {
 
       var $target = $(this).parent().find('.collapse');
@@ -224,6 +234,7 @@
 
     validateSettings();
   });
+
   $(document).ready(function () {
     if (smanager.getValue("settings/firstrun").length < 1) {
       alert("Fortress has not been configured yet, please go to settings and run autodetect or configure manually!");

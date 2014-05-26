@@ -165,8 +165,8 @@ body {
 #waste {
   font-size: 5em;
   position: absolute;
-  right: -1;
-  top: -1;
+  bottom: 0;
+  width: 100%;
   border-radius: 5px;
   border: 1px solid lightgrey !important;
   display: none;
@@ -177,3 +177,6 @@ body {
   font-size: 0.2em;
 }
 
+.waste-hover {
+  background-color: #000;
+}
