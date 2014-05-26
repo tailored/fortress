@@ -185,3 +185,7 @@ function updateDraggables() {
     revert: "invalid"
   }).disableSelection();
 }
+
+function returnCurrentConfig() {
+  return "<<< current config >>>";
+}
