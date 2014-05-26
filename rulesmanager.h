@@ -21,6 +21,7 @@ public:
     int SavePresetsFromStash(QString);
     Q_INVOKABLE QString LoadStashRules();
     Q_INVOKABLE QString LoadStashPresets();
+    Q_INVOKABLE QByteArray ProcessCurrentConfig(QString);
     int ClearStashPresets();
 
 signals:

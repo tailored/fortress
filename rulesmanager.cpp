@@ -144,3 +144,8 @@ void RulesManager::checkDirs() {
         }
     }
 }
+
+QByteArray RulesManager::ProcessCurrentConfig(QString rl) {
+    qDebug() << rl;
+    return NULL;
+}

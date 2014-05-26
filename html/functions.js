@@ -164,7 +164,7 @@ function callBackUpdateRules() {
           htmlCode += '</a>\n';
           htmlCode += '<div class="glyphicon glyphicon-resize-vertical ruleMoveButton"></div>\n';
           htmlCode += '<div class="list-group-item-text ruleConfigForm collapse in">\n';
-          htmlCode += '<button type="button" class="btn btn-danger delrule">Delete Rule</button>\n';
+          htmlCode += '<button type="button" class="btn btn-danger delrule glyphicon glyphicon-fire"></button>\n';
           htmlCode += '</div>\n';
           htmlCode += '</li>\n';
         }

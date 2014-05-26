@@ -161,3 +161,9 @@ body {
 .list-group-item-heading {
   font-size: 1em;
 }
+
+.delrule {
+  position: absolute;
+  right: 0.5em;
+  top: 0.5em;
+}

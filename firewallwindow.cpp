@@ -18,10 +18,11 @@ fireWallWindow::fireWallWindow(QWidget *parent) :
     // init the webview
     this->updateWebView();
     // some gfx stuff
-    this->ui->actionDeploy->setIcon(this->style()->standardIcon(QStyle::SP_DesktopIcon));
-    this->ui->actionExport->setIcon(this->style()->standardIcon(QStyle::SP_ComputerIcon));
-    this->ui->actionQuit->setIcon(this->style()->standardIcon(QStyle::SP_DirClosedIcon));
+    this->ui->actionDeploy->setIcon(this->style()->standardIcon(QStyle::SP_DialogOkButton));
+    this->ui->actionExport->setIcon(this->style()->standardIcon(QStyle::SP_DialogYesButton));
+    this->ui->actionQuit->setIcon(this->style()->standardIcon(QStyle::SP_DialogCloseButton));
     this->ui->actionUpdateRemote->setIcon(this->style()->standardIcon(QStyle::SP_DriveNetIcon));
+    this->ui->actionSave->setIcon(this->style()->standardIcon(QStyle::SP_DialogSaveButton));
     this->ui->mainToolBar->setFloatable(false);
     this->ui->mainToolBar->setMovable(false);
 
@@ -154,4 +155,27 @@ void fireWallWindow::updateFinished() {
         this->ui->actionUpdateRemote->setEnabled(true);
         this->ui->actionUpdateRemote->setEnabled(true);
     }
+}
+
+/**
+ * @brief fireWallWindow::on_actionSave_triggered
+ */
+void fireWallWindow::on_actionSave_triggered()
+{
+    qDebug() << this->getCurrentConfig();
+}
+
+/**
+ * @brief fireWallWindow::getCurrentConfig
+ */
+QString fireWallWindow::getCurrentConfig() {
+    return this->ui->fireWallWebView->page()->mainFrame()->evaluateJavaScript("returnCurrentConfig()").toString();
+}
+
+/**
+ * @brief fireWallWindow::on_actionDeploy_triggered
+ */
+void fireWallWindow::on_actionDeploy_triggered()
+{
+    qDebug() << this->getCurrentConfig();
 }

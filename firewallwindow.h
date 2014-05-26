@@ -38,8 +38,11 @@ private slots:
     void exportFileChoosen(QString);
     void updateFinished();
     Q_INVOKABLE void updateStashesContent();
+    Q_INVOKABLE void on_actionUpdateRemote_triggered();
+    Q_INVOKABLE void on_actionSave_triggered();
+    Q_INVOKABLE QString getCurrentConfig();
 
-    void on_actionUpdateRemote_triggered();
+    void on_actionDeploy_triggered();
 
 private:
     Ui::fireWallWindow *ui;
