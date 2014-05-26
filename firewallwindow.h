@@ -29,7 +29,6 @@ public:
     explicit fireWallWindow(QWidget *parent = 0);
     ~fireWallWindow();
     void updateWebView();
-    Q_INVOKABLE void updateStashesContent();
 private slots:
     void on_fireWallWebView_loadFinished(bool arg1);
     void setStashesList();
@@ -37,10 +36,16 @@ private slots:
     void setPresetsList();
     void on_actionExport_triggered();
     void exportFileChoosen(QString);
+    void updateFinished();
+    Q_INVOKABLE void updateStashesContent();
+
+    void on_actionUpdateRemote_triggered();
 
 private:
     Ui::fireWallWindow *ui;
     FileDownloader *fdl, *rDl, *pDl;
+    bool rulesDone;
+    bool presetsDone;
 
 protected:
     void resizeEvent(QResizeEvent *);

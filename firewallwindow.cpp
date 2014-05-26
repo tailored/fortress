@@ -21,6 +21,7 @@ fireWallWindow::fireWallWindow(QWidget *parent) :
     this->ui->actionDeploy->setIcon(this->style()->standardIcon(QStyle::SP_DesktopIcon));
     this->ui->actionExport->setIcon(this->style()->standardIcon(QStyle::SP_ComputerIcon));
     this->ui->actionQuit->setIcon(this->style()->standardIcon(QStyle::SP_DirClosedIcon));
+    this->ui->actionUpdateRemote->setIcon(this->style()->standardIcon(QStyle::SP_DriveNetIcon));
     this->ui->mainToolBar->setFloatable(false);
     this->ui->mainToolBar->setMovable(false);
 
@@ -81,15 +82,18 @@ void fireWallWindow::updateStashesContent() {
 void fireWallWindow::setRulesList() {
     RulesManager::getSharedInstance()->SaveRulesFromStash(this->rDl->downloadedData());
     this->ui->fireWallWebView->page()->mainFrame()->evaluateJavaScript("callBackUpdateRules()");
+    this->rulesDone = true;
+    this->updateFinished();
 }
 
 /**
  * @brief fireWallWindow::setPresetsList
  */
 void fireWallWindow::setPresetsList() {
-    //qDebug() << this->pDl->downloadedData();
     RulesManager::getSharedInstance()->SavePresetsFromStash(this->pDl->downloadedData());
     this->ui->fireWallWebView->page()->mainFrame()->evaluateJavaScript("callBackUpdatePresets()");
+    this->presetsDone = true;
+    this->updateFinished();
 }
 
 /**
@@ -131,4 +135,23 @@ void fireWallWindow::exportFileChoosen(QString fn) {
     }
 }
 
+/**
+ * @brief fireWallWindow::on_actionUpdateRemote_triggered
+ */
+void fireWallWindow::on_actionUpdateRemote_triggered()
+{
+    this->ui->actionUpdateRemote->setDisabled(true);
+    this->rulesDone = false;
+    this->presetsDone = false;
+    this->updateStashesContent();
+}
 
+/**
+ * @brief fireWallWindow::updateFinished
+ */
+void fireWallWindow::updateFinished() {
+    if(this->rulesDone && this->presetsDone) {
+        this->ui->actionUpdateRemote->setEnabled(true);
+        this->ui->actionUpdateRemote->setEnabled(true);
+    }
+}

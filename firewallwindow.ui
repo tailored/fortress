@@ -67,6 +67,11 @@
     <property name="title">
      <string>&amp;Fortress</string>
     </property>
+    <addaction name="actionDeploy"/>
+    <addaction name="actionExport"/>
+    <addaction name="separator"/>
+    <addaction name="actionUpdateRemote"/>
+    <addaction name="separator"/>
     <addaction name="actionQuit"/>
    </widget>
    <addaction name="menuFirewall"/>
@@ -84,11 +89,16 @@
    <addaction name="actionDeploy"/>
    <addaction name="actionExport"/>
    <addaction name="separator"/>
+   <addaction name="actionUpdateRemote"/>
+   <addaction name="separator"/>
    <addaction name="actionQuit"/>
   </widget>
   <action name="actionQuit">
    <property name="text">
     <string>Quit</string>
+   </property>
+   <property name="toolTip">
+    <string>This will quit Fortress Cpt. Obvious!</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+Q</string>
@@ -104,13 +114,33 @@
    <property name="iconText">
     <string>Deploy</string>
    </property>
+   <property name="toolTip">
+    <string>Deploy the current configuration to your system</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+D</string>
+   </property>
   </action>
   <action name="actionExport">
    <property name="text">
     <string>Export</string>
    </property>
+   <property name="toolTip">
+    <string>Export the current configuration to a shell script</string>
+   </property>
    <property name="shortcut">
     <string>Ctrl+E</string>
+   </property>
+  </action>
+  <action name="actionUpdateRemote">
+   <property name="text">
+    <string>Update</string>
+   </property>
+   <property name="toolTip">
+    <string>Fetch rules- and preset-update from the stash</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+U</string>
    </property>
   </action>
  </widget>
