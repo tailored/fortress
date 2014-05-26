@@ -20,6 +20,7 @@
   </li>
 </ul>
 <div class="tab-content">
+
   <div class="tab-pane fade in active" id="rules">
     <div class="div-content float-left eightypercent" id="ruleslist">
       <ul id="lst-activerules" class="connectedSortable list-group">
@@ -42,6 +43,13 @@
           <div class="list-group-item-text ruleConfigForm collapse in">foobar</div>
         </li>
       </ul>
+      <div id="waste" class="panel panel-danger">
+        <div class="panel-body bg-danger">
+          <div class="text-warning">Drop rule here</div>
+          <span class="glyphicon glyphicon-fire text-warning"></span>
+          <div class="text-warning">to delete!</div>
+        </div>
+      </div>
     </div>
     <div class="float-left twentypercent paddingfive">
       <div class="panel-group" id="accordion">
@@ -49,7 +57,7 @@
           <div class="panel-heading">
             <h4 class="panel-title">
               <a data-toggle="collapse" data-parent="#accordion" href="#collapesPresets">
-                Presets
+                Presets&nbsp;<span class="badge" id="countPresets">0</span>
               </a>
                 <span id="toolTipPresets" class="glyphicon float-right glyphicon-question-sign" data-google="tooltip"
                       data-placement="bottom" title="<-- paste tooltip here -->"></span>
@@ -127,7 +135,7 @@
           <div class="panel-heading">
             <h4 class="panel-title">
               <a data-toggle="collapse" data-parent="#accordion" href="#collapseStashRules">
-                Example Rules
+                Example Rules&nbsp;<span class="badge" id="countCollapseStashRules">0</span>
               </a>
                 <span id="toolTipUserPresets" class="glyphicon float-right glyphicon-question-sign"
                       data-google="tooltip" data-placement="bottom" title="<-- paste tooltip here -->"></span>
@@ -168,14 +176,6 @@
 
             <div id="settings-stashlist-wrapper"></div>
           </div>
-          <div class="form-group">
-            <div class="checkbox">
-              <label class="form">
-                <input type="checkbox" id="settings-fetchstashes" class="checkbox">automatically fetch remote
-                preset stash contents
-              </label>
-            </div>
-          </div>
 
           <div class="form-group">
             <input type="button" value="Save" class="btn btn-warning" onclick="setSettings()">
@@ -188,9 +188,10 @@
   <div class="panel panel-danger twentypercent" id="settingsErrorWrapper">
     <div class="panel-heading">Errors<span class="glyphicon glyphicon-remove float-right"
                                            onclick="$('#settingsErrorWrapper').hide();"></span></div>
-    <div class="panel-body bg-danger" id="settingsError">foobar</div>
+    <div class="panel-body bg-danger" id="settingsError"></div>
   </div>
 </div>
+
 <script type="text/javascript">
   $('#toolTipPresets').tooltip();
   $('#toolTipUserPresets').tooltip();
@@ -205,8 +206,12 @@
         items: "li:not(.list-group-item-info)",
         distance: 10,
         handle: ".ruleMoveButton",
+        start: function (event, ui ) {
+          $('#waste').show();
+        },
         stop: function (event, ui) {
-          onRuleDrop()
+          onRuleDrop();
+          $('#waste').hide();
         }
       }).disableSelection();
 

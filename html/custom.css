@@ -112,8 +112,68 @@ body {
   overflow: auto;
   overflow-x: hidden;
   height: 90%;
+  position: relative;
 }
 
 #lst-rules {
   margin: 0 !important;
 }
+
+.presetButton {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+.presetButton > div {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  font-size: 18px;
+  padding: 2px;
+}
+
+.presetLi {
+  padding-left: 2em;
+}
+
+#collapesPresets > .panel-body,
+#collapseRules > .panel-body,
+#collapseStashRules > .panel-body,
+#collapseUserPresets > .panel-body {
+  padding: 5px;
+}
+
+#lst-presets,
+#stashRulesContent {
+  padding: 0;
+  margin: 0;
+}
+
+.list-group-item-heading {
+  font-size: 1em;
+}
+
+#waste {
+  font-size: 5em;
+  position: absolute;
+  right: -1;
+  top: -1;
+  border-radius: 5px;
+  border: 1px solid lightgrey !important;
+  display: none;
+  text-align: center;
+}
+
+#waste > div > div {
+  font-size: 0.2em;
+}
+
