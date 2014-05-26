@@ -72,9 +72,11 @@ bool SettingsManager::detectSudoProvider(bool writeConfig) {
             process.start(tmpString);
             process.waitForFinished(20);
             output = process.readAllStandardOutput();
-            output.remove(QRegExp("[\\n\\t\\r]"));
-            if(writeConfig) this->setValue("settings/sudoprovider", output);
-            detected = true;
+            if(output.length() > 0){
+                output.remove(QRegExp("[\\n\\t\\r]"));
+                if(writeConfig) this->setValue("settings/sudoprovider", output);
+                detected = true;
+            }
         } else {
             break;
         }
