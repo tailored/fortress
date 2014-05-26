@@ -93,8 +93,6 @@ function validateSettings() {
 
 /**
  *
- * @param sourceDivObject
- * @param ruleType
  */
 function onRuleDrop() {
   //var form = callToSomeCPPFunctionWhichProvidesFormData(ruleType);
@@ -140,7 +138,7 @@ function callBackUpdatePresets() {
  * @param preset
  */
 function deployPreset(preset) {
-  if(confirm("This will replace your current ruleset! Are you sure?")) {
+  if (confirm("This will replace your current ruleset! Are you sure?")) {
     alert("make it so");
     // ruleset json can be extracted from $(preset).val();
   }
@@ -186,16 +184,47 @@ function updateDraggables() {
     revert: "invalid"
   }).disableSelection();
   $(".delrule")
-    .click(function() {
-      $(this).parent().parent().hide("puff", null, 400, function()
-      {
+    .click(function () {
+      $(this).parent().parent().hide("puff", null, 400, function () {
         $(this).remove();
       });
 
-  })
+    })
 }
 
 
 function returnCurrentConfig() {
   return "<<< current config >>>";
+}
+
+function initGui() {
+  $('#toolTipPresets').tooltip();
+  $('#toolTipUserPresets').tooltip();
+  $('#toolTipRules').tooltip();
+  $(function () {
+    updateDraggables();
+
+    $("#lst-activerules")
+      .sortable({
+        items: "li:not(.list-group-item-info)",
+        distance: 10,
+        handle: ".ruleMoveButton",
+        stop: function (event, ui) {
+          updateDraggables();
+        }
+      }).disableSelection();
+
+    $('#lst-activerules').on('click.collapse-next.data-api', '[data-toggle=collapse-next]', function (e) {
+
+      var $target = $(this).parent().find('.collapse');
+      $target.collapse('toggle');
+    });
+
+    validateSettings();
+  });
+  if (smanager.getValue("settings/firstrun").length < 1) {
+    alert("Fortress has not been configured yet, please go to settings and run autodetect or configure manually!");
+    $("#settingsTab").highlight();
+  }
+  getSettings();
 }
