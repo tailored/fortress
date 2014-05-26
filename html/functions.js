@@ -186,9 +186,14 @@ function updateDraggables() {
   }).disableSelection();
   $(".delrule")
     .click(function() {
-      $(this).parent().parent().remove();
+      $(this).parent().parent().hide("puff", null, 400, function()
+      {
+        $(this).remove();
+      });
+
   })
 }
+
 
 function returnCurrentConfig() {
   return "<<< current config >>>";
