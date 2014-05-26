@@ -201,27 +201,25 @@ function initGui() {
   $('#toolTipPresets').tooltip();
   $('#toolTipUserPresets').tooltip();
   $('#toolTipRules').tooltip();
-  $(function () {
-    updateDraggables();
+  updateDraggables();
 
-    $("#lst-activerules")
-      .sortable({
-        items: "li:not(.list-group-item-info)",
-        distance: 10,
-        handle: ".ruleMoveButton",
-        stop: function (event, ui) {
-          updateDraggables();
-        }
-      }).disableSelection();
+  $("#lst-activerules")
+    .sortable({
+      items: "li:not(.list-group-item-info)",
+      distance: 10,
+      handle: ".ruleMoveButton",
+      stop: function (event, ui) {
+        updateDraggables();
+      }
+    }).disableSelection();
 
-    $('#lst-activerules').on('click.collapse-next.data-api', '[data-toggle=collapse-next]', function (e) {
+  $('#lst-activerules').on('click.collapse-next.data-api', '[data-toggle=collapse-next]', function (e) {
 
-      var $target = $(this).parent().find('.collapse');
-      $target.collapse('toggle');
-    });
-
-    validateSettings();
+    var $target = $(this).parent().find('.collapse');
+    $target.collapse('toggle');
   });
+
+  validateSettings();
   if (smanager.getValue("settings/firstrun").length < 1) {
     alert("Fortress has not been configured yet, please go to settings and run autodetect or configure manually!");
     $("#settingsTab").highlight();
