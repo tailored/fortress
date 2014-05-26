@@ -40,16 +40,11 @@
           <div class="ruleMoveButton">
             <span class="glyphicon glyphicon-resize-vertical"></span>
           </div>
-          <div class="list-group-item-text ruleConfigForm collapse in">foobar</div>
+          <div class="list-group-item-text ruleConfigForm collapse in">
+            <button type="button" class="btn btn-danger delrule">Delete Rule</button>
+          </div>
         </li>
       </ul>
-      <div id="waste" class="panel panel-danger">
-        <div class="panel-body bg-danger">
-          <div class="text-warning">Drop rule here</div>
-          <span class="glyphicon glyphicon-fire text-warning"></span>
-          <div class="text-warning">to delete!</div>
-        </div>
-      </div>
     </div>
     <div class="float-left twentypercent paddingfive">
       <div class="panel-group" id="accordion">
@@ -109,7 +104,9 @@
                   </a>
 
                   <div class="glyphicon glyphicon-resize-vertical ruleMoveButton"></div>
-                  <div class="list-group-item-text ruleConfigForm collapse in">foobar</div>
+                  <div class="list-group-item-text ruleConfigForm collapse in">
+                    <button type="button" class="btn btn-danger delrule">Delete Rule</button>
+                  </div>
                 </li>
                 <li class="list-group-item">
                   <a class="accordion-toggle" data-toggle="collapse-next">
@@ -117,7 +114,9 @@
                   </a>
 
                   <div class="glyphicon glyphicon-resize-vertical ruleMoveButton"></div>
-                  <div class="list-group-item-text ruleConfigForm collapse in">foobar</div>
+                  <div class="list-group-item-text ruleConfigForm collapse in">
+                    <button type="button" class="btn btn-danger delrule">Delete Rule</button>
+                  </div>
                 </li>
                 <li class="list-group-item">
                   <a class="accordion-toggle" data-toggle="collapse-next">
@@ -125,7 +124,9 @@
                   </a>
 
                   <div class="glyphicon glyphicon-resize-vertical ruleMoveButton"></div>
-                  <div class="list-group-item-text ruleConfigForm collapse in">foobar</div>
+                  <div class="list-group-item-text ruleConfigForm collapse in">
+                    <button type="button" class="btn btn-danger delrule">Delete Rule</button>
+                  </div>
                 </li>
               </ul>
             </div>
@@ -206,24 +207,11 @@
         items: "li:not(.list-group-item-info)",
         distance: 10,
         handle: ".ruleMoveButton",
-        start: function (event, ui ) {
-          $('#waste').show();
-        },
-        stop: function (event, ui) {
-          onRuleDrop();
-          $('#waste').hide();
-        }
+        stop: function( event, ui ){updateDraggables();}
       }).disableSelection();
 
 
-    $('#waste').droppable({
-      accept: "#lst-activerules li",
-      hoverClass: "waste-hover",
-      focusClass: "panel-danger",
 
-    drop: function( event, ui ) {
-        ui.draggable.remove();
-      }}).disableSelection();
 
     $('#lst-activerules').on('click.collapse-next.data-api', '[data-toggle=collapse-next]', function (e) {
 

@@ -184,6 +184,10 @@ function updateDraggables() {
     helper: "clone",
     revert: "invalid"
   }).disableSelection();
+  $(".delrule")
+    .click(function() {
+      $(this).parent().parent().remove();
+  })
 }
 
 function returnCurrentConfig() {

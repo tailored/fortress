@@ -161,22 +161,3 @@ body {
 .list-group-item-heading {
   font-size: 1em;
 }
-
-#waste {
-  font-size: 5em;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  border-radius: 5px;
-  border: 1px solid lightgrey !important;
-  display: none;
-  text-align: center;
-}
-
-#waste > div > div {
-  font-size: 0.2em;
-}
-
-.waste-hover {
-  background-color: #000;
-}
