@@ -185,11 +185,17 @@ function updateDraggables() {
   }).disableSelection();
   $(".delrule")
     .click(function () {
-      $(this).parent().parent().hide("puff", null, 400, function () {
+      $(this).parent().parent().parent().hide("puff", null, 400, function () {
         $(this).remove();
       });
 
     })
+    $(".saverule")
+        .click(function () {
+            $container = $(this).parent().parent().parent();
+            $container.find('.collapse').collapse('toggle');
+            $container.find(".list-group-item-heading").text($(this).parent().find("input.rulename").val());
+        })
 }
 
 
