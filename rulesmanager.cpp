@@ -145,7 +145,20 @@ void RulesManager::checkDirs() {
     }
 }
 
+/**
+ * @brief RulesManager::ProcessCurrentConfig
+ * @param rl
+ * @return
+ */
 QByteArray RulesManager::ProcessCurrentConfig(QString rl) {
     qDebug() << rl;
     return NULL;
+}
+
+/**
+ * @brief RulesManager::GenerateUUID
+ * @return
+ */
+QString RulesManager::GenerateUUID() {
+    return QUuid::createUuid().toString();
 }

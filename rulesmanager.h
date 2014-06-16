@@ -6,6 +6,7 @@
 #include <QDir>
 #include <QFileInfo>
 #include <QFile>
+#include <QUuid>
 
 #include "defines.h"
 #include "settingsmanager.h"
@@ -22,6 +23,7 @@ public:
     Q_INVOKABLE QString LoadStashRules();
     Q_INVOKABLE QString LoadStashPresets();
     Q_INVOKABLE QByteArray ProcessCurrentConfig(QString);
+    Q_INVOKABLE QString GenerateUUID();
     int ClearStashPresets();
 
 signals:
