@@ -160,5 +160,5 @@ QByteArray RulesManager::ProcessCurrentConfig(QString rl) {
  * @return
  */
 QString RulesManager::GenerateUUID() {
-    return QUuid::createUuid().toString();
+    return QUuid::createUuid().toString().replace("{","").replace("}","");
 }
