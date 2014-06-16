@@ -174,6 +174,41 @@ function callBackUpdateRules() {
   }
 }
 
+
+function insertRule(name, protocol, sourceaddr, sourceport, destport, collapsed){
+  tcp = (protocol["tcp"]==1) ? " checked" : "";
+  udp = (protocol["udp"]==1) ? " checked" : "";
+  icmp = (protocol["icmp"]==1) ? " checked" : "";
+  col = (!collapsed ? " in" : "");
+
+  $('#lst-activerules').append(
+    '<li class="list-group-item"><a class="accordion-toggle" data-toggle="collapse-next">' +
+    '<div class="list-group-item-heading">'+name+'</div></a>' +
+    '<div class="ruleMoveButton"><span class="glyphicon glyphicon-resize-vertical"></span></div>' +
+    '<div class="list-group-item-text ruleConfigForm collapse'+col+'"><form role="form">' +
+    '<div class="form-group">' +
+    '<input type="text" class="form-control rulename" placeholder="Rule Name" value="' + name + '">' +
+    '</div>' +
+    '<div class="form-group">' +
+    '<label class="checkbox-inline"><input type="checkbox" value="tcp"'+ tcp +'> TCP</label>' +
+    '<label class="checkbox-inline"><input type="checkbox" value="udp" '+ udp +'> UDP</label>' +
+    '<label class="checkbox-inline"><input type="checkbox" value="icmp" '+ icmp +'> ICMP</label>' +
+    '</div>' +
+    '<div class="form-group">' +
+    '<input type="text" class="form-control" placeholder="Source Address" value="'+sourceaddr+'">' +
+    '<input type="text" class="form-control" placeholder="Source Port" value="'+sourceport+'">' +
+    '<input type="text" class="form-control" placeholder="Destination Port" value="'+destport+'">' +
+    '</div>' +
+    '<button type="button" class="btn btn-primary saverule">Save</button>' +
+    '<button type="button" class="btn btn-danger delrule">Delete Rule</button>' +
+    '</form></div>' +
+    '</li>');
+}
+
+
+
+
+
 /**
  *
  */
@@ -204,6 +239,10 @@ function returnCurrentConfig() {
 }
 
 function initGui() {
+  insertRule("FUCK", {"tcp":1, "udp":"checked"}, "127.0.0.1", 0, 0, true);
+  insertRule("THIS", {"tcp":1, "udp":"checked"}, "127.0.0.1", 0, 0, true);
+  insertRule("SHIT", {"tcp":1, "udp":"checked"}, "127.0.0.1", 0, 0, true);
+  //insertRule("Shit");
   $('#toolTipPresets').tooltip();
   $('#toolTipUserPresets').tooltip();
   $('#toolTipRules').tooltip();
@@ -231,4 +270,5 @@ function initGui() {
     $("#settingsTab").highlight();
   }
   getSettings();
+
 }
