@@ -157,8 +157,11 @@ function callBackUpdateRules() {
     rulesJson = JSON.parse(rulesJson);
     if ((typeof rulesJson) == 'object') {
       if (rulesJson.hasOwnProperty('rules')) {
+        $('#stashRulesContent').html('');
         for (var i = 0; i < rulesJson.rules.length; i++) {
+
           insertRule(rulesJson.rules[i].name, {"tcp":1, "udp":1}, "127.0.0.1", 0, 0, true, 4);
+          $('#countCollapseStashRules').html(rulesJson.rules.length);
         }
 
 //        var htmlCode = "";
