@@ -112,7 +112,8 @@ function callBackUpdatePresets() {
     presetJson = JSON.parse(presetJson);
     if ((typeof presetJson == 'object')) {
       if (presetJson.hasOwnProperty('rulesets')) {
-/*        var htmlCode = "";
+
+        var htmlCode = "";
         for (var i = 0; i < presetJson.rulesets.length; i++) {
           htmlCode += '<li class="list-group-item presetLi">\n';
           htmlCode += '<a class="accordion-toggle" data-toggle="collapse-next">\n';
@@ -127,7 +128,7 @@ function callBackUpdatePresets() {
         }
         target.html(htmlCode);
         $('#countPresets').html(presetJson.rulesets.length);
-        updateDraggables();*/
+        updateDraggables();
 
       }
     }
@@ -140,7 +141,8 @@ function callBackUpdatePresets() {
  */
 function deployPreset(preset) {
   if (confirm("This will replace your current ruleset! Are you sure?")) {
-    alert("make it so");
+    //alert("make it so");
+    //insertRule("Example Rule 1", {"tcp":1, "udp":1}, "127.0.0.1", 0, 0, true, 0);
     // ruleset json can be extracted from $(preset).val();
   }
 }
