@@ -217,8 +217,6 @@ function insertRule(name, protocol, sourceaddr, sourceport, destport, collapsed,
 
 
 
-
-
 /**
  *
  */
