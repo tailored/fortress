@@ -157,21 +157,25 @@ function callBackUpdateRules() {
     rulesJson = JSON.parse(rulesJson);
     if ((typeof rulesJson) == 'object') {
       if (rulesJson.hasOwnProperty('rules')) {
-        var htmlCode = "";
         for (var i = 0; i < rulesJson.rules.length; i++) {
-          htmlCode += '<li class="list-group-item">\n';
-          htmlCode += '<a class="accordion-toggle" data-toggle="collapse-next">\n';
-          htmlCode += '<div class="list-group-item-heading">' + rulesJson.rules[i].name + '</div>\n';
-          htmlCode += '</a>\n';
-          htmlCode += '<div class="glyphicon glyphicon-resize-vertical ruleMoveButton"></div>\n';
-          htmlCode += '<div class="list-group-item-text ruleConfigForm collapse in">\n';
-          htmlCode += '<button type="button" class="btn btn-danger delrule glyphicon glyphicon-fire"></button>\n';
-          htmlCode += '</div>\n';
-          htmlCode += '</li>\n';
+          insertRule(rulesJson.rules[i].name, {"tcp":1, "udp":1}, "127.0.0.1", 0, 0, true, 4);
         }
-        target.html(htmlCode);
-        $('#countCollapseStashRules').html(rulesJson.rules.length);
-        updateDraggables();
+
+//        var htmlCode = "";
+//        for (var i = 0; i < rulesJson.rules.length; i++) {
+//          htmlCode += '<li class="list-group-item">\n';
+//          htmlCode += '<a class="accordion-toggle" data-toggle="collapse-next">\n';
+//          htmlCode += '<div class="list-group-item-heading">' + rulesJson.rules[i].name + '</div>\n';
+//          htmlCode += '</a>\n';
+//          htmlCode += '<div class="glyphicon glyphicon-resize-vertical ruleMoveButton"></div>\n';
+//          htmlCode += '<div class="list-group-item-text ruleConfigForm collapse in">\n';
+//          htmlCode += '<button type="button" class="btn btn-danger delrule glyphicon glyphicon-fire"></button>\n';
+//          htmlCode += '</div>\n';
+//          htmlCode += '</li>\n';
+//        }
+//        target.html(htmlCode);
+//        $('#countCollapseStashRules').html(rulesJson.rules.length);
+//        updateDraggables();
       }
     }
   }
@@ -186,9 +190,12 @@ function insertRule(name, protocol, sourceaddr, sourceport, destport, collapsed,
   if (list == 1){
       target = '#lst-rules';
   } else if(list == 2){
-      target = '#lst-presets'
+      target = '#lst-presets';
   } else if(list == 3){
-      target = '#lst-userpresets'
+      target = '#lst-userpresets';
+  } else if(list == 4){
+    target = '#stashRulesContent';
+
   } else {
       target = '#lst-activerules';
   }
