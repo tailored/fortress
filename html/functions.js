@@ -112,7 +112,7 @@ function callBackUpdatePresets() {
     presetJson = JSON.parse(presetJson);
     if ((typeof presetJson == 'object')) {
       if (presetJson.hasOwnProperty('rulesets')) {
-        var htmlCode = "";
+/*        var htmlCode = "";
         for (var i = 0; i < presetJson.rulesets.length; i++) {
           htmlCode += '<li class="list-group-item presetLi">\n';
           htmlCode += '<a class="accordion-toggle" data-toggle="collapse-next">\n';
@@ -127,7 +127,8 @@ function callBackUpdatePresets() {
         }
         target.html(htmlCode);
         $('#countPresets').html(presetJson.rulesets.length);
-        updateDraggables();
+        updateDraggables();*/
+
       }
     }
   }
@@ -154,7 +155,7 @@ function callBackUpdateRules() {
     rulesJson = JSON.parse(rulesJson);
     if ((typeof rulesJson) == 'object') {
       if (rulesJson.hasOwnProperty('rules')) {
-        var htmlCode = "";
+/*        var htmlCode = "";
         for (var i = 0; i < rulesJson.rules.length; i++) {
           htmlCode += '<li class="list-group-item">\n';
           htmlCode += '<a class="accordion-toggle" data-toggle="collapse-next">\n';
@@ -168,20 +169,29 @@ function callBackUpdateRules() {
         }
         target.html(htmlCode);
         $('#countCollapseStashRules').html(rulesJson.rules.length);
-        updateDraggables();
+        updateDraggables();*/
       }
     }
   }
 }
 
 
-function insertRule(name, protocol, sourceaddr, sourceport, destport, collapsed){
+function insertRule(name, protocol, sourceaddr, sourceport, destport, collapsed, list){
   tcp = (protocol["tcp"]==1) ? " checked" : "";
   udp = (protocol["udp"]==1) ? " checked" : "";
   icmp = (protocol["icmp"]==1) ? " checked" : "";
   col = (!collapsed ? " in" : "");
+  if (list == 1){
+      target = '#lst-rules';
+  } else if(list == 2){
+      target = '#lst-presets'
+  } else if(list == 3){
+      target = '#lst-userpresets'
+  } else {
+      target = '#lst-activerules';
+  }
 
-  $('#lst-activerules').append(
+  $(target).append(
     '<li class="list-group-item"><a class="accordion-toggle" data-toggle="collapse-next">' +
     '<div class="list-group-item-heading">'+name+'</div></a>' +
     '<div class="ruleMoveButton"><span class="glyphicon glyphicon-resize-vertical"></span></div>' +
@@ -239,10 +249,11 @@ function returnCurrentConfig() {
 }
 
 function initGui() {
-  insertRule("FUCK", {"tcp":1, "udp":"checked"}, "127.0.0.1", 0, 0, true);
-  insertRule("THIS", {"tcp":1, "udp":"checked"}, "127.0.0.1", 0, 0, true);
-  insertRule("SHIT", {"tcp":1, "udp":"checked"}, "127.0.0.1", 0, 0, true);
-  //insertRule("Shit");
+  insertRule("Example Rule 1", {"tcp":1, "udp":1}, "127.0.0.1", 0, 0, true, 0);
+  insertRule("Example Rule 2", {"tcp":1, "udp":1}, "127.0.0.1", 0, 0, true, 0);
+  insertRule("Example Rule 3", {"tcp":1, "udp":1}, "127.0.0.1", 0, 0, true, 0);
+  insertRule("TCP/UDP", {"tcp":1, "udp":1, "icmp":0}, '', '', '', false, 1);
+  insertRule("ICMP", {"tcp":0, "udp":0, "icmp":1}, '', '', '', false, 1);
   $('#toolTipPresets').tooltip();
   $('#toolTipUserPresets').tooltip();
   $('#toolTipRules').tooltip();
