@@ -157,7 +157,7 @@ function callBackUpdateRules() {
     rulesJson = JSON.parse(rulesJson);
     if ((typeof rulesJson) == 'object') {
       if (rulesJson.hasOwnProperty('rules')) {
-/*        var htmlCode = "";
+        var htmlCode = "";
         for (var i = 0; i < rulesJson.rules.length; i++) {
           htmlCode += '<li class="list-group-item">\n';
           htmlCode += '<a class="accordion-toggle" data-toggle="collapse-next">\n';
@@ -171,7 +171,7 @@ function callBackUpdateRules() {
         }
         target.html(htmlCode);
         $('#countCollapseStashRules').html(rulesJson.rules.length);
-        updateDraggables();*/
+        updateDraggables();
       }
     }
   }
