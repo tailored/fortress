@@ -107,6 +107,7 @@ function onRuleDrop() {
  */
 function callBackUpdatePresets() {
     var presetJson = rmanager.LoadStashPresets();
+
     var target = $("#lst-presets");
     if (presetJson.length > 0) {
         presetJson = JSON.parse(presetJson);
@@ -136,6 +137,44 @@ function callBackUpdatePresets() {
         }
     }
 }
+
+
+/**
+ *
+ */
+function LoadUserRuleSet() {
+  var presetJson = rmanager.LoadUserRules();
+  var target = $("#lst-userpresets");
+
+  if (presetJson.length > 0) {
+    presetJson = JSON.parse(presetJson);
+    if ((typeof presetJson == 'object')) {
+      if (presetJson.hasOwnProperty('rulesets')) {
+
+        var htmlCode = "";
+        for (var i = 0; i < presetJson.rulesets.length; i++) {
+          htmlCode += '<li class="list-group-item presetLi">\n';
+          htmlCode += '<a class="accordion-toggle" data-toggle="collapse-next">\n';
+          htmlCode += '<div class="list-group-item-heading">' + presetJson.rulesets[i].name + '</div>\n';
+          htmlCode += '</a>\n';
+          htmlCode += '<div class="glyphicon glyphicon-resize-vertical ruleMoveButton"></div>\n';
+          htmlCode += '<div class="list-group-item-text ruleConfigForm collapse in">';
+          htmlCode += '<textarea id="presetContent' + i + '" style="display:none;">{"rules":' + JSON.stringify(presetJson.rulesets[i].rules) + '}</textarea>\n';
+          htmlCode += '</div>\n';
+          htmlCode += '<a href="#" class="btn btn-success pull-left presetButton" onclick="deployPreset(\'#presetContent' + i + '\')"><div class="glyphicon glyphicon-arrow-left"></div></a>';
+          htmlCode += '</li>\n';
+
+          //insertRule(rulesJson.rules[i].name, {"tcp":1, "udp":1}, "127.0.0.1", 0, 0, true, 2);
+        }
+        target.html(htmlCode);
+        $('#countPresets').html(presetJson.rulesets.length);
+        updateDraggables();
+
+      }
+    }
+  }
+}
+
 
 /**
  *
@@ -263,7 +302,8 @@ function updateDraggables() {
 
 
 function setRuleName() {
-    $('#headercaption').html(rmanager.GetCurrentRulesetName());
+  $('#headercaption').html(rmanager.GetCurrentRulesetName());
+  LoadUserRuleSet();
 }
 
 /*
