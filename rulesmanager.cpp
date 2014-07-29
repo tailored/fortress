@@ -126,13 +126,14 @@ QString RulesManager::LoadStashPresets() {
 QString RulesManager::LoadUserRules() {
     QDir rulesDir(SettingsManager::getSharedInstance()->getFullSettingsPath().append(FORTRESS_RULES_MANAGER_RULES_REL_PATH_USER_PRESETS));
     QStringList files = rulesDir.entryList(QDir::NoDotAndDotDot | QDir::Files, QDir::DirsFirst);
-    QString retVal = "{ rules: [";
+    QString retVal = "{ \"rulesets\": [";
     for(QStringList::Iterator it = files.begin(); it!=files.end();++it) {
         QString file = *it;
         QFile tmpFile(rulesDir.path().append('/').append(file));
         if(tmpFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            retVal.append("{\"name\":\"").append(tmpFile.fileName()).append("\", \"rules\":");
             retVal.append(tmpFile.readAll());
-            retVal.append(",");
+            retVal.append("},");
         }
     }
     retVal = retVal.remove(retVal.length()-1,1);
