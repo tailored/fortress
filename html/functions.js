@@ -125,6 +125,8 @@ function callBackUpdatePresets() {
           htmlCode += '</div>\n';
           htmlCode += '<a href="#" class="btn btn-success pull-left presetButton" onclick="deployPreset(\'#presetContent' + i + '\')"><div class="glyphicon glyphicon-arrow-left"></div></a>';
           htmlCode += '</li>\n';
+
+          //insertRule(rulesJson.rules[i].name, {"tcp":1, "udp":1}, "127.0.0.1", 0, 0, true, 2);
         }
         target.html(htmlCode);
         $('#countPresets').html(presetJson.rulesets.length);
@@ -159,26 +161,10 @@ function callBackUpdateRules() {
       if (rulesJson.hasOwnProperty('rules')) {
         $('#stashRulesContent').html('');
         for (var i = 0; i < rulesJson.rules.length; i++) {
-
-          insertRule(rulesJson.rules[i].name, {"tcp":1, "udp":1}, "127.0.0.1", 0, 0, true, 4);
-          $('#countCollapseStashRules').html(rulesJson.rules.length);
+          insertRule(rulesJson.rules[i].name, {"tcp":1, "udp":1}, "127.0.0.1", 0, true, 4);
         }
-
-//        var htmlCode = "";
-//        for (var i = 0; i < rulesJson.rules.length; i++) {
-//          htmlCode += '<li class="list-group-item">\n';
-//          htmlCode += '<a class="accordion-toggle" data-toggle="collapse-next">\n';
-//          htmlCode += '<div class="list-group-item-heading">' + rulesJson.rules[i].name + '</div>\n';
-//          htmlCode += '</a>\n';
-//          htmlCode += '<div class="glyphicon glyphicon-resize-vertical ruleMoveButton"></div>\n';
-//          htmlCode += '<div class="list-group-item-text ruleConfigForm collapse in">\n';
-//          htmlCode += '<button type="button" class="btn btn-danger delrule glyphicon glyphicon-fire"></button>\n';
-//          htmlCode += '</div>\n';
-//          htmlCode += '</li>\n';
-//        }
-//        target.html(htmlCode);
-//        $('#countCollapseStashRules').html(rulesJson.rules.length);
-//        updateDraggables();
+        $('#countCollapseStashRules').html(rulesJson.rules.length);
+        updateDraggables();
       }
     }
   }
@@ -225,7 +211,6 @@ function insertRule(name, protocol, addr, port, collapsed, list){
     '<button type="button" class="btn btn-danger delrule">Delete Rule</button>' +
     '</form></div>' +
     '</li>');
-  updateDraggables();
 }
 
 
