@@ -161,7 +161,7 @@ function callBackUpdateRules() {
       if (rulesJson.hasOwnProperty('rules')) {
         $('#stashRulesContent').html('');
         for (var i = 0; i < rulesJson.rules.length; i++) {
-          insertRule(rulesJson.rules[i].name, {"tcp":1, "udp":1}, "127.0.0.1", 0, true, 4);
+          insertRule(rulesJson.rules[i].name, rulesJson.rules[i].protocol, rulesJson.rules[i].addr, rulesJson.rules[i].port, true, 4);
         }
         $('#countCollapseStashRules').html(rulesJson.rules.length);
         updateDraggables();
@@ -245,14 +245,13 @@ function returnCurrentConfig() {
 }
 
 function initGui() {
-  insertRule("Example Rule 1", {"tcp":1, "udp":1}, "127.0.0.1", 0, true, 0);
+  insertRule("Example Rule 1", {"tcp":1, "udp":1}, "", 0, true, 0);
   insertRule("Example Rule 2", {"tcp":1, "udp":1}, "127.0.0.1", 0, true, 0);
   insertRule("Example Rule 3", {"tcp":1, "udp":1}, "127.0.0.1", 0, true, 0);
   insertRule("TCP/UDP", {"tcp":1, "udp":1}, '', '', false, 1);
   $('#toolTipPresets').tooltip();
   $('#toolTipUserPresets').tooltip();
   $('#toolTipRules').tooltip();
-  updateDraggables();
 
   $("#lst-activerules")
     .sortable({
