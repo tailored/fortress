@@ -256,8 +256,12 @@ function returnCurrentConfig() {
   return "<<< current config >>>";
 }
 
+function setRuleName() {
+    $('#headercaption').html(rmanager.GetCurrentRulesetName());
+}
+
 function initGui() {
-  $('#headercaption').html(rmanager.GetCurrentRulesetName());
+  setRuleName();
   insertRule("Example Rule 1", {"tcp":1, "udp":1}, "", 0, true, 0);
   insertRule("Example Rule 2", {"tcp":1, "udp":1}, "127.0.0.1", 0, true, 0);
   insertRule("Example Rule 3", {"tcp":1, "udp":1}, "127.0.0.1", 0, true, 0);
