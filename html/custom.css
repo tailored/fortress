@@ -167,3 +167,14 @@ body {
   right: 0.5em;
   top: 0.5em;*/
 }
+
+.div-headline {
+    background: red;
+    height: 20px;
+    padding: 20px 10px 20px 10px;
+}
+
+.headerpadding {
+    padding: 0 20px 0 10px;
+    margin: 5px;
+}

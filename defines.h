@@ -37,4 +37,6 @@
 #define FORTRESS_RULES_MANAGER_RULES_REL_PATH_USER_PRESETS "/rules/userpresets/"
 
 #define FORTRESS_DIALOG_EXPORT "Export firewallscript"
+
+#define FORTRESS_DEFAULT_RULESET_NAME "unnamed"
 #endif // DEFINES_H

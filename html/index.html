@@ -1,161 +1,161 @@
 <html>
 <head>
-  <title>Firewall</title>
-  <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
-  <link rel="stylesheet" href="css/ui-lightness/jquery-ui-1.10.4.min.css">
-  <link rel="stylesheet" href="custom.css">
-  <script type="text/javascript" src="bootstrap/js/jquery-2.1.0.min.js"></script>
-  <script type="text/javascript" src="js/jquery-ui-1.10.4.min.js"></script>
-  <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
-  <script type="text/javascript" src="functions.js"></script>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>Firewall</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/ui-lightness/jquery-ui-1.10.4.min.css">
+    <link rel="stylesheet" href="custom.css">
+    <script type="text/javascript" src="bootstrap/js/jquery-2.1.0.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-1.10.4.min.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="functions.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 </head>
 <body>
 <div class="page">
-  <ul class="nav nav-tabs topnav">
-    <li class="active"><a href="#rules" data-toggle="tab">Rules</a></li>
-    <li id="settingsTab"><a id="settingsTabLink" href="#settings" data-toggle="tab"
-                            onclick="validateSettings(); getSettings();">Settings</a>
-    </li>
-  </ul>
-  <div class="tab-content">
-    <div class="tab-pane fade in active" id="rules">
-      <div class="div-content float-left eightypercent" id="ruleslist">
-        <ul id="lst-activerules" class="connectedSortable list-group">
-          <li class="list-group-item list-group-item-info">
-            <div class="list-group-item-heading">Deny from all</div>
-            <div class="list-group-item-text">
-              This is the initial rule, designed to block <b>every</b> external access to
-              your machine. This rule can neither be moved nor be removed from the list.
+    <ul class="nav nav-tabs topnav">
+        <li class="active"><a href="#rules" data-toggle="tab">Rules</a></li>
+        <li id="settingsTab"><a id="settingsTabLink" href="#settings" data-toggle="tab"
+                                onclick="validateSettings(); getSettings();">Settings</a>
+        </li>
+    </ul>
+    <div class="tab-content">
+        <div class="page-header headerpadding"><h2 id="headercaption"></h2></div>
+        <div class="tab-pane fade in active" id="rules">
+            <div class="div-content float-left eightypercent" id="ruleslist">
+                <ul id="lst-activerules" class="connectedSortable list-group">
+                    <li class="list-group-item list-group-item-info">
+                        <div class="list-group-item-heading">Deny from all</div>
+                        <div class="list-group-item-text">
+                            This is the initial rule, designed to block <b>every</b> external access to
+                            your machine. This rule can neither be moved nor be removed from the list.
+                        </div>
+                    </li>
+                </ul>
             </div>
-          </li>
-        </ul>
-      </div>
-      <div class="float-left twentypercent paddingfive">
-
-        <div class="panel-group" id="accordion">
-          <div class="panel panel-success">
-            <div class="panel-heading">
-              <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapesPresets">
-                  Rulesets<span class="badge" id="countPresets">0</span>
-                </a>
+            <div class="float-left twentypercent paddingfive ruleslist">
+                <div class="panel-group" id="accordion">
+                    <div class="panel panel-success">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapesPresets">
+                                    Rulesets<span class="badge" id="countPresets">0</span>
+                                </a>
                 <span id="toolTipPresets" class="glyphicon float-right glyphicon-question-sign" data-google="tooltip"
                       data-placement="bottom" title="<-- paste tooltip here -->"></span>
-              </h4>
-            </div>
+                            </h4>
+                        </div>
 
-            <div id="collapesPresets" class="panel-collapse collapse in">
-              <div class="panel-body bg-success">
-                <ul id="lst-presets" class="connectedSortable list-group">
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="panel panel-warning">
-            <div class="panel-heading">
-              <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseUserPresets">
-                  User Rulesets
-                </a>
+                        <div id="collapesPresets" class="panel-collapse collapse in">
+                            <div class="panel-body bg-success">
+                                <ul id="lst-presets" class="connectedSortable list-group">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-warning">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseUserPresets">
+                                    User Rulesets
+                                </a>
                 <span id="toolTipUserPresets" class="glyphicon float-right glyphicon-question-sign"
                       data-google="tooltip" data-placement="bottom" title="<-- paste tooltip here -->"></span>
-              </h4>
-            </div>
-            <div id="collapseUserPresets" class="panel-collapse collapse">
-              <div class="panel-body bg-warning">
-                <!--<ul id="lst-userpresets" class="connectedSortable list-group">
-                    <li class="list-group-item">User 1</li>
-                    <li class="list-group-item">User 2</li>
-                </ul>-->
-              </div>
-            </div>
-          </div>
-          <div class="panel panel-danger">
-            <div class="panel panel-heading">
-              <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseRules">
-                  Rules
-                </a>
+                            </h4>
+                        </div>
+                        <div id="collapseUserPresets" class="panel-collapse collapse">
+                            <div class="panel-body bg-warning">
+                                <!--<ul id="lst-userpresets" class="connectedSortable list-group">
+                                    <li class="list-group-item">User 1</li>
+                                    <li class="list-group-item">User 2</li>
+                                </ul>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-danger">
+                        <div class="panel panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseRules">
+                                    Rules
+                                </a>
                 <span id="toolTipRules" class="glyphicon float-right glyphicon-question-sign" data-google="tooltip"
                       data-placement="bottom" title="<-- paste tooltip here -->"></span>
-              </h4>
-            </div>
+                            </h4>
+                        </div>
 
-            <div id="collapseRules" class="panel-collapse collapse">
-              <div class="panel-body bg-danger">
-                <ul id="lst-rules" class="connectedSortable list-group">
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div class="panel panel-info">
-            <div class="panel-heading">
-              <h4 class="panel-title">
-                <a data-toggle="collapse" data-parent="#accordion" href="#collapseStashRules">
-                  Example Rules&nbsp;<span class="badge" id="countCollapseStashRules">0</span>
-                </a>
+                        <div id="collapseRules" class="panel-collapse collapse">
+                            <div class="panel-body bg-danger">
+                                <ul id="lst-rules" class="connectedSortable list-group">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseStashRules">
+                                    Example Rules&nbsp;<span class="badge" id="countCollapseStashRules">0</span>
+                                </a>
                 <span id="toolTipUserPresets" class="glyphicon float-right glyphicon-question-sign"
                       data-google="tooltip" data-placement="bottom" title="<-- paste tooltip here -->"></span>
-              </h4>
-            </div>
-            <div id="collapseStashRules" class="panel-collapse collapse">
-              <div class="panel-body bg-info">
-                <ul class="connectedSortable list-group" id="stashRulesContent"></ul>
-              </div>
-            </div>
-          </div>
+                            </h4>
+                        </div>
+                        <div id="collapseStashRules" class="panel-collapse collapse">
+                            <div class="panel-body bg-info">
+                                <ul class="connectedSortable list-group" id="stashRulesContent"></ul>
+                            </div>
+                        </div>
+                    </div>
 
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
 
-    <!-- TODO: add whats this symbol to each form field -->
-    <div class="tab-pane fade in paddingfive" id="settings">
-      <div class="modal-header">
-        <div class="panel panel-heading">Settings</div>
-        <div class="panel">
-          <div class="form">
-            <div class="form-group">
-              <label for="settings-sudoprovider" class="form">path to graphical sudo gui</label>
-              <input class="form-control" type="text" id="settings-sudoprovider">
+        <!-- TODO: add whats this symbol to each form field -->
+        <div class="tab-pane fade in paddingfive" id="settings">
+            <div class="modal-header">
+                <div class="panel panel-heading">Settings</div>
+                <div class="panel">
+                    <div class="form">
+                        <div class="form-group">
+                            <label for="settings-sudoprovider" class="form">path to graphical sudo gui</label>
+                            <input class="form-control" type="text" id="settings-sudoprovider">
 
-              <div class="form-control-feedback"><b>Note:</b><br/>
-                If you are attempting to use <i>kdesudo</i> outside an kde
-                environment, it is likely that it won't work, we recommend using <i>gksudo</i>.<br/>
-                If <i>kdesudo</i> is the only sudo gui installed on your system, fortress will detect it
-                nonetheless!
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="settings-iptables" class="form">path to iptables</label>
-              <input class="form-control" type="text" id="settings-iptables">
-            </div>
-            <div class="form-group">
-              <label for="settings-stashurl">remote preset stash</label>
+                            <div class="form-control-feedback"><b>Note:</b><br/>
+                                If you are attempting to use <i>kdesudo</i> outside an kde
+                                environment, it is likely that it won't work, we recommend using <i>gksudo</i>.<br/>
+                                If <i>kdesudo</i> is the only sudo gui installed on your system, fortress will detect it
+                                nonetheless!
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="settings-iptables" class="form">path to iptables</label>
+                            <input class="form-control" type="text" id="settings-iptables">
+                        </div>
+                        <div class="form-group">
+                            <label for="settings-stashurl">remote preset stash</label>
 
-              <div id="settings-stashlist-wrapper"></div>
-            </div>
+                            <div id="settings-stashlist-wrapper"></div>
+                        </div>
 
-            <div class="form-group">
-              <input type="button" value="Save" class="btn btn-warning" onclick="setSettings()">
-              <input type="button" value="Autodetect" class="btn btn-info" onclick="autoDetectSettings()">
+                        <div class="form-group">
+                            <input type="button" value="Save" class="btn btn-warning" onclick="setSettings()">
+                            <input type="button" value="Autodetect" class="btn btn-info" onclick="autoDetectSettings()">
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
+        <div class="panel panel-danger twentypercent" id="settingsErrorWrapper">
+            <div class="panel-heading">Errors<span class="glyphicon glyphicon-remove float-right"
+                                                   onclick="$('#settingsErrorWrapper').hide();"></span></div>
+            <div class="panel-body bg-danger" id="settingsError"></div>
+        </div>
     </div>
-    <div class="panel panel-danger twentypercent" id="settingsErrorWrapper">
-      <div class="panel-heading">Errors<span class="glyphicon glyphicon-remove float-right"
-                                             onclick="$('#settingsErrorWrapper').hide();"></span></div>
-      <div class="panel-body bg-danger" id="settingsError"></div>
-    </div>
-  </div>
 </div>
 
 <script type="text/javascript">
-  $(document).ready(initGui());
+    $(document).ready(initGui());
 </script>
 </body>
 </html>

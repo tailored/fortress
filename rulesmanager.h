@@ -24,20 +24,23 @@ public:
     Q_INVOKABLE QString LoadStashPresets();
     Q_INVOKABLE QByteArray ProcessCurrentConfig(QString);
     Q_INVOKABLE QString GenerateUUID();
+    Q_INVOKABLE QString GetCurrentRulesetName();
+    Q_INVOKABLE void SetCurrentRulesetname(QString);
     int ClearStashPresets();
+    int SaveRule(QString, QString, bool);
+    QString LoadRule(QString);
 
 signals:
 
 public slots:
 
 private:
-    void checkDirs();
-    int SaveRule(QString, QString, bool);
-    QString LoadRule(QString);
+    void CheckDirs();
     QString configBasePath;
     QString fullRulePath;
     QString userPresetPath;
     QString stashesPresetPath;
+    QString currentRulesetName;
 };
 
 #endif // RULESMANAGER_H

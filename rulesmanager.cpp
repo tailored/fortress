@@ -17,7 +17,8 @@ RulesManager::RulesManager(QObject *parent) :
             + FORTRESS_RULES_MANAGER_RULES_REL_PATH;
     this->userPresetPath = SettingsManager::getSharedInstance()->getFullSettingsPath()
             + FORTRESS_RULES_MANAGER_RULES_REL_PATH_USER_PRESETS;
-    this->checkDirs();
+    this->CheckDirs();
+    this->SetCurrentRulesetname(FORTRESS_DEFAULT_RULESET_NAME);
 }
 
 /**
@@ -132,7 +133,7 @@ int RulesManager::ClearStashPresets() {
 /**
  * @brief RulesManager::checkDirs
  */
-void RulesManager::checkDirs() {
+void RulesManager::CheckDirs() {
     QStringList paths;
     paths << this->fullRulePath << this->userPresetPath;
     for(int i = 0; i < paths.size(); ++i) {
@@ -161,4 +162,20 @@ QByteArray RulesManager::ProcessCurrentConfig(QString rl) {
  */
 QString RulesManager::GenerateUUID() {
     return QUuid::createUuid().toString().replace("{","").replace("}","");
+}
+
+/**
+ * @brief RulesManager::GetCurrentRulesetName
+ * @return
+ */
+QString RulesManager::GetCurrentRulesetName() {
+    return this->currentRulesetName;
+}
+
+/**
+ * @brief RulesManager::SetCurrentRulesetname
+ * @param n
+ */
+void RulesManager::SetCurrentRulesetname(QString n) {
+    this->currentRulesetName = n;
 }

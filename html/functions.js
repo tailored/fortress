@@ -245,6 +245,7 @@ function returnCurrentConfig() {
 }
 
 function initGui() {
+  $('#headercaption').html(rmanager.GetCurrentRulesetName());
   insertRule("Example Rule 1", {"tcp":1, "udp":1}, "", 0, true, 0);
   insertRule("Example Rule 2", {"tcp":1, "udp":1}, "127.0.0.1", 0, true, 0);
   insertRule("Example Rule 3", {"tcp":1, "udp":1}, "127.0.0.1", 0, true, 0);
@@ -275,5 +276,4 @@ function initGui() {
     $("#settingsTab").highlight();
   }
   getSettings();
-
 }
