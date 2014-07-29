@@ -176,21 +176,6 @@ function callBackUpdateRules() {
             }
         }
     }
-    var rulesJson = rmanager.LoadUserRules();
-    var target = $('#lst-userpresets');
-    if (rulesJson.length > 0) {
-        rulesJson = JSON.parse(rulesJson);
-        if ((typeof rulesJson) == 'object') {
-            if (rulesJson.hasOwnProperty('rules')) {
-                $('#lst-userpresets').html('');
-                for (var i = 0; i < rulesJson.rules.length; i++) {
-                    insertRule(rulesJson.rules[i].name, rulesJson.rules[i].protocol, rulesJson.rules[i].addr, rulesJson.rules[i].port, true, 4);
-                }
-                $('#countCollapseStashRules').html(rulesJson.rules.length);
-                updateDraggables();
-            }
-        }
-    }
 }
 
 
