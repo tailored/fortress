@@ -152,10 +152,6 @@ function LoadUserRuleSet() {
       if (presetJson.hasOwnProperty('rulesets')) {
 
         var htmlCode = "";
-
-        // value for the counter - not yet implemented in html
-        cnt = presetJson.rulesets.length;
-        
         for (var i = 0; i < presetJson.rulesets.length; i++) {
           htmlCode += '<li class="list-group-item presetLi">\n';
           htmlCode += '<a class="accordion-toggle" data-toggle="collapse-next">\n';
@@ -171,7 +167,7 @@ function LoadUserRuleSet() {
           //insertRule(rulesJson.rules[i].name, {"tcp":1, "udp":1}, "127.0.0.1", 0, 0, true, 2);
         }
         target.html(htmlCode);
-        $('#countPresets').html(presetJson.rulesets.length);
+        $('#countUserRules').html(presetJson.rulesets.length);
         updateDraggables();
 
       }
