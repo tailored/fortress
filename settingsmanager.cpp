@@ -148,6 +148,7 @@ QString SettingsManager::validateSettings() {
             tmpJsonList.append(tmpMap);
             errorFound = true;
         }
+
         if(!this->checkFileExecutable(this->getValue("settings/sudoprovider"))) {
             QVariantMap tmpMap; tmpMap.insert(FORTRESS_KEYWORD_ERROR, FORTRESS_ERROR_SUDOPROVIDER_NOT_EXECUTABLE);
             tmpJsonList.append(tmpMap);

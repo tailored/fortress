@@ -154,10 +154,6 @@ function deployPreset(preset) {
         updateDraggables();
       }
     }
-
-    //alert("make it so");
-    //insertRule("Example Rule 1", {"tcp":1, "udp":1}, "127.0.0.1", 0, 0, true, 0);
-    // ruleset json can be extracted from $(preset).val();
   }
 }
 
@@ -184,11 +180,12 @@ function callBackUpdateRules() {
 
 
 function insertRule(name, protocol, addr, port, collapsed, list) {
-  tcp = (protocol["tcp"] == 1) ? " checked" : "";
-  udp = (protocol["udp"] == 1) ? " checked" : "";
+  tcp = (protocol["tcp"]) ? " checked" : "";
+  udp = (protocol["udp"]) ? " checked" : "";
   col = (!collapsed ? " in" : "");
   port = (port ? port : 0);
   addr = (addr ? addr : "");
+  var rulejson = {"name": name, "protocol": protocol, "port": port, "addr": addr};
 
   if (list == 1) {
     target = '#lst-rules';
@@ -216,11 +213,12 @@ function insertRule(name, protocol, addr, port, collapsed, list) {
       '<label class="checkbox-inline"><input type="checkbox" value="udp" ' + udp + '> UDP</label>' +
       '</div>' +
       '<div class="form-group">' +
-      '<input type="text" class="form-control" placeholder="Source Address" value="' + addr + '">' +
-      '<input type="text" class="form-control" placeholder="Ports" value="' + port + '">' +
+      '<input type="text" class="form-control address" placeholder="Source Address" value="' + addr + '">' +
+      '<input type="text" class="form-control ports" placeholder="Ports" value="' + port + '">' +
       '</div>' +
       '<button type="button" class="btn btn-primary saverule">Save</button>' +
       '<button type="button" class="btn btn-danger delrule">Delete Rule</button>' +
+      '<textarea name="json" style="display:none;">' + JSON.stringify(rulejson) + '</textarea>' +
       '</form></div>' +
       '</li>');
 }
@@ -245,35 +243,48 @@ function updateDraggables() {
   $(".saverule")
     .click(function () {
       $container = $(this).parent().parent().parent();
+      $jsonstore = $(this).parent().find("textarea[name=json]");
       $container.find('.collapse').collapse('toggle');
-      newTitle = $(this).parent().find("input.rulename").val();
-      if (newTitle) {
-        $container.find(".list-group-item-heading").text(newTitle);
+      form_title = $(this).parent().find("input.rulename").val();
+      form_tcp = $(this).parent().find("input[type=checkbox][value=tcp]").is(':checked');
+      form_udp = $(this).parent().find("input[type=checkbox][value=udp]").is(':checked');
+      form_port = $(this).parent().find("input.ports").val();
+      form_addr = $(this).parent().find("input.address").val();
+
+      if (form_title) {
+        $container.find(".list-group-item-heading").text(form_title);
       }
 
+      var protocoljson = {"tcp": form_tcp, "udp": form_udp};
+      var rulejson = {"name": form_title, "protocol": protocoljson, "port": form_port, "addr": form_addr};
+      $jsonstore.text(JSON.stringify(rulejson));
     })
 }
 
-
-function returnCurrentConfig() {
-  return "<<< current config >>>";
-}
 
 function setRuleName() {
   $('#headercaption').html(rmanager.GetCurrentRulesetName());
 }
 
-
+/*
+  Returns the current Rules as JSON String
+ */
 function getCurrentRules() {
-  alert('fooo');
+  var listItems = $("#lst-activerules li");
+  var ruleList = [];
+  listItems.each(function(idx, li) {
+    ruleString = $(li).find("textarea[name=json]").val();
+    ruleList.push(ruleString);
+  });
+  return('['+ruleList+']');
 }
 
 function initGui() {
   setRuleName();
-  insertRule("Example Rule 1", {"tcp": 1, "udp": 1}, "", 0, true, 0);
-  insertRule("Example Rule 2", {"tcp": 1, "udp": 1}, "127.0.0.1", 0, true, 0);
-  insertRule("Example Rule 3", {"tcp": 1, "udp": 1}, "127.0.0.1", 0, true, 0);
-  insertRule("TCP/UDP", {"tcp": 1, "udp": 1}, '', '', false, 1);
+  insertRule("Example Rule 1", {"tcp": true, "udp": true}, "", 0, true, 0);
+  insertRule("Example Rule 2", {"tcp": true, "udp": true}, "127.0.0.1", 0, true, 0);
+  insertRule("Example Rule 3", {"tcp": true, "udp": false}, "127.0.0.1", 0, true, 0);
+  insertRule("TCP/UDP", {"tcp": true, "udp": true}, '', '', false, 1);
   $('#toolTipPresets').tooltip();
   $('#toolTipUserPresets').tooltip();
   $('#toolTipRules').tooltip();

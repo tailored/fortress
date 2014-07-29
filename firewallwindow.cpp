@@ -171,7 +171,7 @@ void fireWallWindow::on_actionSave_triggered()
             || tmpRn.isEmpty()
       ) {
         while(rn == NULL) {
-            bool ok = FALSE;
+            bool ok = false;
             QString qi = QInputDialog::getText(this, FORTRESS_RULESET_SAVE_DIALOG_TITLE, FORTRESS_RULESET_SAVE_DIALOG_TEXT,QLineEdit::Normal,QString::null,&ok);
             if(!ok) return;
             if( ok && !qi.isEmpty() ) rn = qi;
