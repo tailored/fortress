@@ -23,6 +23,8 @@ RulesManager::RulesManager(QObject *parent) :
         this->SetCurrentRulesetname(tmpDefaultRulesetName);
     else
         this->SetCurrentRulesetname(FORTRESS_DEFAULT_RULESET_NAME);
+    // DEBUG: Remove this afterwards
+    this->LoadUserRules();
 }
 
 /**
@@ -115,6 +117,27 @@ QString RulesManager::LoadStashRules() {
 QString RulesManager::LoadStashPresets() {
     QString tmp(this->fullRulePath);
     return this->LoadRule(tmp.append(FORTRESS_STASHES_PRESETS_FILENAME));
+}
+
+/**
+ * @brief RulesManager::LoadUserRules
+ * @return
+ */
+QString RulesManager::LoadUserRules() {
+    QDir rulesDir(SettingsManager::getSharedInstance()->getFullSettingsPath().append(FORTRESS_RULES_MANAGER_RULES_REL_PATH_USER_PRESETS));
+    QStringList files = rulesDir.entryList(QDir::NoDotAndDotDot | QDir::Files, QDir::DirsFirst);
+    QString retVal = "{ rules: [";
+    for(QStringList::Iterator it = files.begin(); it!=files.end();++it) {
+        QString file = *it;
+        QFile tmpFile(rulesDir.path().append('/').append(file));
+        if(tmpFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
+            retVal.append(tmpFile.readAll());
+            retVal.append(",");
+        }
+    }
+    retVal = retVal.remove(retVal.length()-1,1);
+    retVal.append("]}");
+    return retVal;
 }
 
 /**

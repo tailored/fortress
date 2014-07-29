@@ -191,7 +191,7 @@ void fireWallWindow::on_actionSave_triggered()
  * @brief fireWallWindow::getCurrentConfig
  */
 QString fireWallWindow::getCurrentConfig() {
-    return this->ui->fireWallWebView->page()->mainFrame()->evaluateJavaScript("returnCurrentConfig()").toString();
+    return this->ui->fireWallWebView->page()->mainFrame()->evaluateJavaScript("getCurrentRules()").toString();
 }
 
 /**
