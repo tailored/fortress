@@ -23,8 +23,6 @@ RulesManager::RulesManager(QObject *parent) :
         this->SetCurrentRulesetname(tmpDefaultRulesetName);
     else
         this->SetCurrentRulesetname(FORTRESS_DEFAULT_RULESET_NAME);
-    // DEBUG: Remove this afterwards
-    this->LoadUserRules();
 }
 
 /**
@@ -138,6 +136,7 @@ QString RulesManager::LoadUserRules() {
     }
     retVal = retVal.remove(retVal.length()-1,1);
     retVal.append("]}");
+    qDebug() << retVal;
     return retVal;
 }
 
