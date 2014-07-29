@@ -33,12 +33,14 @@
         </ul>
       </div>
       <div class="float-left twentypercent paddingfive">
+
+        <button type="button" class="btn btn-primary btn-lg" onclick='insertRule("New Rule", {"tcp":1, "udp":1}, false, 1);'>New Rule</button>
         <div class="panel-group" id="accordion">
           <div class="panel panel-success">
             <div class="panel-heading">
               <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapesPresets">
-                  Presets&nbsp;<span class="badge" id="countPresets">0</span>
+                  Rulesets<span class="badge" id="countPresets">0</span>
                 </a>
                 <span id="toolTipPresets" class="glyphicon float-right glyphicon-question-sign" data-google="tooltip"
                       data-placement="bottom" title="<-- paste tooltip here -->"></span>
@@ -56,7 +58,7 @@
             <div class="panel-heading">
               <h4 class="panel-title">
                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseUserPresets">
-                  User Presets
+                  User Rulesets
                 </a>
                 <span id="toolTipUserPresets" class="glyphicon float-right glyphicon-question-sign"
                       data-google="tooltip" data-placement="bottom" title="<-- paste tooltip here -->"></span>

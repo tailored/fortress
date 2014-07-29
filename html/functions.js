@@ -185,11 +185,13 @@ function callBackUpdateRules() {
 }
 
 
-function insertRule(name, protocol, sourceaddr, sourceport, destport, collapsed, list){
+function insertRule(name, protocol, addr, port, collapsed, list){
   tcp = (protocol["tcp"]==1) ? " checked" : "";
   udp = (protocol["udp"]==1) ? " checked" : "";
-  icmp = (protocol["icmp"]==1) ? " checked" : "";
   col = (!collapsed ? " in" : "");
+  port = (port ? port : 0);
+  addr = (addr ? addr : "");
+
   if (list == 1){
       target = '#lst-rules';
   } else if(list == 2){
@@ -214,17 +216,16 @@ function insertRule(name, protocol, sourceaddr, sourceport, destport, collapsed,
     '<div class="form-group">' +
     '<label class="checkbox-inline"><input type="checkbox" value="tcp"'+ tcp +'> TCP</label>' +
     '<label class="checkbox-inline"><input type="checkbox" value="udp" '+ udp +'> UDP</label>' +
-    '<label class="checkbox-inline"><input type="checkbox" value="icmp" '+ icmp +'> ICMP</label>' +
     '</div>' +
     '<div class="form-group">' +
-    '<input type="text" class="form-control" placeholder="Source Address" value="'+sourceaddr+'">' +
-    '<input type="text" class="form-control" placeholder="Source Port" value="'+sourceport+'">' +
-    '<input type="text" class="form-control" placeholder="Destination Port" value="'+destport+'">' +
+    '<input type="text" class="form-control" placeholder="Source Address" value="'+addr+'">' +
+    '<input type="text" class="form-control" placeholder="Ports" value="'+port+'">' +
     '</div>' +
     '<button type="button" class="btn btn-primary saverule">Save</button>' +
     '<button type="button" class="btn btn-danger delrule">Delete Rule</button>' +
     '</form></div>' +
     '</li>');
+  updateDraggables();
 }
 
 
@@ -259,11 +260,10 @@ function returnCurrentConfig() {
 }
 
 function initGui() {
-  insertRule("Example Rule 1", {"tcp":1, "udp":1}, "127.0.0.1", 0, 0, true, 0);
-  insertRule("Example Rule 2", {"tcp":1, "udp":1}, "127.0.0.1", 0, 0, true, 0);
-  insertRule("Example Rule 3", {"tcp":1, "udp":1}, "127.0.0.1", 0, 0, true, 0);
-  insertRule("TCP/UDP", {"tcp":1, "udp":1, "icmp":0}, '', '', '', false, 1);
-  insertRule("ICMP", {"tcp":0, "udp":0, "icmp":1}, '', '', '', false, 1);
+  insertRule("Example Rule 1", {"tcp":1, "udp":1}, "127.0.0.1", 0, true, 0);
+  insertRule("Example Rule 2", {"tcp":1, "udp":1}, "127.0.0.1", 0, true, 0);
+  insertRule("Example Rule 3", {"tcp":1, "udp":1}, "127.0.0.1", 0, true, 0);
+  insertRule("TCP/UDP", {"tcp":1, "udp":1}, '', '', false, 1);
   $('#toolTipPresets').tooltip();
   $('#toolTipUserPresets').tooltip();
   $('#toolTipRules').tooltip();
