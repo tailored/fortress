@@ -183,48 +183,47 @@ function callBackUpdateRules() {
 }
 
 
-function insertRule(name, protocol, addr, port, collapsed, list){
-  tcp = (protocol["tcp"]==1) ? " checked" : "";
-  udp = (protocol["udp"]==1) ? " checked" : "";
+function insertRule(name, protocol, addr, port, collapsed, list) {
+  tcp = (protocol["tcp"] == 1) ? " checked" : "";
+  udp = (protocol["udp"] == 1) ? " checked" : "";
   col = (!collapsed ? " in" : "");
   port = (port ? port : 0);
   addr = (addr ? addr : "");
 
-  if (list == 1){
-      target = '#lst-rules';
-  } else if(list == 2){
-      target = '#lst-presets';
-  } else if(list == 3){
-      target = '#lst-userpresets';
-  } else if(list == 4){
+  if (list == 1) {
+    target = '#lst-rules';
+  } else if (list == 2) {
+    target = '#lst-presets';
+  } else if (list == 3) {
+    target = '#lst-userpresets';
+  } else if (list == 4) {
     target = '#stashRulesContent';
 
   } else {
-      target = '#lst-activerules';
+    target = '#lst-activerules';
   }
 
   $(target).append(
     '<li class="list-group-item"><a class="accordion-toggle" data-toggle="collapse-next">' +
-    '<div class="list-group-item-heading">'+name+'</div></a>' +
-    '<div class="ruleMoveButton"><span class="glyphicon glyphicon-resize-vertical"></span></div>' +
-    '<div class="list-group-item-text ruleConfigForm collapse'+col+'"><form role="form">' +
-    '<div class="form-group">' +
-    '<input type="text" class="form-control rulename" placeholder="Rule Name" value="' + name + '">' +
-    '</div>' +
-    '<div class="form-group">' +
-    '<label class="checkbox-inline"><input type="checkbox" value="tcp"'+ tcp +'> TCP</label>' +
-    '<label class="checkbox-inline"><input type="checkbox" value="udp" '+ udp +'> UDP</label>' +
-    '</div>' +
-    '<div class="form-group">' +
-    '<input type="text" class="form-control" placeholder="Source Address" value="'+addr+'">' +
-    '<input type="text" class="form-control" placeholder="Ports" value="'+port+'">' +
-    '</div>' +
-    '<button type="button" class="btn btn-primary saverule">Save</button>' +
-    '<button type="button" class="btn btn-danger delrule">Delete Rule</button>' +
-    '</form></div>' +
-    '</li>');
+      '<div class="list-group-item-heading">' + name + '</div></a>' +
+      '<div class="ruleMoveButton"><span class="glyphicon glyphicon-resize-vertical"></span></div>' +
+      '<div class="list-group-item-text ruleConfigForm collapse' + col + '"><form role="form">' +
+      '<div class="form-group">' +
+      '<input type="text" class="form-control rulename" placeholder="Rule Name" value="' + name + '">' +
+      '</div>' +
+      '<div class="form-group">' +
+      '<label class="checkbox-inline"><input type="checkbox" value="tcp"' + tcp + '> TCP</label>' +
+      '<label class="checkbox-inline"><input type="checkbox" value="udp" ' + udp + '> UDP</label>' +
+      '</div>' +
+      '<div class="form-group">' +
+      '<input type="text" class="form-control" placeholder="Source Address" value="' + addr + '">' +
+      '<input type="text" class="form-control" placeholder="Ports" value="' + port + '">' +
+      '</div>' +
+      '<button type="button" class="btn btn-primary saverule">Save</button>' +
+      '<button type="button" class="btn btn-danger delrule">Delete Rule</button>' +
+      '</form></div>' +
+      '</li>');
 }
-
 
 
 /**
@@ -243,12 +242,16 @@ function updateDraggables() {
       });
 
     })
-    $(".saverule")
-        .click(function () {
-            $container = $(this).parent().parent().parent();
-            $container.find('.collapse').collapse('toggle');
-            $container.find(".list-group-item-heading").text($(this).parent().find("input.rulename").val());
-        })
+  $(".saverule")
+    .click(function () {
+      $container = $(this).parent().parent().parent();
+      $container.find('.collapse').collapse('toggle');
+      newTitle = $(this).parent().find("input.rulename").val();
+      if (newTitle) {
+        $container.find(".list-group-item-heading").text(newTitle);
+      }
+
+    })
 }
 
 
@@ -257,15 +260,20 @@ function returnCurrentConfig() {
 }
 
 function setRuleName() {
-    $('#headercaption').html(rmanager.GetCurrentRulesetName());
+  $('#headercaption').html(rmanager.GetCurrentRulesetName());
+}
+
+
+function getCurrentRules() {
+  alert('fooo');
 }
 
 function initGui() {
   setRuleName();
-  insertRule("Example Rule 1", {"tcp":1, "udp":1}, "", 0, true, 0);
-  insertRule("Example Rule 2", {"tcp":1, "udp":1}, "127.0.0.1", 0, true, 0);
-  insertRule("Example Rule 3", {"tcp":1, "udp":1}, "127.0.0.1", 0, true, 0);
-  insertRule("TCP/UDP", {"tcp":1, "udp":1}, '', '', false, 1);
+  insertRule("Example Rule 1", {"tcp": 1, "udp": 1}, "", 0, true, 0);
+  insertRule("Example Rule 2", {"tcp": 1, "udp": 1}, "127.0.0.1", 0, true, 0);
+  insertRule("Example Rule 3", {"tcp": 1, "udp": 1}, "127.0.0.1", 0, true, 0);
+  insertRule("TCP/UDP", {"tcp": 1, "udp": 1}, '', '', false, 1);
   $('#toolTipPresets').tooltip();
   $('#toolTipUserPresets').tooltip();
   $('#toolTipRules').tooltip();
