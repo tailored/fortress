@@ -142,7 +142,19 @@ function callBackUpdatePresets() {
  * @param preset
  */
 function deployPreset(preset) {
+
   if (confirm("This will replace your current ruleset! Are you sure?")) {
+    rulesJson = JSON.parse($(preset).val());
+    if ((typeof rulesJson) == 'object') {
+      if (rulesJson.hasOwnProperty('rules')) {
+        $('#lst-activerules').html('');
+        for (var i = 0; i < rulesJson.rules.length; i++) {
+          insertRule(rulesJson.rules[i].name, rulesJson.rules[i].protocol, rulesJson.rules[i].addr, rulesJson.rules[i].port, true);
+        }
+        updateDraggables();
+      }
+    }
+
     //alert("make it so");
     //insertRule("Example Rule 1", {"tcp":1, "udp":1}, "127.0.0.1", 0, 0, true, 0);
     // ruleset json can be extracted from $(preset).val();
