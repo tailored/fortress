@@ -152,6 +152,10 @@ function LoadUserRuleSet() {
       if (presetJson.hasOwnProperty('rulesets')) {
 
         var htmlCode = "";
+
+        // value for the counter - not yet implemented in html
+        cnt = presetJson.rulesets.length;
+        
         for (var i = 0; i < presetJson.rulesets.length; i++) {
           htmlCode += '<li class="list-group-item presetLi">\n';
           htmlCode += '<a class="accordion-toggle" data-toggle="collapse-next">\n';
