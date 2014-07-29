@@ -247,7 +247,11 @@ function updateDraggables() {
         .click(function () {
             $container = $(this).parent().parent().parent();
             $container.find('.collapse').collapse('toggle');
-            $container.find(".list-group-item-heading").text($(this).parent().find("input.rulename").val());
+            newTitle = $(this).parent().find("input.rulename").val();
+            if(newTitle){
+              $container.find(".list-group-item-heading").text(newTitle);
+            }
+
         })
 }
 
