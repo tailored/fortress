@@ -48,14 +48,14 @@ QString RulesManager::GenarateScriptFromRule(QString rule) {
 int RulesManager::SaveRule(QString path, QString rule, bool overwrite) {
     QFileInfo tmpFileInfo(path);
     if(!overwrite && tmpFileInfo.exists()) return FORTRESS_RULES_MANAGER_SAVE_RULE_EXISTS;
-    QFile tmpFile(path);
-    if(tmpFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        QTextStream out(&tmpFile);
-        out << rule;
-        tmpFile.close();
-        return FORTRESS_RULES_MANAGER_SAVE_OK;
-    } else return FORTRESS_RULES_MANAGER_SAVE_RULE_ACCESS_DENIED;
-
+        QFile tmpFile(path);
+        if(tmpFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
+            this->SetCurrentRulesetname(tmpFile.fileName());
+            QTextStream out(&tmpFile);
+            out << rule;
+            tmpFile.close();
+            return FORTRESS_RULES_MANAGER_SAVE_OK;
+        } else return FORTRESS_RULES_MANAGER_SAVE_RULE_ACCESS_DENIED;
 }
 
 /**
@@ -178,4 +178,12 @@ QString RulesManager::GetCurrentRulesetName() {
  */
 void RulesManager::SetCurrentRulesetname(QString n) {
     this->currentRulesetName = n;
+}
+
+/**
+ * @brief RulesManager::GetFullRulePath
+ * @return
+ */
+QString RulesManager::GetFullRulePath() {
+    return this->fullRulePath;
 }

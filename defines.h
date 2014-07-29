@@ -39,4 +39,6 @@
 #define FORTRESS_DIALOG_EXPORT "Export firewallscript"
 
 #define FORTRESS_DEFAULT_RULESET_NAME "unnamed"
+#define FORTRESS_RULESET_SAVE_DIALOG_TITLE "Ruleset Name"
+#define FORTRESS_RULESET_SAVE_DIALOG_TEXT "Please enter a name for the ruleset"
 #endif // DEFINES_H

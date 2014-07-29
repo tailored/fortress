@@ -29,6 +29,7 @@ public:
     int ClearStashPresets();
     int SaveRule(QString, QString, bool);
     QString LoadRule(QString);
+    QString GetFullRulePath();
 
 signals:
 

@@ -162,7 +162,23 @@ void fireWallWindow::updateFinished() {
  */
 void fireWallWindow::on_actionSave_triggered()
 {
-    qDebug() << this->getCurrentConfig();
+    QString rn = NULL;
+    QString tmpRn = RulesManager::getSharedInstance()->GetCurrentRulesetName();
+    QString r = this->getCurrentConfig();
+    if(
+            tmpRn.compare(FORTRESS_DEFAULT_RULESET_NAME) != 0
+            && tmpRn.length() > 1
+      ) {
+        while(rn == NULL) {
+            QString qi = QInputDialog::getText(this,FORTRESS_RULESET_SAVE_DIALOG_TITLE,FORTRESS_RULESET_SAVE_DIALOG_TEXT);
+            if(qi.length() > 0 ) rn = qi;
+        }
+    } else {
+        rn = RulesManager::getSharedInstance()->GetCurrentRulesetName();
+    }
+    QString tmpPath = SettingsManager::getSharedInstance()->getFullSettingsPath().append(FORTRESS_RULES_MANAGER_RULES_REL_PATH_USER_PRESETS).append(rn);
+    qDebug() << tmpPath;
+    RulesManager::getSharedInstance()->SaveRule(tmpPath,r,true);
 }
 
 /**

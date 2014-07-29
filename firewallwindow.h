@@ -9,6 +9,7 @@
 #include <QStyle>
 #include <QFileDialog>
 #include <QMessageBox>
+#include <QInputDialog>
 
 #include "settingsmanager.h"
 #include "defines.h"
