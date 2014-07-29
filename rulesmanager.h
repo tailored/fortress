@@ -22,7 +22,6 @@ public:
     int SavePresetsFromStash(QString);
     Q_INVOKABLE QString LoadStashRules();
     Q_INVOKABLE QString LoadStashPresets();
-    Q_INVOKABLE QByteArray ProcessCurrentConfig(QString);
     Q_INVOKABLE QString GenerateUUID();
     Q_INVOKABLE QString GetCurrentRulesetName();
     Q_INVOKABLE void SetCurrentRulesetname(QString);

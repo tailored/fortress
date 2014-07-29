@@ -45,6 +45,8 @@ private slots:
 
     void on_actionDeploy_triggered();
 
+    void on_actionClear_triggered();
+
 private:
     Ui::fireWallWindow *ui;
     FileDownloader *fdl, *rDl, *pDl;

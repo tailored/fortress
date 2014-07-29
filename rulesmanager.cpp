@@ -18,7 +18,11 @@ RulesManager::RulesManager(QObject *parent) :
     this->userPresetPath = SettingsManager::getSharedInstance()->getFullSettingsPath()
             + FORTRESS_RULES_MANAGER_RULES_REL_PATH_USER_PRESETS;
     this->CheckDirs();
-    this->SetCurrentRulesetname(FORTRESS_DEFAULT_RULESET_NAME);
+    QString tmpDefaultRulesetName = SettingsManager::getSharedInstance()->getValue("settings/activeRules");
+    if(!tmpDefaultRulesetName.isEmpty())
+        this->SetCurrentRulesetname(tmpDefaultRulesetName);
+    else
+        this->SetCurrentRulesetname(FORTRESS_DEFAULT_RULESET_NAME);
 }
 
 /**
@@ -50,7 +54,6 @@ int RulesManager::SaveRule(QString path, QString rule, bool overwrite) {
     if(!overwrite && tmpFileInfo.exists()) return FORTRESS_RULES_MANAGER_SAVE_RULE_EXISTS;
         QFile tmpFile(path);
         if(tmpFile.open(QIODevice::WriteOnly | QIODevice::Text)) {
-            this->SetCurrentRulesetname(tmpFile.fileName());
             QTextStream out(&tmpFile);
             out << rule;
             tmpFile.close();
@@ -147,16 +150,6 @@ void RulesManager::CheckDirs() {
 }
 
 /**
- * @brief RulesManager::ProcessCurrentConfig
- * @param rl
- * @return
- */
-QByteArray RulesManager::ProcessCurrentConfig(QString rl) {
-    qDebug() << rl;
-    return NULL;
-}
-
-/**
  * @brief RulesManager::GenerateUUID
  * @return
  */
@@ -178,6 +171,7 @@ QString RulesManager::GetCurrentRulesetName() {
  */
 void RulesManager::SetCurrentRulesetname(QString n) {
     this->currentRulesetName = n;
+    SettingsManager::getSharedInstance()->setValue("settings/activeRules", n);
 }
 
 /**

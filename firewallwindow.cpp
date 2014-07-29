@@ -23,9 +23,9 @@ fireWallWindow::fireWallWindow(QWidget *parent) :
     this->ui->actionQuit->setIcon(this->style()->standardIcon(QStyle::SP_DialogCloseButton));
     this->ui->actionUpdateRemote->setIcon(this->style()->standardIcon(QStyle::SP_DriveNetIcon));
     this->ui->actionSave->setIcon(this->style()->standardIcon(QStyle::SP_DialogSaveButton));
+    this->ui->actionClear->setIcon(this->style()->standardIcon(QStyle::SP_DialogDiscardButton));
     this->ui->mainToolBar->setFloatable(false);
     this->ui->mainToolBar->setMovable(false);
-
     // this is for debug remove!
     FortressGenerator::getSharedInstance();
     RulesManager::getSharedInstance();
@@ -46,6 +46,7 @@ void fireWallWindow::updateWebView() {
     this->ui->fireWallWebView->page()->mainFrame()->addToJavaScriptWindowObject("smanager", SettingsManager::getSharedInstance());
     this->ui->fireWallWebView->page()->mainFrame()->addToJavaScriptWindowObject("rmanager", RulesManager::getSharedInstance());
     this->ui->fireWallWebView->page()->mainFrame()->addToJavaScriptWindowObject("mwindow", this);
+    this->ui->fireWallWebView->page()->mainFrame()->evaluateJavaScript("setRuleName()");
     this->updateStashesContent();
 }
 
@@ -166,20 +167,25 @@ void fireWallWindow::on_actionSave_triggered()
     QString tmpRn = RulesManager::getSharedInstance()->GetCurrentRulesetName();
     QString r = this->getCurrentConfig();
     if(
-            tmpRn.compare(FORTRESS_DEFAULT_RULESET_NAME) != 0
-            && tmpRn.length() > 1
+            tmpRn.compare(FORTRESS_DEFAULT_RULESET_NAME) == 0
+            || tmpRn.isEmpty()
       ) {
         while(rn == NULL) {
-            QString qi = QInputDialog::getText(this,FORTRESS_RULESET_SAVE_DIALOG_TITLE,FORTRESS_RULESET_SAVE_DIALOG_TEXT);
-            if(qi.length() > 0 ) rn = qi;
+            bool ok = FALSE;
+            QString qi = QInputDialog::getText(this, FORTRESS_RULESET_SAVE_DIALOG_TITLE, FORTRESS_RULESET_SAVE_DIALOG_TEXT,QLineEdit::Normal,QString::null,&ok);
+            if(!ok) return;
+            if( ok && !qi.isEmpty() ) rn = qi;
         }
     } else {
         rn = RulesManager::getSharedInstance()->GetCurrentRulesetName();
     }
     QString tmpPath = SettingsManager::getSharedInstance()->getFullSettingsPath().append(FORTRESS_RULES_MANAGER_RULES_REL_PATH_USER_PRESETS).append(rn);
-    qDebug() << tmpPath;
+    QFileInfo tmpFile = tmpPath;
     RulesManager::getSharedInstance()->SaveRule(tmpPath,r,true);
+    RulesManager::getSharedInstance()->SetCurrentRulesetname(tmpFile.fileName());
+    this->ui->fireWallWebView->page()->mainFrame()->evaluateJavaScript("setRuleName()");
 }
+
 
 /**
  * @brief fireWallWindow::getCurrentConfig
@@ -194,4 +200,24 @@ QString fireWallWindow::getCurrentConfig() {
 void fireWallWindow::on_actionDeploy_triggered()
 {
     qDebug() << this->getCurrentConfig();
+}
+
+/**
+ * @brief fireWallWindow::on_actionClear_triggered
+ */
+void fireWallWindow::on_actionClear_triggered()
+{
+    QMessageBox *qm = new QMessageBox(this);
+    qm->setText(FORTRESS_RULESET_CLEAR_TEXT);
+    qm->setWindowTitle(FORTRESS_RULESET_CLEAR_TITLE);
+    qm->setIcon(QMessageBox::Warning);
+    qm->setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+    qm->setDefaultButton(QMessageBox::Cancel);
+    int ret = qm->exec();
+    if(ret == QMessageBox::Ok) {
+        RulesManager::getSharedInstance()->SetCurrentRulesetname(FORTRESS_DEFAULT_RULESET_NAME);
+        this->ui->fireWallWebView->page()->mainFrame()->evaluateJavaScript("setRuleName()");
+    }
+
+
 }
