@@ -10,7 +10,7 @@ function onRuleDrop() {
 }
 
 /**
- *
+ * Populate the #rulesets-remote-list
  */
 function callBackUpdatePresets() {
   var presetJson = rmanager.LoadStashPresets();
@@ -29,9 +29,9 @@ function callBackUpdatePresets() {
           htmlCode += '</a>\n';
           htmlCode += '<div class="glyphicon glyphicon-resize-vertical ruleMoveButton"></div>\n';
           htmlCode += '<div class="list-group-item-text ruleConfigForm collapse in">';
-          htmlCode += '<textarea id="presetContent' + i + '" style="display:none;">{"rules":' + JSON.stringify(presetJson.rulesets[i].rules) + '}</textarea>\n';
+          htmlCode += '<textarea id="remoterule' + i + '" style="display:none;">{"rules":' + JSON.stringify(presetJson.rulesets[i].rules) + '}</textarea>\n';
           htmlCode += '</div>\n';
-          htmlCode += '<a href="#" class="btn btn-success pull-left presetButton" onclick="loadRuleset(\'#presetContent' + i + '\')"><div class="glyphicon glyphicon-arrow-left"></div></a>';
+          htmlCode += '<a href="#" class="btn btn-success pull-left presetButton" onclick="loadRuleset(\'#remoterule' + i + '\')"><div class="glyphicon glyphicon-arrow-left"></div></a>';
           htmlCode += '</li>\n';
 
           //insertRule(rulesJson.rules[i].name, {"tcp":1, "udp":1}, "127.0.0.1", 0, 0, true, 2);
@@ -47,7 +47,7 @@ function callBackUpdatePresets() {
 
 
 /**
- *
+ * Populate the #rulesets-local-list
  */
 function LoadUserRuleSet() {
   var presetJson = rmanager.LoadUserRules();
@@ -66,12 +66,10 @@ function LoadUserRuleSet() {
           htmlCode += '</a>\n';
           htmlCode += '<div class="glyphicon glyphicon-resize-vertical ruleMoveButton"></div>\n';
           htmlCode += '<div class="list-group-item-text ruleConfigForm collapse in">';
-          htmlCode += '<textarea id="presetContent' + i + '" style="display:none;">{"rules":' + JSON.stringify(presetJson.rulesets[i].rules) + '}</textarea>\n';
+          htmlCode += '<textarea id="localrule' + i + '" style="display:none;">{"rules":' + JSON.stringify(presetJson.rulesets[i].rules) + '}</textarea>\n';
           htmlCode += '</div>\n';
-          htmlCode += '<a href="#" class="btn btn-success pull-left presetButton" onclick="loadRuleset(\'#presetContent' + i + '\')"><div class="glyphicon glyphicon-arrow-left"></div></a>';
+          htmlCode += '<a href="#" class="btn btn-success pull-left presetButton" onclick="loadRuleset(\'#localrule' + i + '\')"><div class="glyphicon glyphicon-arrow-left"></div></a>';
           htmlCode += '</li>\n';
-
-          //insertRule(rulesJson.rules[i].name, {"tcp":1, "udp":1}, "127.0.0.1", 0, 0, true, 2);
         }
         target.html(htmlCode);
         $('#countUserRules').html(presetJson.rulesets.length);
@@ -85,11 +83,12 @@ function LoadUserRuleSet() {
 
 /**
  *
- * @param preset
+ * Load a ruleset from a given html element
  */
-function loadRuleset(preset) {
+function loadRuleset(element) {
   if (confirm("This will replace your current ruleset! Are you sure?")) {
-    rulesJson = JSON.parse($(preset).val());
+    rulesJson = JSON.parse($(element).val());
+    alert('loading: ' + JSON.stringify(rulesJson));
     if ((typeof rulesJson) == 'object') {
       if (rulesJson.hasOwnProperty('rules')) {
         $('#rules-active').html('');
