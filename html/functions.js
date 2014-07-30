@@ -124,7 +124,7 @@ function callBackUpdatePresets() {
                     htmlCode += '<div class="list-group-item-text ruleConfigForm collapse in">';
                     htmlCode += '<textarea id="presetContent' + i + '" style="display:none;">{"rules":' + JSON.stringify(presetJson.rulesets[i].rules) + '}</textarea>\n';
                     htmlCode += '</div>\n';
-                    htmlCode += '<a href="#" class="btn btn-success pull-left presetButton" onclick="deployPreset(\'#presetContent' + i + '\')"><div class="glyphicon glyphicon-arrow-left"></div></a>';
+                    htmlCode += '<a href="#" class="btn btn-success pull-left presetButton" onclick="loadRuleset(\'#presetContent' + i + '\')"><div class="glyphicon glyphicon-arrow-left"></div></a>';
                     htmlCode += '</li>\n';
 
                     //insertRule(rulesJson.rules[i].name, {"tcp":1, "udp":1}, "127.0.0.1", 0, 0, true, 2);
@@ -161,7 +161,7 @@ function LoadUserRuleSet() {
           htmlCode += '<div class="list-group-item-text ruleConfigForm collapse in">';
           htmlCode += '<textarea id="presetContent' + i + '" style="display:none;">{"rules":' + JSON.stringify(presetJson.rulesets[i].rules) + '}</textarea>\n';
           htmlCode += '</div>\n';
-          htmlCode += '<a href="#" class="btn btn-success pull-left presetButton" onclick="deployPreset(\'#presetContent' + i + '\')"><div class="glyphicon glyphicon-arrow-left"></div></a>';
+          htmlCode += '<a href="#" class="btn btn-success pull-left presetButton" onclick="loadRuleset(\'#presetContent' + i + '\')"><div class="glyphicon glyphicon-arrow-left"></div></a>';
           htmlCode += '</li>\n';
 
           //insertRule(rulesJson.rules[i].name, {"tcp":1, "udp":1}, "127.0.0.1", 0, 0, true, 2);
@@ -180,13 +180,12 @@ function LoadUserRuleSet() {
  *
  * @param preset
  */
-function deployPreset(preset) {
-
+function loadRuleset(preset) {
     if (confirm("This will replace your current ruleset! Are you sure?")) {
         rulesJson = JSON.parse($(preset).val());
         if ((typeof rulesJson) == 'object') {
             if (rulesJson.hasOwnProperty('rules')) {
-                $('#lst-activerules').html('');
+                $('#rules-active').html('');
                 for (var i = 0; i < rulesJson.rules.length; i++) {
                     insertRule(rulesJson.rules[i].name, rulesJson.rules[i].protocol, rulesJson.rules[i].addr, rulesJson.rules[i].port, true);
                 }
@@ -236,7 +235,7 @@ function insertRule(name, protocol, addr, port, collapsed, list) {
         target = '#stashRulesContent';
 
     } else {
-        target = '#lst-activerules';
+        target = '#rules-active';
     }
 
     $(target).append(
@@ -268,7 +267,7 @@ function insertRule(name, protocol, addr, port, collapsed, list) {
  */
 function updateDraggables() {
     $("#lst-userpresets li, #lst-rules li, #stashRulesContent li").draggable({
-        connectToSortable: "#lst-activerules",
+        connectToSortable: "#rules-active",
         helper: "clone",
         revert: "invalid"
     }).disableSelection();
@@ -310,7 +309,7 @@ function setRuleName() {
  Returns the current Rules as JSON String
  */
 function getCurrentRules() {
-    var listItems = $("#lst-activerules li");
+    var listItems = $("#rules-active li");
     var ruleList = [];
     listItems.each(function (idx, li) {
         ruleString = $(li).find("textarea[name=json]").val();
@@ -329,7 +328,7 @@ function initGui() {
     $('#toolTipUserPresets').tooltip();
     $('#toolTipRules').tooltip();
 
-    $("#lst-activerules")
+    $("#rules-active")
         .sortable({
             items: "li:not(.list-group-item-info)",
             distance: 10,
@@ -339,7 +338,7 @@ function initGui() {
             }
         }).disableSelection();
 
-    $('#lst-activerules').on('click.collapse-next.data-api', '[data-toggle=collapse-next]', function (e) {
+    $('#rules-active').on('click.collapse-next.data-api', '[data-toggle=collapse-next]', function (e) {
 
         var $target = $(this).parent().find('.collapse');
         $target.collapse('toggle');
