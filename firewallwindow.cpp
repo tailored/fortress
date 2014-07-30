@@ -221,6 +221,7 @@ void fireWallWindow::on_actionClear_triggered()
     if(ret == QMessageBox::Ok) {
         RulesManager::getSharedInstance()->SetCurrentRulesetname(FORTRESS_DEFAULT_RULESET_NAME);
         this->ui->fireWallWebView->page()->mainFrame()->evaluateJavaScript("setRuleName()");
+        this->ui->fireWallWebView->page()->mainFrame()->evaluateJavaScript("callbackClearRules()");
     }
 
 
