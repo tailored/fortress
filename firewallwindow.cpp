@@ -1,6 +1,8 @@
 #include "firewallwindow.h"
 #include "ui_firewallwindow.h"
 
+// TODO: IMPLEMENT SAVE AS FUNCTION!
+
 /**
  * @brief fireWallWindow::fireWallWindow
  * @param parent
@@ -199,7 +201,9 @@ QString fireWallWindow::getCurrentConfig() {
  */
 void fireWallWindow::on_actionDeploy_triggered()
 {
-    //qDebug() << this->getCurrentConfig();
+    // TODO: run this file on the current system and make it persistant on boot
+    // TODO: add deploy logic for debian/ubuntu
+    this->exportFileChoosen(QString::fromLatin1("/tmp/tmp.sh"));
 }
 
 /**
