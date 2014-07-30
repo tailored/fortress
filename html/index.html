@@ -38,7 +38,15 @@
             </div>
 
             <div class="float-left twentypercent paddingfive ruleslist">
-                <div class="panel-group" id="accordion">
+              <div class="btn-group btn-block">
+                <button class="btn btn-danger btn-block"
+                        onclick="insertRule('New Rule', {'tcp': true, 'udp': true}, '', '', false, 0); updateDraggables();">
+                  <span class="glyphicon glyphicon-plus"></span> Add Rule
+                </button>
+              </div>
+              <br><br>
+
+              <div class="panel-group" id="accordion">
                     <div class="panel panel-success">
                         <div class="panel-heading">
                             <h4 class="panel-title">
@@ -76,25 +84,25 @@
                         </div>
                     </div>
                     <!-- standard tcp/udp rules -->
-                    <div class="panel panel-danger">
-                        <div class="panel panel-heading">
-                            <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseRules">
-                                    Rules
-                                </a>
-                <span id="toolTipRules" class="glyphicon float-right glyphicon-question-sign" data-google="tooltip"
-                      data-placement="bottom" title="<-- paste tooltip here -->"></span>
-                            </h4>
-                        </div>
+                <!--<div class="panel panel-danger">-->
+                <!--<div class="panel panel-heading">-->
+                <!--<h4 class="panel-title">-->
+                <!--<a data-toggle="collapse" data-parent="#accordion" href="#collapseRules">-->
+                <!--Rules-->
+                <!--</a>-->
+                <!--<span id="toolTipRules" class="glyphicon float-right glyphicon-question-sign" data-google="tooltip"-->
+                <!--data-placement="bottom" title="<-- paste tooltip here &ndash;&gt;"></span>-->
+                <!--</h4>-->
+                <!--</div>-->
 
-                        <div id="collapseRules" class="panel-collapse collapse">
-                            <div class="panel-body bg-danger">
-                                <ul id="rules-user" class="connectedSortable list-group">
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- stash preset list -->
+                <!--<div id="collapseRules" class="panel-collapse collapse">-->
+                <!--<div class="panel-body bg-danger">-->
+                <!--<ul id="rules-user" class="connectedSortable list-group">-->
+                <!--</ul>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!-- stash preset list -->
                     <div class="panel panel-info">
                         <div class="panel-heading">
                             <h4 class="panel-title">
