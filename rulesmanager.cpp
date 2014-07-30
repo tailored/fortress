@@ -129,14 +129,13 @@ QString RulesManager::LoadUserRules() {
         QString file = *it;
         QFile tmpFile(rulesDir.path().append('/').append(file));
         if(tmpFile.open(QIODevice::ReadOnly | QIODevice::Text)) {
-            retVal.append("{\"name\":\"").append(tmpFile.fileName()).append("\", \"rules\":");
+            retVal.append("{\"name\":\"").append(tmpFile.fileName().section("/",-1,-1)).append("\", \"rules\":");
             retVal.append(tmpFile.readAll());
             retVal.append("},");
         }
     }
     retVal = retVal.remove(retVal.length()-1,1);
     retVal.append("]}");
-    qDebug() << retVal;
     return retVal;
 }
 

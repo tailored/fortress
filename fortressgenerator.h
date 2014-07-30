@@ -5,6 +5,7 @@
 #include <QFile>
 #include <QDebug>
 #include <QUrl>
+#include <qjson/parser.h>
 
 #include "defines.h"
 #include "rulesmanager.h"
@@ -17,7 +18,7 @@ public:
     static FortressGenerator* getSharedInstance();
     QString getFortressTemplateString();
     QString injectCode(QString);
-    bool exportFirewallScript(QString);
+    bool exportFirewallScript(QString, QString);
 
 private:
     QString fortressTemplateString;

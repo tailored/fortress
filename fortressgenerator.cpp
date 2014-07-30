@@ -59,11 +59,20 @@ QString FortressGenerator::injectCode(QString code) {
  * @param fn
  * @return
  */
-bool FortressGenerator::exportFirewallScript(QString fn) {
+bool FortressGenerator::exportFirewallScript(QString fn, QString rs) {
     QFile fp(fn);
+    bool ok;
+    QJson::Parser *parser = new QJson::Parser;
+    QByteArray rules(rs.toAscii(),rs.length());
+    QVariantList jsonObject = parser->parse(rules,&ok).toList();
+    for(QVariantList::Iterator it = jsonObject.begin(); it!=jsonObject.end();++it) {
+        QVariant tmp = *it;
+        qDebug() << "----------------------------------------------------------------";
+        qDebug() << tmp;
+    }
     if(fp.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text)) {
         QTextStream out(&fp);
-        out << this->injectCode("//TODO IMPLEMENT FETCHING OF CURRENT RULESET IN RulesManager->exportFirewallScript(QString)");
+        out << this->injectCode(rs);
         fp.close();
         return true;
     } else return false;

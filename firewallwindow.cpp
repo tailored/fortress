@@ -129,7 +129,7 @@ void fireWallWindow::exportFileChoosen(QString fn) {
     // if extension missing add .sh
     QRegExp rx(".sh$");
     if(rx.indexIn(fn) < 0) fn.append(".sh");
-    if(!FortressGenerator::getSharedInstance()->exportFirewallScript(fn)) {
+    if(!FortressGenerator::getSharedInstance()->exportFirewallScript(fn, this->getCurrentConfig())) {
         QMessageBox *mb = new QMessageBox();
         mb->setText("Fortress failed to export the firewallscript!");
         mb->setIcon(QMessageBox::Warning);
@@ -199,7 +199,7 @@ QString fireWallWindow::getCurrentConfig() {
  */
 void fireWallWindow::on_actionDeploy_triggered()
 {
-    qDebug() << this->getCurrentConfig();
+    //qDebug() << this->getCurrentConfig();
 }
 
 /**
