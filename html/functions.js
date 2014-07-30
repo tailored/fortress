@@ -75,6 +75,7 @@ function LoadUserRuleSet() {
         $('#countUserRules').html(presetJson.rulesets.length);
         updateDraggables();
 
+
       }
     }
   }
@@ -88,7 +89,6 @@ function LoadUserRuleSet() {
 function loadRuleset(element) {
   if (confirm("This will replace your current ruleset! Are you sure?")) {
     rulesJson = JSON.parse($(element).val());
-    alert('loading: ' + JSON.stringify(rulesJson));
     if ((typeof rulesJson) == 'object') {
       if (rulesJson.hasOwnProperty('rules')) {
         $('#rules-active').html('');
@@ -96,6 +96,10 @@ function loadRuleset(element) {
           insertRule(rulesJson.rules[i].name, rulesJson.rules[i].protocol, rulesJson.rules[i].addr, rulesJson.rules[i].port, true);
         }
         updateDraggables();
+        rname = $(element).parent().parent().find(".list-group-item-heading").text();
+
+        rmanager.SetCurrentRulesetname(rname);
+        setCurrentRulesetName();
       }
     }
   }
@@ -206,7 +210,7 @@ function updateDraggables() {
 }
 
 
-function setRuleName() {
+function setCurrentRulesetName() {
   $('#headercaption').html(rmanager.GetCurrentRulesetName());
   LoadUserRuleSet();
 }
@@ -225,7 +229,7 @@ function getCurrentRules() {
 }
 
 function initGui() {
-  setRuleName();
+  setCurrentRulesetName();
   insertRule("Example Rule 1", {"tcp": true, "udp": true}, "", 0, true, 0);
   insertRule("Example Rule 2", {"tcp": true, "udp": true}, "127.0.0.1", 0, true, 0);
   insertRule("Example Rule 3", {"tcp": true, "udp": false}, "127.0.0.1", 0, true, 0);
