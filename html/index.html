@@ -9,7 +9,8 @@
     <script type="text/javascript" src="js/jquery-ui-1.10.4.min.js"></script>
     <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="functions.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <script type="text/javascript" src="settings.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 </head>
 <body>
 <div class="page">
@@ -31,7 +32,7 @@
                     </div>
                 </div>
 
-                <ul id="lst-activerules" class="connectedSortable list-group">
+                <ul id="rules-active" class="connectedSortable list-group">
 
                 </ul>
             </div>
@@ -51,7 +52,7 @@
 
                         <div id="collapesPresets" class="panel-collapse collapse in">
                             <div class="panel-body bg-success">
-                                <ul id="lst-presets" class="connectedSortable list-group">
+                                <ul id="rulesets-remote" class="list-group">
                                 </ul>
                             </div>
                         </div>
@@ -69,7 +70,7 @@
                         </div>
                         <div id="collapseUserPresets" class="panel-collapse collapse">
                             <div class="panel-body bg-warning">
-                                <ul id="lst-userpresets" class="connectedSortable list-group">
+                                <ul id="rulesets-local" class="list-group">
                                 </ul>
                             </div>
                         </div>
@@ -88,7 +89,7 @@
 
                         <div id="collapseRules" class="panel-collapse collapse">
                             <div class="panel-body bg-danger">
-                                <ul id="lst-rules" class="connectedSortable list-group">
+                                <ul id="rules-user" class="connectedSortable list-group">
                                 </ul>
                             </div>
                         </div>
@@ -106,7 +107,7 @@
                         </div>
                         <div id="collapseStashRules" class="panel-collapse collapse">
                             <div class="panel-body bg-info">
-                                <ul class="connectedSortable list-group" id="stashRulesContent"></ul>
+                                <ul class="connectedSortable list-group" id="rules-remote"></ul>
                             </div>
                         </div>
                     </div>
