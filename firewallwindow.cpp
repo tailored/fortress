@@ -46,7 +46,7 @@ void fireWallWindow::updateWebView() {
     this->ui->fireWallWebView->page()->mainFrame()->addToJavaScriptWindowObject("smanager", SettingsManager::getSharedInstance());
     this->ui->fireWallWebView->page()->mainFrame()->addToJavaScriptWindowObject("rmanager", RulesManager::getSharedInstance());
     this->ui->fireWallWebView->page()->mainFrame()->addToJavaScriptWindowObject("mwindow", this);
-    this->ui->fireWallWebView->page()->mainFrame()->evaluateJavaScript("setRuleName()");
+    this->ui->fireWallWebView->page()->mainFrame()->evaluateJavaScript("setCurrentRulesetName()");
     this->updateStashesContent();
 }
 
