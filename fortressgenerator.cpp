@@ -63,7 +63,7 @@ bool FortressGenerator::exportFirewallScript(QString fn, QString rs) {
     QFile fp(fn);
     bool ok;
     QJson::Parser *parser = new QJson::Parser;
-    QByteArray rules(rs.toAscii(),rs.length());
+    QByteArray rules(rs.toLatin1(),rs.length());
     QVariantList jsonObject = parser->parse(rules,&ok).toList();
     for(QVariantList::Iterator it = jsonObject.begin(); it!=jsonObject.end();++it) {
         QVariant tmp = *it;
