@@ -128,7 +128,8 @@ function callBackUpdateRules() {
 
 
 function callbackClearRules() {
-  return true;
+  $('#rules-active').html('');
+  setCurrentRulesetName();
 }
 
 
