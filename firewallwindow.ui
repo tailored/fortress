@@ -67,7 +67,10 @@
     <property name="title">
      <string>&amp;Fortress</string>
     </property>
+    <addaction name="actionClear"/>
+    <addaction name="separator"/>
     <addaction name="actionSave"/>
+    <addaction name="actionSaveAs"/>
     <addaction name="actionDeploy"/>
     <addaction name="actionExport"/>
     <addaction name="separator"/>
@@ -95,6 +98,7 @@
    </attribute>
    <addaction name="actionClear"/>
    <addaction name="actionSave"/>
+   <addaction name="actionSaveAs"/>
    <addaction name="actionDeploy"/>
    <addaction name="actionExport"/>
    <addaction name="separator"/>
@@ -169,6 +173,14 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+C</string>
+   </property>
+  </action>
+  <action name="actionSaveAs">
+   <property name="text">
+    <string>Save as</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Shift+S</string>
    </property>
   </action>
  </widget>

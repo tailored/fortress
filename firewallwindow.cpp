@@ -25,7 +25,8 @@ fireWallWindow::fireWallWindow(QWidget *parent) :
     this->ui->actionQuit->setIcon(this->style()->standardIcon(QStyle::SP_DialogCloseButton));
     this->ui->actionUpdateRemote->setIcon(this->style()->standardIcon(QStyle::SP_DriveNetIcon));
     this->ui->actionSave->setIcon(this->style()->standardIcon(QStyle::SP_DialogSaveButton));
-    this->ui->actionClear->setIcon(this->style()->standardIcon(QStyle::SP_DialogDiscardButton));
+    this->ui->actionClear->setIcon(this->style()->standardIcon(QStyle::SP_DialogResetButton));
+    this->ui->actionSaveAs->setIcon(this->style()->standardIcon(QStyle::SP_DialogSaveButton));
     this->ui->mainToolBar->setFloatable(false);
     this->ui->mainToolBar->setMovable(false);
     // this is for debug remove!
@@ -185,7 +186,7 @@ void fireWallWindow::on_actionSave_triggered()
     QFileInfo tmpFile = tmpPath;
     RulesManager::getSharedInstance()->SaveRule(tmpPath,r,true);
     RulesManager::getSharedInstance()->SetCurrentRulesetname(tmpFile.fileName());
-    this->ui->fireWallWebView->page()->mainFrame()->evaluateJavaScript("setRuleName()");
+    this->ui->fireWallWebView->page()->mainFrame()->evaluateJavaScript("setCurrentRulesetName()");
 }
 
 
@@ -220,7 +221,7 @@ void fireWallWindow::on_actionClear_triggered()
     int ret = qm->exec();
     if(ret == QMessageBox::Ok) {
         RulesManager::getSharedInstance()->SetCurrentRulesetname(FORTRESS_DEFAULT_RULESET_NAME);
-        this->ui->fireWallWebView->page()->mainFrame()->evaluateJavaScript("setRuleName()");
+        this->ui->fireWallWebView->page()->mainFrame()->evaluateJavaScript("setCurrentRulesetName()");
         this->ui->fireWallWebView->page()->mainFrame()->evaluateJavaScript("callbackClearRules()");
     }
 
@@ -230,4 +231,25 @@ void fireWallWindow::on_actionClear_triggered()
 void fireWallWindow::on_actionQuit_triggered()
 {
 
+}
+
+/**
+ * @brief fireWallWindow::on_actionSaveAs_triggered
+ */
+void fireWallWindow::on_actionSaveAs_triggered()
+{
+    QString rn = NULL;
+    QString tmpRn = RulesManager::getSharedInstance()->GetCurrentRulesetName();
+    QString r = this->getCurrentConfig();
+    while(rn == NULL) {
+        bool ok = false;
+        QString qi = QInputDialog::getText(this, FORTRESS_RULESET_SAVE_DIALOG_TITLE, FORTRESS_RULESET_SAVE_DIALOG_TEXT,QLineEdit::Normal,QString::null,&ok);
+        if(!ok) return;
+        if( ok && !qi.isEmpty() ) rn = qi;
+    }
+    QString tmpPath = SettingsManager::getSharedInstance()->getFullSettingsPath().append(FORTRESS_RULES_MANAGER_RULES_REL_PATH_USER_PRESETS).append(rn);
+    QFileInfo tmpFile = tmpPath;
+    RulesManager::getSharedInstance()->SaveRule(tmpPath,r,true);
+    RulesManager::getSharedInstance()->SetCurrentRulesetname(tmpFile.fileName());
+    this->ui->fireWallWebView->page()->mainFrame()->evaluateJavaScript("setCurrentRulesetName()");
 }
