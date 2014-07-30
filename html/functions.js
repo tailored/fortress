@@ -127,6 +127,11 @@ function callBackUpdateRules() {
 }
 
 
+function callbackClearRules() {
+  return true;
+}
+
+
 function insertRule(name, protocol, addr, port, collapsed, list) {
   tcp = (protocol["tcp"]) ? " checked" : "";
   udp = (protocol["udp"]) ? " checked" : "";
