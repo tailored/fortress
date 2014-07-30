@@ -115,7 +115,7 @@ body {
   position: relative;
 }
 
-#lst-rules {
+#rules-user {
   margin: 0 !important;
 }
 
@@ -152,8 +152,8 @@ body {
   padding: 5px;
 }
 
-#lst-presets,
-#stashRulesContent {
+#rulesets-remote,
+#rules-remote {
   padding: 0;
   margin: 0;
 }

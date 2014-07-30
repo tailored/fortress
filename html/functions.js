@@ -108,7 +108,7 @@ function onRuleDrop() {
 function callBackUpdatePresets() {
     var presetJson = rmanager.LoadStashPresets();
 
-    var target = $("#lst-presets");
+    var target = $("#rulesets-remote");
     if (presetJson.length > 0) {
         presetJson = JSON.parse(presetJson);
         if ((typeof presetJson == 'object')) {
@@ -144,7 +144,7 @@ function callBackUpdatePresets() {
  */
 function LoadUserRuleSet() {
   var presetJson = rmanager.LoadUserRules();
-  var target = $("#lst-userpresets");
+  var target = $("#rulesets-local");
 
   if (presetJson.length > 0) {
     presetJson = JSON.parse(presetJson);
@@ -200,12 +200,12 @@ function loadRuleset(preset) {
  */
 function callBackUpdateRules() {
     var rulesJson = rmanager.LoadStashRules();
-    var target = $('#stashRulesContent');
+    var target = $('#rules-remote');
     if (rulesJson.length > 0) {
         rulesJson = JSON.parse(rulesJson);
         if ((typeof rulesJson) == 'object') {
             if (rulesJson.hasOwnProperty('rules')) {
-                $('#stashRulesContent').html('');
+                $('#rules-remote').html('');
                 for (var i = 0; i < rulesJson.rules.length; i++) {
                     insertRule(rulesJson.rules[i].name, rulesJson.rules[i].protocol, rulesJson.rules[i].addr, rulesJson.rules[i].port, true, 4);
                 }
@@ -226,13 +226,13 @@ function insertRule(name, protocol, addr, port, collapsed, list) {
     var rulejson = {"name": name, "protocol": protocol, "port": port, "addr": addr};
 
     if (list == 1) {
-        target = '#lst-rules';
+        target = '#rules-user';
     } else if (list == 2) {
-        target = '#lst-presets';
+        target = '#rulesets-remote';
     } else if (list == 3) {
-        target = '#lst-userpresets';
+        target = '#rulesets-local';
     } else if (list == 4) {
-        target = '#stashRulesContent';
+        target = '#rules-remote';
 
     } else {
         target = '#rules-active';
@@ -266,7 +266,7 @@ function insertRule(name, protocol, addr, port, collapsed, list) {
  *
  */
 function updateDraggables() {
-    $("#lst-userpresets li, #lst-rules li, #stashRulesContent li").draggable({
+    $("#rules-user li, #rules-remote li").draggable({
         connectToSortable: "#rules-active",
         helper: "clone",
         revert: "invalid"
