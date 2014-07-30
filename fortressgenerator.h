@@ -6,6 +6,9 @@
 #include <QDebug>
 #include <QUrl>
 #include <qjson/parser.h>
+#include <QVariant>
+#include <QVariantMap>
+#include <QMap>
 
 #include "defines.h"
 #include "rulesmanager.h"

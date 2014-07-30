@@ -1,8 +1,6 @@
 #include "firewallwindow.h"
 #include "ui_firewallwindow.h"
 
-// TODO: IMPLEMENT SAVE AS FUNCTION!
-
 /**
  * @brief fireWallWindow::fireWallWindow
  * @param parent

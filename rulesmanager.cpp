@@ -23,6 +23,7 @@ RulesManager::RulesManager(QObject *parent) :
         this->SetCurrentRulesetname(tmpDefaultRulesetName);
     else
         this->SetCurrentRulesetname(FORTRESS_DEFAULT_RULESET_NAME);
+    this->DeleteUserRule("foobar");
 }
 
 /**
@@ -202,4 +203,12 @@ void RulesManager::SetCurrentRulesetname(QString n) {
  */
 QString RulesManager::GetFullRulePath() {
     return this->fullRulePath;
+}
+
+/**
+ * @brief RulesManager::DeleteUserRule
+ */
+bool RulesManager::DeleteUserRule(QString rule) {
+    if(QFile::remove(SettingsManager::getSharedInstance()->getFullSettingsPath().append(FORTRESS_RULES_MANAGER_RULES_REL_PATH_USER_PRESETS).append(rule))) return true;
+    else return false;
 }
