@@ -26,7 +26,7 @@ public:
     Q_INVOKABLE QString GenerateUUID();
     Q_INVOKABLE QString GetCurrentRulesetName();
     Q_INVOKABLE void SetCurrentRulesetname(QString);
-    Q_INVOKABLE void DeleteUserRule(QString);
+    Q_INVOKABLE bool DeleteUserRule(QString);
     int ClearStashPresets();
     int SaveRule(QString, QString, bool);
     QString LoadRule(QString);
