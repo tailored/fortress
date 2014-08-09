@@ -60,16 +60,29 @@ function LoadUserRuleSet() {
 
         var htmlCode = "";
         for (var i = 0; i < presetJson.rulesets.length; i++) {
-          htmlCode += '<li class="list-group-item presetLi">\n';
-          htmlCode += '<a class="accordion-toggle" data-toggle="collapse-next">\n';
-          htmlCode += '<div class="list-group-item-heading">' + presetJson.rulesets[i].name + '</div>\n';
-          htmlCode += '</a>\n';
-          htmlCode += '<div class="glyphicon glyphicon-resize-vertical ruleMoveButton"></div>\n';
-          htmlCode += '<div class="list-group-item-text ruleConfigForm collapse in">';
-          htmlCode += '<textarea id="localrule' + i + '" style="display:none;">{"rules":' + JSON.stringify(presetJson.rulesets[i].rules) + '}</textarea>\n';
-          htmlCode += '</div>\n';
-          htmlCode += '<a href="#" class="btn btn-success pull-left presetButton" onclick="loadRuleset(\'#localrule' + i + '\')"><div class="glyphicon glyphicon-arrow-left"></div></a>';
-          htmlCode += '</li>\n';
+//          htmlCode += '<li class="list-group-item presetLi">\n';
+//          htmlCode += '<div class="list-group-item-heading">' + presetJson.rulesets[i].name + '</div>\n';
+//          htmlCode += '<div class="list-group-item-text ruleConfigForm collapse in">';
+//          htmlCode += '<textarea id="localrule' + i + '" style="display:none;">{"rules":' + JSON.stringify(presetJson.rulesets[i].rules) + '}</textarea>\n';
+//          htmlCode += '</div>\n';
+//          htmlCode += '<a href="#" class="btn btn-success pull-left presetButton" onclick="loadRuleset(\'#localrule' + i + '\')"><div class="glyphicon glyphicon-arrow-left"></div></a>';
+//          htmlCode += '<a href="#" class="btn btn-danger pull-right presetButton" onclick="loadRuleset(\'#localrule' + i + '\')"><div class="glyphicon glyphicon-arrow-trash"></div></a>';
+//          htmlCode += '</li>\n';
+
+
+          htmlCode +=
+            '<li class="">' +
+              '<div class="btn-group">' +
+              '<div class="btn-group>">' +
+              '<button type="button" class="btn btn-default glyphicon glyphicon-arrow-left" onclick="loadRuleset(\'#localrule' + i + '\')">' + presetJson.rulesets[i].name + '</button>' +
+              '</div>' +
+              '<button type="button" class="btn btn-danger glyphicon glyphicon-trash"></button>' +
+              '<textarea id="localrule' + i + '" style="display:none;">{"rules":' + JSON.stringify(presetJson.rulesets[i].rules) + '}</textarea>' +
+              '</div>' +
+              '' +
+              '' +
+              '' +
+              '</li>\n'
         }
         target.html(htmlCode);
         $('#countUserRules').html(presetJson.rulesets.length);
