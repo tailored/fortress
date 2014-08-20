@@ -36,16 +36,6 @@ RulesManager* RulesManager::getSharedInstance() {
 }
 
 /**
- * @brief RulesManager::GenarateScriptFromRule
- * @param rule
- * @return
- */
-QString RulesManager::GenarateScriptFromRule(QString rule) {
-    // ToDo: this needs implementation
-    return NULL;
-}
-
-/**
  * @brief RulesManager::SaveRule
  * @param rule
  * @return

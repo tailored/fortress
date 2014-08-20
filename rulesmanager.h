@@ -16,7 +16,6 @@ class RulesManager : public QObject
     Q_OBJECT
 public:
     explicit RulesManager(QObject *parent = 0);
-    QString GenarateScriptFromRule(QString);
     static RulesManager* getSharedInstance();
     int SaveRulesFromStash(QString);
     int SavePresetsFromStash(QString);
