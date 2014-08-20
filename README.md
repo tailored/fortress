@@ -8,6 +8,7 @@ dependencies
 ============
 
 - <a href="http://qjson.sourceforge.net/" target="_blank">QJson</a>
+- <a href="http://qt-project.org" target="_blank">QT</a>
 
 license
 =======
