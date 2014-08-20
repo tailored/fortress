@@ -9,8 +9,8 @@
     <script type="text/javascript" src="js/jquery-ui-1.10.4.min.js"></script>
     <script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="functions.js"></script>
-  <script type="text/javascript" src="settings.js"></script>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script type="text/javascript" src="settings.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 </head>
 <body>
 <div class="page">
@@ -21,8 +21,8 @@
         </li>
     </ul>
     <div class="tab-content">
-        <div class="page-header headerpadding"><h2 id="headercaption"></h2></div>
         <div class="tab-pane fade in active" id="rules">
+            <div class="page-header headerpadding"><h2 id="headercaption"></h2></div>
             <div class="div-content float-left eightypercent" id="ruleslist">
                 <div class="list-group-item list-group-item-info listSingleItem">
                     <div class="list-group-item-heading">Deny from all</div>
@@ -38,20 +38,20 @@
             </div>
 
             <div class="float-left twentypercent paddingfive ruleslist">
-              <div class="btn-group btn-block">
-                <button class="btn btn-danger btn-block"
-                        onclick="insertRule('New Rule', {'tcp': true, 'udp': true}, '', '', false, 0); updateDraggables();">
-                  <span class="glyphicon glyphicon-plus"></span> Add Rule
-                </button>
-              </div>
-              <br><br>
+                <div class="btn-group btn-block">
+                    <button class="btn btn-danger btn-block"
+                            onclick="insertRule('New Rule', {'tcp': true, 'udp': true}, '', '', false, 0); updateDraggables();">
+                        <span class="glyphicon glyphicon-plus"></span> Add Rule
+                    </button>
+                </div>
+                <br><br>
 
-              <div class="panel-group" id="accordion">
+                <div class="panel-group" id="accordion">
                     <div class="panel panel-success">
                         <div class="panel-heading">
                             <h4 class="panel-title">
                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapesPresets">
-                                    Rulesets<span class="badge" id="countPresets">0</span>
+                                    &nbsp;Rulesets<span class="badge float-left" id="countPresets">0</span>
                                 </a>
                 <span id="toolTipPresets" class="glyphicon float-right glyphicon-question-sign" data-google="tooltip"
                       data-placement="bottom" title="<-- paste tooltip here -->"></span>
@@ -70,7 +70,7 @@
                         <div class="panel-heading">
                             <h4 class="panel-title">
                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseUserPresets">
-                                    User Rulesets<span class="badge" id="countUserRules">0</span>
+                                    &nbsp;User Rulesets<span class="badge float-left" id="countUserRules">0</span>
                                 </a>
                 <span id="toolTipUserPresets" class="glyphicon float-right glyphicon-question-sign"
                       data-google="tooltip" data-placement="bottom" title="<-- paste tooltip here -->"></span>
@@ -84,30 +84,30 @@
                         </div>
                     </div>
                     <!-- standard tcp/udp rules -->
-                <!--<div class="panel panel-danger">-->
-                <!--<div class="panel panel-heading">-->
-                <!--<h4 class="panel-title">-->
-                <!--<a data-toggle="collapse" data-parent="#accordion" href="#collapseRules">-->
-                <!--Rules-->
-                <!--</a>-->
-                <!--<span id="toolTipRules" class="glyphicon float-right glyphicon-question-sign" data-google="tooltip"-->
-                <!--data-placement="bottom" title="<-- paste tooltip here &ndash;&gt;"></span>-->
-                <!--</h4>-->
-                <!--</div>-->
+                    <!--<div class="panel panel-danger">-->
+                    <!--<div class="panel panel-heading">-->
+                    <!--<h4 class="panel-title">-->
+                    <!--<a data-toggle="collapse" data-parent="#accordion" href="#collapseRules">-->
+                    <!--Rules-->
+                    <!--</a>-->
+                    <!--<span id="toolTipRules" class="glyphicon float-right glyphicon-question-sign" data-google="tooltip"-->
+                    <!--data-placement="bottom" title="<-- paste tooltip here &ndash;&gt;"></span>-->
+                    <!--</h4>-->
+                    <!--</div>-->
 
-                <!--<div id="collapseRules" class="panel-collapse collapse">-->
-                <!--<div class="panel-body bg-danger">-->
-                <!--<ul id="rules-user" class="connectedSortable list-group">-->
-                <!--</ul>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!--</div>-->
-                <!-- stash preset list -->
+                    <!--<div id="collapseRules" class="panel-collapse collapse">-->
+                    <!--<div class="panel-body bg-danger">-->
+                    <!--<ul id="rules-user" class="connectedSortable list-group">-->
+                    <!--</ul>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!--</div>-->
+                    <!-- stash preset list -->
                     <div class="panel panel-info">
                         <div class="panel-heading">
                             <h4 class="panel-title">
                                 <a data-toggle="collapse" data-parent="#accordion" href="#collapseStashRules">
-                                    Example Rules&nbsp;<span class="badge" id="countCollapseStashRules">0</span>
+                                    &nbsp;Example Rules<span class="badge float-left" id="countCollapseStashRules">0</span>
                                 </a>
                 <span id="toolTipStashPresets" class="glyphicon float-right glyphicon-question-sign"
                       data-google="tooltip" data-placement="bottom" title="<-- paste tooltip here -->"></span>
@@ -127,15 +127,15 @@
         <!-- TODO: add whats this symbol to each form field -->
         <div class="tab-pane fade in paddingfive" id="settings">
             <div class="modal-header">
-                <div class="panel panel-heading">Settings</div>
+                <div class="panel panel-heading"><h2>Settings</h2></div>
                 <div class="panel">
                     <div class="form">
                         <div class="form-group">
-                          <div class="input-group">
-                          <label for="settings-sudoprovider" class="form">path to graphical sudo gui</label>
-                            <input class="form-control" type="text" id="settings-sudoprovider">
-                          </div>
-                          <div class="form-control-feedback"><b>Note:</b><br/>
+                            <div class="input-group">
+                                <label for="settings-sudoprovider" class="form input-group-addon settingsFormLabel">Path to graphical sudo gui:</label>
+                                <input class="form-control" type="text" id="settings-sudoprovider">
+                            </div>
+                            <div class="form-control-feedback"><b>Note:</b><br/>
                                 If you are attempting to use <i>kdesudo</i> outside an kde
                                 environment, it is likely that it won't work, we recommend using <i>gksudo</i>.<br/>
                                 If <i>kdesudo</i> is the only sudo gui installed on your system, fortress will detect it
@@ -143,17 +143,16 @@
                             </div>
                         </div>
                         <div class="form-group">
-                          <div class="input-group">
-                          <label for="settings-iptables" class="form">path to iptables</label>
-                            <input class="form-control" type="text" id="settings-iptables">
-                          </div>
+                            <div class="input-group">
+                                <label for="settings-iptables" class="form input-group-addon settingsFormLabel">Path to iptables:</label>
+                                <input class="form-control" type="text" id="settings-iptables">
+                            </div>
                         </div>
                         <div class="form-group">
-                          <div class="input-group">
-                          <label for="settings-stashurl">remote preset stash</label>
-
-                            <div id="settings-stashlist-wrapper"></div>
-                          </div>
+                            <div class="input-group">
+                                <label for="settings-stashurl" class="input-group-addon settingsFormLabel">Remote preset stash:</label>
+                                <div id="settings-stashlist-wrapper"></div>
+                            </div>
                         </div>
 
                         <div class="form-group">

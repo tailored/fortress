@@ -188,6 +188,11 @@ body {
     text-align: right;
 }
 
+.settingsFormLabel {
+    width: 220px;
+    text-align: right;
+}
+
 .cbtn {
     margin-right: 10px;
 }
