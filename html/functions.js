@@ -176,9 +176,11 @@ function insertRule(name, protocol, addr, port, collapsed, list) {
       '<input type="text" class="form-control rulename" placeholder="Rule Name" value="' + name + '">' +
       '</div>' +
       '<div class="form-group">' +
+      '<div class="input-group">' +
       '<label class="checkbox-inline"><input type="checkbox" value="tcp"' + tcp + '> TCP</label>' +
+      '</div><div class="input-group">' +
       '<label class="checkbox-inline"><input type="checkbox" value="udp" ' + udp + '> UDP</label>' +
-      '</div>' +
+      '</div></div>' +
       '<div class="form-group">' +
       '<input type="text" class="form-control address" placeholder="Source Address" value="' + addr + '">' +
       '<input type="text" class="form-control ports" placeholder="Ports" value="' + port + '">' +

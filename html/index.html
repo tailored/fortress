@@ -131,10 +131,11 @@
                 <div class="panel">
                     <div class="form">
                         <div class="form-group">
-                            <label for="settings-sudoprovider" class="form">path to graphical sudo gui</label>
+                          <div class="input-group">
+                          <label for="settings-sudoprovider" class="form">path to graphical sudo gui</label>
                             <input class="form-control" type="text" id="settings-sudoprovider">
-
-                            <div class="form-control-feedback"><b>Note:</b><br/>
+                          </div>
+                          <div class="form-control-feedback"><b>Note:</b><br/>
                                 If you are attempting to use <i>kdesudo</i> outside an kde
                                 environment, it is likely that it won't work, we recommend using <i>gksudo</i>.<br/>
                                 If <i>kdesudo</i> is the only sudo gui installed on your system, fortress will detect it
@@ -142,13 +143,17 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="settings-iptables" class="form">path to iptables</label>
+                          <div class="input-group">
+                          <label for="settings-iptables" class="form">path to iptables</label>
                             <input class="form-control" type="text" id="settings-iptables">
+                          </div>
                         </div>
                         <div class="form-group">
-                            <label for="settings-stashurl">remote preset stash</label>
+                          <div class="input-group">
+                          <label for="settings-stashurl">remote preset stash</label>
 
                             <div id="settings-stashlist-wrapper"></div>
+                          </div>
                         </div>
 
                         <div class="form-group">
