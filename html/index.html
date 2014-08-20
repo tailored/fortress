@@ -130,16 +130,25 @@
                 <div class="panel panel-heading"><h2>Settings</h2></div>
                 <div class="panel">
                     <div class="form">
+                        <div class="float-right" style="width: 50%"><b>Note:</b><br/>
+                            <ul>
+                                <li>
+                                    You need to be in the sudoers list of your system, If you can run softwareupdates on your System
+                                    without having to switch to a root account, everything is fine and will, most likly, work.<br>
+                                    However if you aren't (the unlikly case on Desktop Linuxes these days) you might want to contact
+                                    the user manual of your system and make sure you can gain root access using the sudo system!
+                                </li>
+                                <li>If you are attempting to use <i>kdesudo</i> outside an kde
+                                    environment, it is likely that it won't work, we recommend using <i>gksudo</i>.<br/>
+                                    If <i>kdesudo</i> is the only sudo gui installed on your system, fortress will detect it
+                                    nonetheless!
+                                </li>
+                            </ul>
+                        </div>
                         <div class="form-group">
                             <div class="input-group">
                                 <label for="settings-sudoprovider" class="form input-group-addon settingsFormLabel">Path to graphical sudo gui:</label>
                                 <input class="form-control" type="text" id="settings-sudoprovider">
-                            </div>
-                            <div class="form-control-feedback"><b>Note:</b><br/>
-                                If you are attempting to use <i>kdesudo</i> outside an kde
-                                environment, it is likely that it won't work, we recommend using <i>gksudo</i>.<br/>
-                                If <i>kdesudo</i> is the only sudo gui installed on your system, fortress will detect it
-                                nonetheless!
                             </div>
                         </div>
                         <div class="form-group">

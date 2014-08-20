@@ -203,7 +203,13 @@ void fireWallWindow::on_actionDeploy_triggered()
 {
     // TODO: run this file on the current system and make it persistant on boot
     // TODO: add deploy logic for debian/ubuntu
-    this->exportFileChoosen(QString::fromLatin1("/tmp/tmp.sh"));
+    this->exportFileChoosen(QString::fromLatin1("/tmp/firewall.sh"));
+    QMessageBox::StandardButton qd;
+    qd = QMessageBox::question(this,"Are you sure?","This will deploy the firewallrules below to your System. Are you sure?", QMessageBox::Yes|QMessageBox::No);
+    if(qd == QMessageBox::Yes) {
+        QProcess process;
+        process.startDetached(SettingsManager::getSharedInstance()->getValue("settings/sudoprovider"), QStringList() << "/tmp/firewall.sh");
+    }
 }
 
 /**
@@ -251,4 +257,9 @@ void fireWallWindow::on_actionSaveAs_triggered()
     RulesManager::getSharedInstance()->SaveRule(tmpPath,r,true);
     RulesManager::getSharedInstance()->SetCurrentRulesetname(tmpFile.fileName());
     this->ui->fireWallWebView->page()->mainFrame()->evaluateJavaScript("setCurrentRulesetName()");
+}
+
+void fireWallWindow::on_actionDebploy_on_Boot_triggered()
+{
+
 }

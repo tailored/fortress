@@ -72,6 +72,7 @@
     <addaction name="actionSave"/>
     <addaction name="actionSaveAs"/>
     <addaction name="actionDeploy"/>
+    <addaction name="actionDebploy_on_Boot"/>
     <addaction name="actionExport"/>
     <addaction name="separator"/>
     <addaction name="actionUpdateRemote"/>

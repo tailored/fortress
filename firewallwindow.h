@@ -10,6 +10,9 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QInputDialog>
+#include <QProcess>
+#include <QStringList>
+#include <QMessageBox>
 
 #include "settingsmanager.h"
 #include "defines.h"
@@ -50,6 +53,8 @@ private slots:
     void on_actionQuit_triggered();
 
     void on_actionSaveAs_triggered();
+
+    void on_actionDebploy_on_Boot_triggered();
 
 private:
     Ui::fireWallWindow *ui;
