@@ -25,6 +25,7 @@ fireWallWindow::fireWallWindow(QWidget *parent) :
     this->ui->actionSave->setIcon(this->style()->standardIcon(QStyle::SP_DialogSaveButton));
     this->ui->actionClear->setIcon(this->style()->standardIcon(QStyle::SP_DialogResetButton));
     this->ui->actionSaveAs->setIcon(this->style()->standardIcon(QStyle::SP_DialogSaveButton));
+    this->ui->actionDebploy_on_Boot->setIcon(this->style()->standardIcon(QStyle::SP_DialogApplyButton));
     this->ui->mainToolBar->setFloatable(false);
     this->ui->mainToolBar->setMovable(false);
     // this is for debug remove!

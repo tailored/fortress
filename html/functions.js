@@ -185,27 +185,28 @@ function insertRule(name, protocol, addr, port, collapsed, list) {
       '<div class="list-group-item-heading">' + name + '</div></a>' +
       '<div class="ruleMoveButton"><span class="glyphicon glyphicon-resize-vertical"></span></div>' +
       '<div class="list-group-item-text ruleConfigForm collapse' + col + '"><form role="form">' +
-      '<div class="form-group">' +
+      '<div class="form-group input-group">' +
+      '<label class="input-group-addon"><div class="formLabel">Name:</div></label>'+
       '<input type="text" class="form-control rulename" placeholder="Rule Name" value="' + name + '">' +
       '</div>' +
-      '<div class="form-group">' +
-      '<div class="input-group">' +
-      '<label class="checkbox-inline"><input type="checkbox" value="tcp"' + tcp + '> TCP</label>' +
-      '</div><div class="input-group">' +
-      '<label class="checkbox-inline"><input type="checkbox" value="udp" ' + udp + '> UDP</label>' +
-      '</div></div>' +
-      '<div class="form-group">' +
-      '<div class="input-group">' +
-      '<label>Source Address</label>' +
+      '<div class="form-group clearBoth">' +
+      '<div class="input-group form-group">' +
+      '<label class="input-group-addon"><div class="formLabel">Source Address:</div></label>' +
       '<input type="text" class="form-control address" placeholder="Source Address" value="' + addr + '">' +
       '</div>' +
-      '<div class="input-group">' +
-      '<label>Port</label>' +
+      '<div class="form-group input-group">' +
+      '<label class="input-group-addon"><div class="formLabel">Port:</div></label>' +
       '<input type="text" class="form-control ports" placeholder="Port" value="' + port + '">' +
       '</div>' +
       '</div>' +
-      '<button type="button" class="btn btn-primary saverule">Save</button>' +
-      '<button type="button" class="btn btn-danger delrule">Delete Rule</button>' +
+      '<div class="form-group">' +
+      '<div class="input-group float-left">' +
+      '<label class="checkbox-inline"><input type="checkbox" value="tcp"' + tcp + '> TCP</label>' +
+      '</div><div class="input-group float-left">' +
+      '<label class="checkbox-inline"><input type="checkbox" value="udp" ' + udp + '> UDP</label>' +
+      '</div></div>&nbsp;&nbsp;' +
+      '<button type="button" class="btn btn-primary saverule float-right">Save</button>' +
+      '<button type="button" class="btn btn-danger delrule float-right cbtn">Delete Rule</button>' +
       '<textarea name="json" style="display:none;">' + JSON.stringify(rulejson) + '</textarea>' +
       '</form></div>' +
       '</li>');

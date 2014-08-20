@@ -100,6 +100,7 @@
    <addaction name="actionSave"/>
    <addaction name="actionSaveAs"/>
    <addaction name="actionDeploy"/>
+   <addaction name="actionDebploy_on_Boot"/>
    <addaction name="actionExport"/>
    <addaction name="separator"/>
    <addaction name="actionUpdateRemote"/>
@@ -181,6 +182,14 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+Shift+S</string>
+   </property>
+  </action>
+  <action name="actionDebploy_on_Boot">
+   <property name="text">
+    <string>Debloy on Boot</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+B</string>
    </property>
   </action>
  </widget>
