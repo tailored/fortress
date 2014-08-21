@@ -196,6 +196,20 @@ QString RulesManager::GetFullRulePath() {
 }
 
 /**
+ * @brief RulesManager::DeleteUserRuleResponsive
+ */
+bool RulesManager::DeleteUserRuleResponsive(QString rule) {
+    QMessageBox::StandardButton qd;
+    qd = QMessageBox::question(NULL,"Are you sure?",QString("This will delete \"").append(rule).append("\". Are you sure?"), QMessageBox::Yes|QMessageBox::No,QMessageBox::Yes);
+    if(qd == QMessageBox::Yes) {
+        if(QFile::remove(SettingsManager::getSharedInstance()->getFullSettingsPath().append(FORTRESS_RULES_MANAGER_RULES_REL_PATH_USER_PRESETS).append(rule)))  {
+            return true;
+        }
+    } else return false;
+    return false;
+}
+
+/**
  * @brief RulesManager::DeleteUserRule
  */
 bool RulesManager::DeleteUserRule(QString rule) {

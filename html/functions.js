@@ -24,9 +24,7 @@ function callBackUpdatePresets() {
         var htmlCode = "";
         for (var i = 0; i < presetJson.rulesets.length; i++) {
           htmlCode += '<li class="list-group-item presetLi">\n';
-          htmlCode += '<a class="accordion-toggle" data-toggle="collapse-next">\n';
           htmlCode += '<div class="list-group-item-heading">' + presetJson.rulesets[i].name + '</div>\n';
-          htmlCode += '</a>\n';
           htmlCode += '<div class="glyphicon glyphicon-resize-vertical ruleMoveButton"></div>\n';
           htmlCode += '<div class="list-group-item-text ruleConfigForm collapse in">';
           htmlCode += '<textarea id="remoterule' + i + '" style="display:none;">{"rules":' + JSON.stringify(presetJson.rulesets[i].rules) + '}</textarea>\n';
@@ -45,6 +43,10 @@ function callBackUpdatePresets() {
   }
 }
 
+function deleteUserRule(rulename) {
+    rmanager.DeleteUserRuleResponsive(rulename);
+    LoadUserRuleSet();
+}
 
 /**
  * Populate the #rulesets-local-list
@@ -62,10 +64,10 @@ function LoadUserRuleSet() {
         for (var i = 0; i < presetJson.rulesets.length; i++) {
 
           htmlCode += '<li class="list-group-item presetLi">\n';
-          htmlCode += '<div>' + presetJson.rulesets[i].name + '</div>\n';
+          htmlCode += '<div class="list-group-item-heading">' + presetJson.rulesets[i].name + '</div>\n';
           htmlCode += '<textarea id="userruleset' + i + '" style="display:none;">{"rules":' + JSON.stringify(presetJson.rulesets[i].rules) + '}</textarea>\n';
           htmlCode += '<a href="#" class="btn btn-success pull-left presetButton" onclick="loadRuleset(\'#userruleset' + i + '\')"><div class="glyphicon glyphicon-arrow-left"></div></a>';
-          htmlCode += '<a href="#" class="btn btn-danger pull-left trashButton" onclick="alert(\'not yet implemented\');"><div class="glyphicon glyphicon-trash"></div></a>';
+          htmlCode += '<a href="#" class="btn btn-danger pull-left trashButton" onclick="deleteUserRule(\'' + presetJson.rulesets[i].name + '\');"><div class="glyphicon glyphicon-trash"></div></a>';
           htmlCode += '</li>\n';
         }
         target.html(htmlCode);

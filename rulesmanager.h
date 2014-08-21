@@ -7,6 +7,7 @@
 #include <QFileInfo>
 #include <QFile>
 #include <QUuid>
+#include <QMessageBox>
 
 #include "defines.h"
 #include "settingsmanager.h"
@@ -26,6 +27,7 @@ public:
     Q_INVOKABLE QString GetCurrentRulesetName();
     Q_INVOKABLE void SetCurrentRulesetname(QString);
     Q_INVOKABLE bool DeleteUserRule(QString);
+    Q_INVOKABLE bool DeleteUserRuleResponsive(QString);
     int ClearStashPresets();
     int SaveRule(QString, QString, bool);
     QString LoadRule(QString);
