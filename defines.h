@@ -36,8 +36,6 @@
 #define FORTRESS_RULES_MANAGER_RULES_REL_PATH "/rules/";
 #define FORTRESS_RULES_MANAGER_RULES_REL_PATH_USER_PRESETS "/rules/userpresets/"
 
-#define FORTRESS_DIALOG_EXPORT "Export firewallscript"
-
 #define FORTRESS_DEFAULT_RULESET_NAME "unnamed"
 #define FORTRESS_RULESET_SAVE_DIALOG_TITLE "Ruleset Name"
 #define FORTRESS_RULESET_SAVE_DIALOG_TEXT "Please enter a name for the ruleset"
@@ -46,5 +44,17 @@
 #define FORTRESS_RULESET_CLEAR_TITLE "Warning"
 
 #define FORTRESS_SUPPORTED_OSS "Gentoo  Debian  Arch  Mint"
+
+#define FORTRESS_DIALOG_EXPORT "Export firewallscript"
+
+#define FORTRESS_DIALOG_TITLE_ARE_YOUR_SURE "Are you sure?"
+#define FORTRESS_DIALOG_TEXT_DEPLOY_SYSTEM "This will deploy the firewallrules below to your System. Are you sure?"
+#define FORTRESS_DIALOG_TEXT_DEPLOY_SYSTEM_BOOT "This will deploy the firewallrules below to the boot process of your System. Are you sure?"
+
+#define FORTRESS_DIALOG_TITLE_CRITICAL_ERROR "Critical error"
+#define FORTRESS_DIALOG_TEXT_OS_UNSUPPORTED "Your operatingsystem is not supported! We are sorry.\nYou will not be able to deploy the configuration, however\nyou may create firewallscripts and export them as shell scripts."
+
+#define FORTRESS_DIALOG_TEXT_DELETE_RULE_PART1 "This will delete the ruleset \""
+#define FORTRESS_DIALOG_TEXT_DELETE_RULE_PART2 "\" permanently. Are you sure?"
 
 #endif // DEFINES_H

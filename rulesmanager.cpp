@@ -23,7 +23,6 @@ RulesManager::RulesManager(QObject *parent) :
         this->SetCurrentRulesetname(tmpDefaultRulesetName);
     else
         this->SetCurrentRulesetname(FORTRESS_DEFAULT_RULESET_NAME);
-    this->DeleteUserRule("foobar");
 }
 
 /**
@@ -200,7 +199,7 @@ QString RulesManager::GetFullRulePath() {
  */
 bool RulesManager::DeleteUserRuleResponsive(QString rule) {
     QMessageBox::StandardButton qd;
-    qd = QMessageBox::question(NULL,"Are you sure?",QString("This will delete \"").append(rule).append("\". Are you sure?"), QMessageBox::Yes|QMessageBox::No,QMessageBox::Yes);
+    qd = QMessageBox::question(NULL,FORTRESS_DIALOG_TITLE_ARE_YOUR_SURE,QString(FORTRESS_DIALOG_TEXT_DELETE_RULE_PART1).append(rule).append(FORTRESS_DIALOG_TEXT_DELETE_RULE_PART2), QMessageBox::Yes|QMessageBox::No,QMessageBox::Yes);
     if(qd == QMessageBox::Yes) {
         if(QFile::remove(SettingsManager::getSharedInstance()->getFullSettingsPath().append(FORTRESS_RULES_MANAGER_RULES_REL_PATH_USER_PRESETS).append(rule)))  {
             return true;

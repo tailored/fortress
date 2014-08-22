@@ -1,6 +1,5 @@
 #include "firewallwindow.h"
 #include "ui_firewallwindow.h"
-// TODO: move all hardcoded strings to defines.h!!!! (global task)
 
 /**
  * @brief fireWallWindow::fireWallWindow
@@ -205,7 +204,7 @@ QString fireWallWindow::getCurrentConfig() {
 void fireWallWindow::on_actionDeploy_triggered()
 {
     QMessageBox::StandardButton qd;
-    qd = QMessageBox::question(this,"Are you sure?","This will deploy the firewallrules below to your System. Are you sure?", QMessageBox::Yes|QMessageBox::No);
+    qd = QMessageBox::question(this,FORTRESS_DIALOG_TITLE_ARE_YOUR_SURE, FORTRESS_DIALOG_TEXT_DEPLOY_SYSTEM, QMessageBox::Yes|QMessageBox::No);
     if(qd == QMessageBox::Yes) {
         this->exportFileChoosen(QString::fromLatin1("/tmp/firewall.sh"));
         QProcess process;
@@ -271,7 +270,7 @@ void fireWallWindow::on_actionDebploy_on_Boot_triggered()
     // TODO: run this file on the current system and make it persistant on boot
     // TODO: add deploy logic for debian/ubuntu
     QMessageBox::StandardButton qd;
-    qd = QMessageBox::question(this,"Are you sure?","This will deploy the firewallrules below to the boot process of your System. Are you sure?", QMessageBox::Yes|QMessageBox::No);
+    qd = QMessageBox::question(this,FORTRESS_DIALOG_TITLE_ARE_YOUR_SURE,FORTRESS_DIALOG_TEXT_DEPLOY_SYSTEM_BOOT, QMessageBox::Yes|QMessageBox::No);
     if(qd == QMessageBox::Yes) {
         SettingsManager::getSharedInstance()->detectOS();
 
@@ -285,7 +284,7 @@ void fireWallWindow::on_actionDebploy_on_Boot_triggered()
 bool fireWallWindow::osIsSupported() {
     if(SettingsManager::getSharedInstance()->getValue("settings/os_supported").compare("true") != 0) {
         QMessageBox::StandardButton qm;
-        qm = QMessageBox::critical(this,"Critical error","Your operatingsystem is not supported! We are sorry.\nYou will not be able to deploy the configuration, however\nyou may create firewallscripts and export them as shell scripts.",QMessageBox::Ok);
+        qm = QMessageBox::critical(this,FORTRESS_DIALOG_TITLE_CRITICAL_ERROR,FORTRESS_DIALOG_TEXT_OS_UNSUPPORTED,QMessageBox::Ok);
         this->ui->actionDeploy->setEnabled(false);
         this->ui->actionDebploy_on_Boot->setEnabled(false);
         return false;
