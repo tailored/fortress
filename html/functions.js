@@ -165,7 +165,7 @@ function insertRule(name, protocol, addr, port, collapsed, list) {
       '<div class="form-group clearBoth">' +
       '<div class="input-group form-group">' +
       '<label class="input-group-addon"><div class="formLabel">Source Address</div></label>' +
-      '<input type="text" class="form-control address" placeholder="Everything" value="' + addr + '">' +
+      '<input type="text" class="form-control address" placeholder="Any" value="' + addr + '">' +
       '</div>' +
       '<div class="form-group input-group">' +
       '<label class="input-group-addon"><div class="formLabel">Port</div></label>' +
