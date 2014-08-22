@@ -1,5 +1,6 @@
 #include "firewallwindow.h"
 #include "ui_firewallwindow.h"
+// TODO: move all hardcoded strings to defines.h!!!! (global task)
 
 /**
  * @brief fireWallWindow::fireWallWindow
@@ -31,6 +32,8 @@ fireWallWindow::fireWallWindow(QWidget *parent) :
     // this is for debug remove!
     FortressGenerator::getSharedInstance();
     RulesManager::getSharedInstance();
+    SettingsManager::getSharedInstance()->detectOS();
+    this->osIsSupported();
 }
 
 /**
@@ -201,12 +204,10 @@ QString fireWallWindow::getCurrentConfig() {
  */
 void fireWallWindow::on_actionDeploy_triggered()
 {
-    // TODO: run this file on the current system and make it persistant on boot
-    // TODO: add deploy logic for debian/ubuntu
-    this->exportFileChoosen(QString::fromLatin1("/tmp/firewall.sh"));
     QMessageBox::StandardButton qd;
     qd = QMessageBox::question(this,"Are you sure?","This will deploy the firewallrules below to your System. Are you sure?", QMessageBox::Yes|QMessageBox::No);
     if(qd == QMessageBox::Yes) {
+        this->exportFileChoosen(QString::fromLatin1("/tmp/firewall.sh"));
         QProcess process;
         process.startDetached(SettingsManager::getSharedInstance()->getValue("settings/sudoprovider"), QStringList() << "/tmp/firewall.sh");
     }
@@ -233,6 +234,9 @@ void fireWallWindow::on_actionClear_triggered()
 
 }
 
+/**
+ * @brief fireWallWindow::on_actionQuit_triggered
+ */
 void fireWallWindow::on_actionQuit_triggered()
 {
 
@@ -259,7 +263,35 @@ void fireWallWindow::on_actionSaveAs_triggered()
     this->ui->fireWallWebView->page()->mainFrame()->evaluateJavaScript("setCurrentRulesetName()");
 }
 
+/**
+ * @brief fireWallWindow::on_actionDebploy_on_Boot_triggered
+ */
 void fireWallWindow::on_actionDebploy_on_Boot_triggered()
 {
+    // TODO: run this file on the current system and make it persistant on boot
+    // TODO: add deploy logic for debian/ubuntu
+    QMessageBox::StandardButton qd;
+    qd = QMessageBox::question(this,"Are you sure?","This will deploy the firewallrules below to the boot process of your System. Are you sure?", QMessageBox::Yes|QMessageBox::No);
+    if(qd == QMessageBox::Yes) {
+        SettingsManager::getSharedInstance()->detectOS();
 
+        if(this->osIsSupported()) {
+            this->exportFileChoosen(QString::fromLatin1("/tmp/firewall.sh"));
+            QString os = SettingsManager::getSharedInstance()->getValue("settings/os");
+        }
+    }
+}
+
+bool fireWallWindow::osIsSupported() {
+    if(SettingsManager::getSharedInstance()->getValue("settings/os_supported").compare("true") != 0) {
+        QMessageBox::StandardButton qm;
+        qm = QMessageBox::critical(this,"Critical error","Your operatingsystem is not supported! We are sorry.\nYou will not be able to deploy the configuration, however\nyou may create firewallscripts and export them as shell scripts.",QMessageBox::Ok);
+        this->ui->actionDeploy->setEnabled(false);
+        this->ui->actionDebploy_on_Boot->setEnabled(false);
+        return false;
+    } else {
+        this->ui->actionDeploy->setEnabled(true);
+        this->ui->actionDebploy_on_Boot->setEnabled(true);
+        return true;
+    }
 }

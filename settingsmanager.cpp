@@ -232,3 +232,30 @@ QString SettingsManager::getFullSettingsPath() {
     tmp.makeAbsolute();
     return tmp.path();
 }
+
+/**
+ * @brief SettingsManager::detectOS
+ * @return
+ */
+bool SettingsManager::detectOS() {
+    QFile osFile("/etc/os-release");
+    if(!osFile.exists()) {
+        if(!osFile.exists()) return false;
+    }
+    osFile.open(QIODevice::ReadOnly|QIODevice::Text);
+    QString osDescriptor = osFile.readAll();
+    QRegExp rx("^NAME=([A-z]*)\n");
+    rx.indexIn(osDescriptor);
+    if(rx.captureCount() >= 1 && rx.capturedTexts()[1] != NULL) {
+        this->setValue("settings/os",rx.capturedTexts()[1]);
+        QRegExp rx2(rx.capturedTexts()[1]);
+        rx2.indexIn(FORTRESS_SUPPORTED_OSS);
+        if(rx2.capturedTexts().length() > 0) {
+            this->setValue("settings/os_supported","true");
+        } else {
+            this->setValue("settings/os_supported", "false");
+        }
+        return true;
+    }
+    return false;
+}

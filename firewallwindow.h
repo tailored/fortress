@@ -41,6 +41,7 @@ private slots:
     void on_actionExport_triggered();
     void exportFileChoosen(QString);
     void updateFinished();
+    bool osIsSupported();
     Q_INVOKABLE void updateStashesContent();
     Q_INVOKABLE void on_actionUpdateRemote_triggered();
     Q_INVOKABLE void on_actionSave_triggered();

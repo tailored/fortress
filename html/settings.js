@@ -32,6 +32,7 @@ function getSettings() {
     retVal += "</select>";
   }
   $("#settings-stashlist-wrapper").html(retVal);
+  $("#settings-os").val(smanager.getValue("settings/os"));
 }
 
 function setSettings() {

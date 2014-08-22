@@ -45,4 +45,6 @@
 #define FORTRESS_RULESET_CLEAR_TEXT "The current ruleset will be purged if you proceed!"
 #define FORTRESS_RULESET_CLEAR_TITLE "Warning"
 
+#define FORTRESS_SUPPORTED_OSS "Gentoo  Debian  Arch  Mint"
+
 #endif // DEFINES_H

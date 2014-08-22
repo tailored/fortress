@@ -11,6 +11,9 @@
 #include <QThread>
 #include <qjson/serializer.h>
 #include <QNetworkInterface>
+#include <QDir>
+#include <QStringList>
+#include <QRegExp>
 
 #include "defines.h"
 #include "filedownloader.h"
@@ -30,6 +33,7 @@ public:
     Q_INVOKABLE QString getNetWorkInterfaces();
     Q_INVOKABLE bool detectSudoProvider(bool writeConfig = true);
     Q_INVOKABLE bool detectIptables(bool writeConfig = true);
+    Q_INVOKABLE bool detectOS();
 
     QString getFullSettingsPath();
 
