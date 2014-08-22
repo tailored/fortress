@@ -25,9 +25,9 @@ function callBackUpdatePresets() {
         for (var i = 0; i < presetJson.rulesets.length; i++) {
           htmlCode += '<li class="list-group-item presetLi">\n';
           htmlCode += '<div class="list-group-item-heading">' + presetJson.rulesets[i].name + '</div>\n';
+          htmlCode += '<textarea id="remoterule' + i + '" style="display:none;">{"rules":' + JSON.stringify(presetJson.rulesets[i].rules) + '}</textarea>\n';
           htmlCode += '<div class="glyphicon glyphicon-resize-vertical ruleMoveButton"></div>\n';
           htmlCode += '<div class="list-group-item-text ruleConfigForm collapse in">';
-          htmlCode += '<textarea id="remoterule' + i + '" style="display:none;">{"rules":' + JSON.stringify(presetJson.rulesets[i].rules) + '}</textarea>\n';
           htmlCode += '</div>\n';
           htmlCode += '<a href="#" class="btn btn-success pull-left presetButton" onclick="loadRuleset(\'#remoterule' + i + '\')"><div class="glyphicon glyphicon-arrow-left"></div></a>';
           htmlCode += '</li>\n';
@@ -95,7 +95,7 @@ function loadRuleset(element) {
           insertRule(rulesJson.rules[i].name, rulesJson.rules[i].protocol, rulesJson.rules[i].addr, rulesJson.rules[i].port, true);
         }
         updateDraggables();
-        rname = $(element).parent().parent().find(".list-group-item-heading").text();
+        rname = $(element).parent().find(".list-group-item-heading").text();
 
         rmanager.SetCurrentRulesetname(rname);
         setCurrentRulesetName();
@@ -220,7 +220,7 @@ function updateDraggables() {
       var protocoljson = {"tcp": form_tcp, "udp": form_udp};
       var rulejson = {"name": form_title, "protocol": protocoljson, "port": form_port, "addr": form_addr};
       $jsonstore.text(JSON.stringify(rulejson));
-    })
+    });
 }
 
 
