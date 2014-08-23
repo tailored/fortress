@@ -244,8 +244,9 @@ bool SettingsManager::detectOS() {
     }
     osFile.open(QIODevice::ReadOnly|QIODevice::Text);
     QString osDescriptor = osFile.readAll();
-    QRegExp rx("^NAME=([A-z]*)\n");
+    QRegExp rx("^NAME=(?:\")?([\\w\\d\\s]+)(?:\")?\n");
     rx.indexIn(osDescriptor);
+
     if(rx.captureCount() >= 1 && rx.capturedTexts()[1] != NULL) {
         this->setValue("settings/os",rx.capturedTexts()[1]);
         QRegExp rx2(rx.capturedTexts()[1]);

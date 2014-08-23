@@ -52,7 +52,7 @@
 #define FORTRESS_DIALOG_TEXT_DEPLOY_SYSTEM_BOOT "This will deploy the firewallrules below to the boot process of your System. Are you sure?"
 
 #define FORTRESS_DIALOG_TITLE_CRITICAL_ERROR "Critical error"
-#define FORTRESS_DIALOG_TEXT_OS_UNSUPPORTED "Your operatingsystem is not supported! We are sorry.\nYou will not be able to deploy the configuration, however\nyou may create firewallscripts and export them as shell scripts."
+#define FORTRESS_DIALOG_TEXT_OS_UNSUPPORTED "Your operating system is not supported! We are sorry.\nYou will not be able to deploy the configuration, however\nyou may create firewallscripts and export them as shell scripts."
 
 #define FORTRESS_DIALOG_TEXT_DELETE_RULE_PART1 "This will delete the ruleset \""
 #define FORTRESS_DIALOG_TEXT_DELETE_RULE_PART2 "\" permanently. Are you sure?"
