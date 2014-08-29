@@ -271,3 +271,8 @@ function initGui() {
   }
   getSettings();
 }
+
+
+function validateRule() {
+
+}
