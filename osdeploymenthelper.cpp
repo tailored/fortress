@@ -7,6 +7,16 @@ void OsDeploymentHelper::gentooDeploy() {
 }
 
 void OsDeploymentHelper::ubuntuDeploy() {
+    QProcess process;
+    process.execute(SettingsManager::getSharedInstance()->getValue("settings/sudoprovider"),
+                    QStringList() << QString("cp /etc/rc.local /etc/rc.local.fortressbackup"));
+    QFile file("/etc/rc.local");
+    QString rcLocalContents = file.readAll();
+    if(!rcLocalContents.contains("/echo 0/")) {
+        rcLocalContents.replace("/echo 0/",QString(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH).append("firewall.sh\nexit 0"));
+        process.execute(SettingsManager::getSharedInstance()->getValue("settings/sudoprovider"),
+                        QStringList() << QString("echo `").append(rcLocalContents).append("`"));
+    }
 
 }
 
@@ -14,13 +24,11 @@ void OsDeploymentHelper::fedoraDeploy() {
 
 }
 
-void OsDeploymentHelper::suseDeploy() {
+void OsDeploymentHelper::debianDeploy() {
 
 }
 
-void OsDeploymentHelper::archDeploy() {
 
-}
 
 void OsDeploymentHelper::gentooRemove() {
     QProcess process;
@@ -29,21 +37,20 @@ void OsDeploymentHelper::gentooRemove() {
 }
 
 void OsDeploymentHelper::ubuntuRemove() {
-
+    QProcess process;
+    QFIle("/etc/rc.local");
+    QString rcLocalContents = file.readAll();
+    if(rcLocalContents.contains(QString("/").append(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH).append("firewall.sh").append("/"))) {
+        rcLocalContents.replace(QString("/").append(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH).append("firewall.sh").append("/"),"");
+        process.execute(SettingsManager::getSharedInstance()->getValue("settings/sudoprovider"),
+                        QStringList() << QString("echo `").append(rcLocalContents).append("`"));
+    }
 }
 
 void OsDeploymentHelper::fedoraRemove() {
 
 }
 
-void OsDeploymentHelper::redhatRemove() {
-
-}
-
-void OsDeploymentHelper::suseRemove() {
-
-}
-
-void OsDeploymentHelper::archRemove() {
+void OsDeploymentHelper::debianRemove() {
 
 }

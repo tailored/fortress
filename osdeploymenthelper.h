@@ -15,16 +15,10 @@ public:
     static void gentooDeploy();
     static void ubuntuDeploy();
     static void fedoraDeploy();
-    static void redhatDeploy();
-    static void suseDeploy();
-    static void archDeploy();
 
     static void gentooRemove();
     static void ubuntuRemove();
     static void fedoraRemove();
-    static void redhatRemove();
-    static void suseRemove();
-    static void archRemove();
 
 signals:
 

@@ -181,7 +181,6 @@ void fireWallWindow::on_actionSave_triggered()
             if(!ok) return;
             QFile tmpFile(SettingsManager::getSharedInstance()->getFullSettingsPath().append(FORTRESS_RULES_MANAGER_RULES_REL_PATH_USER_PRESETS).append(qi));
             if(tmpFile.exists()) {
-                qDebug()<< "narf";
                 QMessageBox::StandardButton reply = QMessageBox::question(this,
                                                                           FORTRESS_RULESET_SAVE_OVERWRITE_WARNING_TITLE,
                                                                           FORTRESS_RULESET_SAVE_OVERWRITE_WARNING_TEXT,
@@ -298,17 +297,15 @@ void fireWallWindow::on_actionDebploy_on_Boot_triggered()
                 QProcess process;
                 process.execute(SettingsManager::getSharedInstance()->getValue("settings/sudoprovider"),
                                       QStringList() << QString::fromLatin1("mkdir -p -m a+rwx ").append(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH));
-                qDebug() << process.readAll();
             }
             this->exportFileChoosen(QString::fromLatin1(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH).append("firewall.sh"));
             QString os = SettingsManager::getSharedInstance()->getValue("settings/os");
-            // TODO: add ifs for missing os
             if(os.compare("Gentoo") == 0) {
                 OsDeploymentHelper::gentooDeploy();
-            } else if(os.compare("Ubuntu") == 0) {
+            } else if(os.compare("Ubuntu") == 0 || os.compare("Debian") == 0) {
                 OsDeploymentHelper::ubuntuDeploy();
-            } else if(os.compare("Arch Linux") == 0) {
-                OsDeploymentHelper::archDeploy();
+            } else if(os.compare("Fedora") == 0) {
+                OsDeploymentHelper::fedoraDeploy();
             }
         }
     }
@@ -339,13 +336,12 @@ void fireWallWindow::on_actionRemove_from_Boot_triggered()
     QMessageBox::StandardButton qm = QMessageBox::critical(this,FORTRESS_DIALOG_TITLE_ARE_YOUR_SURE,FORTRESS_DIALOG_TEXT_DROP_FROM_BOOT, QMessageBox::Yes|QMessageBox::No);
     if(qm == QMessageBox::Yes) {
         QString os = SettingsManager::getSharedInstance()->getValue("settings/os");
-        // TODO: add ifs for missing os
         if(os.compare("Gentoo") == 0) {
             OsDeploymentHelper::gentooRemove();
-        } else if(os.compare("Ubuntu") == 0) {
+        } else if(os.compare("Ubuntu") == 0 || os.compare("Debian") == 0) {
             OsDeploymentHelper::ubuntuRemove();
-        } else if(os.compare("Arch Linux") == 0) {
-            OsDeploymentHelper::archRemove();
+        } else if(os.compare("Fedora") == 0) {
+            OsDeploymentHelper::fedoraRemove();
         }
         qm = QMessageBox::critical(this,FORTRESS_DIALOG_TITLE_REBOOT, FORTRESS_DIALOG_TEXT_REBOOT,QMessageBox::Yes|QMessageBox::No);
         if(qm = QMessageBox::Yes) {
