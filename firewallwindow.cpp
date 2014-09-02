@@ -181,7 +181,10 @@ void fireWallWindow::on_actionSave_triggered()
             QFile tmpFile(SettingsManager::getSharedInstance()->getFullSettingsPath().append(FORTRESS_RULES_MANAGER_RULES_REL_PATH_USER_PRESETS).append(qi));
             if(tmpFile.exists()) {
                 qDebug()<< "narf";
-                QMessageBox::StandardButton reply = QMessageBox::question(this,"Overwrite","The selected filename already exists. Overwrite?", QMessageBox::Yes|QMessageBox::No);
+                QMessageBox::StandardButton reply = QMessageBox::question(this,
+                                                                          FORTRESS_RULESET_SAVE_OVERWRITE_WARNING_TITLE,
+                                                                          FORTRESS_RULESET_SAVE_OVERWRITE_WARNING_TEXT,
+                                                                          QMessageBox::Yes|QMessageBox::No);
                 if(reply == QMessageBox::No) ok = false;
             }
             if( ok && !qi.isEmpty()) rn = qi;
@@ -262,7 +265,10 @@ void fireWallWindow::on_actionSaveAs_triggered()
         if(!ok) return;
         QFile tmpFile(SettingsManager::getSharedInstance()->getFullSettingsPath().append(FORTRESS_RULES_MANAGER_RULES_REL_PATH_USER_PRESETS).append(qi));
         if(tmpFile.exists()) {
-            QMessageBox::StandardButton reply = QMessageBox::question(this,"Overwrite","The selected filename already exists. Overwrite?", QMessageBox::Yes|QMessageBox::No);
+            QMessageBox::StandardButton reply = QMessageBox::question(this,
+                                                                      FORTRESS_RULESET_SAVE_OVERWRITE_WARNING_TITLE,
+                                                                      FORTRESS_RULESET_SAVE_OVERWRITE_WARNING_TEXT,
+                                                                      QMessageBox::Yes|QMessageBox::No);
             if(reply == QMessageBox::No) ok = false;
         }
         if( ok && !qi.isEmpty() ) rn = qi;

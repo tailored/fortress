@@ -40,6 +40,8 @@
 #define FORTRESS_DEFAULT_RULESET_NAME "unnamed"
 #define FORTRESS_RULESET_SAVE_DIALOG_TITLE "Ruleset Name"
 #define FORTRESS_RULESET_SAVE_DIALOG_TEXT "Please enter a name for the ruleset"
+#define FORTRESS_RULESET_SAVE_OVERWRITE_WARNING_TITLE "Overwrite?"
+#define FORTRESS_RULESET_SAVE_OVERWRITE_WARNING_TEXT "The selected filename already exists. Overwrite?"
 
 #define FORTRESS_RULESET_CLEAR_TEXT "The current ruleset will be purged if you proceed!"
 #define FORTRESS_RULESET_CLEAR_TITLE "Warning"
