@@ -302,10 +302,10 @@ void fireWallWindow::on_actionDebploy_on_Boot_triggered()
             QString os = SettingsManager::getSharedInstance()->getValue("settings/os");
             if(os.compare("Gentoo") == 0) {
                 OsDeploymentHelper::gentooDeploy();
-            } else if(os.compare("Ubuntu") == 0 || os.compare("Debian") == 0) {
+            } else if(os.compare("Ubuntu") == 0
+                      || os.compare("Debian") == 0
+                      || os.compare("Fedora") == 0) {
                 OsDeploymentHelper::ubuntuDeploy();
-            } else if(os.compare("Fedora") == 0) {
-                OsDeploymentHelper::fedoraDeploy();
             }
         }
     }
@@ -338,10 +338,10 @@ void fireWallWindow::on_actionRemove_from_Boot_triggered()
         QString os = SettingsManager::getSharedInstance()->getValue("settings/os");
         if(os.compare("Gentoo") == 0) {
             OsDeploymentHelper::gentooRemove();
-        } else if(os.compare("Ubuntu") == 0 || os.compare("Debian") == 0) {
+        } else if(os.compare("Ubuntu") == 0
+                  || os.compare("Debian") == 0
+                  || os.compare("Fedora") == 0) {
             OsDeploymentHelper::ubuntuRemove();
-        } else if(os.compare("Fedora") == 0) {
-            OsDeploymentHelper::fedoraRemove();
         }
         qm = QMessageBox::critical(this,FORTRESS_DIALOG_TITLE_REBOOT, FORTRESS_DIALOG_TEXT_REBOOT,QMessageBox::Yes|QMessageBox::No);
         if(qm = QMessageBox::Yes) {

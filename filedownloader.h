@@ -7,27 +7,54 @@
 #include <QNetworkRequest>
 #include <QNetworkReply>
 
+/**
+ * @brief The FileDownloader class
+ */
 class FileDownloader : public QObject
 {
     Q_OBJECT
 public:
+    /**
+     * @brief FileDownloader
+     * @param imageUrl
+     * @param parent
+     */
     explicit FileDownloader(QUrl imageUrl, QObject *parent = 0);
 
+    /**
+     * @brief ~FileDownloader
+     */
     virtual ~FileDownloader();
 
+    /**
+     * @brief downloadedData
+     * @return
+     */
     QByteArray downloadedData() const;
 
 signals:
-        void downloaded();
+    /**
+     * @brief downloaded
+     */
+    void downloaded();
 
 private slots:
-
+    /**
+     * @brief fileDownloaded
+     * @param pReply
+     */
     void fileDownloaded(QNetworkReply* pReply);
 
 private:
 
+    /**
+     * @brief m_WebCtrl
+     */
     QNetworkAccessManager m_WebCtrl;
 
+    /**
+     * @brief m_DownloadedData
+     */
     QByteArray m_DownloadedData;
 
 };
