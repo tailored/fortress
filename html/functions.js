@@ -1,3 +1,24 @@
+/**************************************************************************
+ * Copyright (C) 2014  - Daniel Niedermeyer                               *
+ *                     - Christian Richter                                *
+ *                     - Benjamin Hiefner                                 *
+ *                                                                        *
+ * This program is free software: you can redistribute it and/or modify   *
+ * it under the terms of the GNU General Public License as published by   *
+ * the Free Software Foundation, either version 3 of the License, or      *
+ * (at your option) any later version.                                    *
+ *                                                                        *
+ * This program is distributed in the hope that it will be useful,        *
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of         *
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the          *
+ * GNU General Public License for more details.                           *
+ *                                                                        *
+ * You should have received a copy of the GNU General Public License      *
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>   *
+ **************************************************************************
+ * File: functions.js                                                     *
+ **************************************************************************/
+
 /**
  *
  */
@@ -42,6 +63,9 @@ function callBackUpdatePresets() {
   }
 }
 
+/**
+ * @param rulename
+ */
 function deleteUserRule(rulename) {
   if (rmanager.DeleteUserRuleResponsive(rulename)) {
     if (rulename == $('#headercaption').text()) $('#headercaption').text('unnamed');
@@ -89,7 +113,6 @@ function LoadUserRuleSet() {
 
 
 /**
- *
  * Load a ruleset from a given html element
  */
 function loadRuleset(element) {
@@ -133,13 +156,22 @@ function callBackUpdateRules() {
   }
 }
 
-
+/**
+ *
+ */
 function callbackClearRules() {
   $('#rules-active').html('');
   setCurrentRulesetName();
 }
 
-
+/**
+ * @param name
+ * @param protocol
+ * @param addr
+ * @param port
+ * @param collapsed
+ * @param list
+ */
 function insertRule(name, protocol, addr, port, collapsed, list) {
   tcp = (protocol["tcp"]) ? " checked" : "";
   udp = (protocol["udp"]) ? " checked" : "";
@@ -235,7 +267,9 @@ function updateDraggables() {
 
 }
 
-
+/**
+ *
+ */
 function setCurrentRulesetName() {
   $('#headercaption').html(rmanager.GetCurrentRulesetName());
   LoadUserRuleSet();
@@ -254,10 +288,10 @@ function getCurrentRules() {
   return('[' + ruleList + ']');
 }
 
+/**
+ *
+ */
 function initGui() {
-//  setCurrentRulesetName();
-
-//  insertRule("TCP/UDP", {"tcp": true, "udp": true}, '', '', false, 1);
   $('#toolTipPresets').tooltip();
   $('#toolTipUserPresets').tooltip();
   $('#toolTipRules').tooltip();
@@ -286,7 +320,9 @@ function initGui() {
   getSettings();
 }
 
-
+/**
+ *
+ */
 function validateRules() {
   $('.ruleform').bootstrapValidator({
     // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
