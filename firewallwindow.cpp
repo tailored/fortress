@@ -297,8 +297,9 @@ void fireWallWindow::on_actionDebploy_on_Boot_triggered()
             QDir qDir(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH);
             if(!qDir.exists()) {
                 QProcess process;
-                process.startDetached(SettingsManager::getSharedInstance()->getValue("settings/sudoprovider"),
+                process.execute(SettingsManager::getSharedInstance()->getValue("settings/sudoprovider"),
                                       QStringList() << QString::fromLatin1("mkdir -p -m a+rwx ").append(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH));
+                qDebug() << process.readAll();
             }
             this->exportFileChoosen(QString::fromLatin1(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH).append("firewall.sh"));
             QString os = SettingsManager::getSharedInstance()->getValue("settings/os");
@@ -306,10 +307,13 @@ void fireWallWindow::on_actionDebploy_on_Boot_triggered()
     }
 }
 
+/**
+ * @brief fireWallWindow::osIsSupported
+ * @return
+ */
 bool fireWallWindow::osIsSupported() {
     if(SettingsManager::getSharedInstance()->getValue("settings/os_supported").compare("true") != 0) {
-        QMessageBox::StandardButton qm;
-        qm = QMessageBox::critical(this,FORTRESS_DIALOG_TITLE_CRITICAL_ERROR,FORTRESS_DIALOG_TEXT_OS_UNSUPPORTED,QMessageBox::Ok);
+        QMessageBox::StandardButton qm = QMessageBox::critical(this,FORTRESS_DIALOG_TITLE_CRITICAL_ERROR,FORTRESS_DIALOG_TEXT_OS_UNSUPPORTED,QMessageBox::Ok);
         this->ui->actionDeploy->setEnabled(false);
         this->ui->actionDebploy_on_Boot->setEnabled(false);
         return false;
