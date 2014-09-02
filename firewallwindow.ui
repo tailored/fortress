@@ -73,6 +73,7 @@
     <addaction name="actionSaveAs"/>
     <addaction name="actionDeploy"/>
     <addaction name="actionDebploy_on_Boot"/>
+    <addaction name="actionRemove_from_Boot"/>
     <addaction name="actionExport"/>
     <addaction name="separator"/>
     <addaction name="actionUpdateRemote"/>
@@ -102,6 +103,7 @@
    <addaction name="actionSaveAs"/>
    <addaction name="actionDeploy"/>
    <addaction name="actionDebploy_on_Boot"/>
+   <addaction name="actionRemove_from_Boot"/>
    <addaction name="actionExport"/>
    <addaction name="separator"/>
    <addaction name="actionUpdateRemote"/>
@@ -191,6 +193,17 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+B</string>
+   </property>
+  </action>
+  <action name="actionRemove_from_Boot">
+   <property name="text">
+    <string>Remove from Boot</string>
+   </property>
+   <property name="toolTip">
+    <string>Remove from Boot</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
    </property>
   </action>
  </widget>

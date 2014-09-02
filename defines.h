@@ -35,11 +35,13 @@
 #define FORTRESS_RULES_MANAGER_SAVE_RULE_DOES_NOT_EXIST 3
 #define FORTRESS_RULES_MANAGER_RULES_REL_PATH "/rules/";
 #define FORTRESS_RULES_MANAGER_RULES_REL_PATH_USER_PRESETS "/rules/userpresets/"
-#define FORTRESS_RULES_BOOT_DEPLOYMENT_PATH "/opt/fortress/"
+#define FORTRESS_RULES_BOOT_DEPLOYMENT_PATH "/etc/fortress/"
 
 #define FORTRESS_DEFAULT_RULESET_NAME "unnamed"
 #define FORTRESS_RULESET_SAVE_DIALOG_TITLE "Ruleset Name"
 #define FORTRESS_RULESET_SAVE_DIALOG_TEXT "Please enter a name for the ruleset"
+#define FORTRESS_RULESET_SAVE_OVERWRITE_WARNING_TITLE "Overwrite?"
+#define FORTRESS_RULESET_SAVE_OVERWRITE_WARNING_TEXT "The selected filename already exists. Overwrite?"
 
 #define FORTRESS_RULESET_CLEAR_TEXT "The current ruleset will be purged if you proceed!"
 #define FORTRESS_RULESET_CLEAR_TITLE "Warning"
@@ -51,9 +53,13 @@
 #define FORTRESS_DIALOG_TITLE_ARE_YOUR_SURE "Are you sure?"
 #define FORTRESS_DIALOG_TEXT_DEPLOY_SYSTEM "This will deploy the firewallrules below to your System. Are you sure?"
 #define FORTRESS_DIALOG_TEXT_DEPLOY_SYSTEM_BOOT "This will deploy the firewallrules below to the boot process of your System. Are you sure?"
+#define FORTRESS_DIALOG_TEXT_DROP_FROM_BOOT "This will remove the firewall from your systems startup. Are you sure?"
 
 #define FORTRESS_DIALOG_TITLE_CRITICAL_ERROR "Critical error"
 #define FORTRESS_DIALOG_TEXT_OS_UNSUPPORTED "Your operating system is not supported! We are sorry.\nYou will not be able to deploy the configuration, however\nyou may create firewallscripts and export them as shell scripts."
+
+#define FORTRESS_DIALOG_TITLE_REBOOT "Reboot?"
+#define FORTRESS_DIALOG_TEXT_REBOOT "Do you want to reboot your system?"
 
 #define FORTRESS_DIALOG_TEXT_DELETE_RULE_PART1 "This will delete the ruleset \""
 #define FORTRESS_DIALOG_TEXT_DELETE_RULE_PART2 "\" permanently. Are you sure?"

@@ -11,7 +11,8 @@ TARGET = fortress
 TEMPLATE = app
 
 
-SOURCES += main.cpp\
+SOURCES += main.cpp \
+        osdeploymenthelper.cpp \
         firewallwindow.cpp \
     settingsmanager.cpp \
     filedownloader.cpp \
@@ -19,6 +20,7 @@ SOURCES += main.cpp\
     rulesmanager.cpp
 
 HEADERS  += firewallwindow.h \
+    osdeploymenthelper.h \
     settingsmanager.h \
     defines.h \
     filedownloader.h \
