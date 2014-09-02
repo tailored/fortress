@@ -244,9 +244,6 @@ function getCurrentRules() {
 
 function initGui() {
   setCurrentRulesetName();
-  insertRule("Example Rule 1", {"tcp": true, "udp": true}, "", 0, true, 0);
-  insertRule("Example Rule 2", {"tcp": true, "udp": true}, "127.0.0.1", 0, true, 0);
-  insertRule("Example Rule 3", {"tcp": true, "udp": false}, "127.0.0.1", 0, true, 0);
   insertRule("TCP/UDP", {"tcp": true, "udp": true}, '', '', false, 1);
   $('#toolTipPresets').tooltip();
   $('#toolTipUserPresets').tooltip();
@@ -273,4 +270,9 @@ function initGui() {
     $("#settingsTab").highlight();
   }
   getSettings();
+}
+
+
+function validateRule() {
+
 }
