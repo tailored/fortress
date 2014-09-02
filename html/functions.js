@@ -44,8 +44,8 @@ function callBackUpdatePresets() {
 }
 
 function deleteUserRule(rulename) {
-    rmanager.DeleteUserRuleResponsive(rulename);
-    LoadUserRuleSet();
+  rmanager.DeleteUserRuleResponsive(rulename);
+  LoadUserRuleSet();
 }
 
 /**
@@ -55,8 +55,6 @@ function LoadUserRuleSet() {
   var presetJson = rmanager.LoadUserRules();
   var target = $("#rulesets-local");
   var htmlCode = "";
-  alert(presetJson);
-
   if (presetJson.length > 0) {
     presetJson = JSON.parse(presetJson);
     if ((typeof presetJson == 'object')) {
