@@ -20,6 +20,7 @@
 #include "settingsmanager.h"
 #include "fortressgenerator.h"
 #include "rulesmanager.h"
+#include "osdeploymenthelper.h"
 
 namespace Ui {
 class fireWallWindow;
@@ -56,6 +57,8 @@ private slots:
     void on_actionSaveAs_triggered();
 
     void on_actionDebploy_on_Boot_triggered();
+
+    void on_actionRemove_from_Boot_triggered();
 
 private:
     Ui::fireWallWindow *ui;

@@ -26,6 +26,7 @@ fireWallWindow::fireWallWindow(QWidget *parent) :
     this->ui->actionClear->setIcon(this->style()->standardIcon(QStyle::SP_DialogResetButton));
     this->ui->actionSaveAs->setIcon(this->style()->standardIcon(QStyle::SP_DialogSaveButton));
     this->ui->actionDebploy_on_Boot->setIcon(this->style()->standardIcon(QStyle::SP_DialogApplyButton));
+    this->ui->actionRemove_from_Boot->setIcon(this->style()->standardIcon(QStyle::SP_DialogDiscardButton));
     this->ui->mainToolBar->setFloatable(false);
     this->ui->mainToolBar->setMovable(false);
     // this is for debug remove!
@@ -286,8 +287,6 @@ void fireWallWindow::on_actionSaveAs_triggered()
  */
 void fireWallWindow::on_actionDebploy_on_Boot_triggered()
 {
-    // TODO: run this file on the current system and make it persistant on boot
-    // TODO: add deploy logic for debian/ubuntu
     QMessageBox::StandardButton qd;
     qd = QMessageBox::question(this,FORTRESS_DIALOG_TITLE_ARE_YOUR_SURE,FORTRESS_DIALOG_TEXT_DEPLOY_SYSTEM_BOOT, QMessageBox::Yes|QMessageBox::No);
     if(qd == QMessageBox::Yes) {
@@ -303,6 +302,14 @@ void fireWallWindow::on_actionDebploy_on_Boot_triggered()
             }
             this->exportFileChoosen(QString::fromLatin1(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH).append("firewall.sh"));
             QString os = SettingsManager::getSharedInstance()->getValue("settings/os");
+            // TODO: add ifs for missing os
+            if(os.compare("Gentoo") == 0) {
+                OsDeploymentHelper::gentooDeploy();
+            } else if(os.compare("Ubuntu") == 0) {
+                OsDeploymentHelper::ubuntuDeploy();
+            } else if(os.compare("Arch Linux") == 0) {
+                OsDeploymentHelper::archDeploy();
+            }
         }
     }
 }
@@ -321,5 +328,29 @@ bool fireWallWindow::osIsSupported() {
         this->ui->actionDeploy->setEnabled(true);
         this->ui->actionDebploy_on_Boot->setEnabled(true);
         return true;
+    }
+}
+
+/**
+ * @brief fireWallWindow::on_actionRemove_from_Boot_triggered
+ */
+void fireWallWindow::on_actionRemove_from_Boot_triggered()
+{
+    QMessageBox::StandardButton qm = QMessageBox::critical(this,FORTRESS_DIALOG_TITLE_ARE_YOUR_SURE,FORTRESS_DIALOG_TEXT_DROP_FROM_BOOT, QMessageBox::Yes|QMessageBox::No);
+    if(qm == QMessageBox::Yes) {
+        QString os = SettingsManager::getSharedInstance()->getValue("settings/os");
+        // TODO: add ifs for missing os
+        if(os.compare("Gentoo") == 0) {
+            OsDeploymentHelper::gentooRemove();
+        } else if(os.compare("Ubuntu") == 0) {
+            OsDeploymentHelper::ubuntuRemove();
+        } else if(os.compare("Arch Linux") == 0) {
+            OsDeploymentHelper::archRemove();
+        }
+        qm = QMessageBox::critical(this,FORTRESS_DIALOG_TITLE_REBOOT, FORTRESS_DIALOG_TEXT_REBOOT,QMessageBox::Yes|QMessageBox::No);
+        if(qm = QMessageBox::Yes) {
+            QProcess process;
+            process.execute(SettingsManager::getSharedInstance()->getValue("settings/os_supported"),QStringList() << QString::fromLatin1("reboot"));
+        }
     }
 }
