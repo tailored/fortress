@@ -238,7 +238,7 @@ void fireWallWindow::on_actionClear_triggered()
  */
 void fireWallWindow::on_actionQuit_triggered()
 {
-
+    QApplication::quit();
 }
 
 /**
