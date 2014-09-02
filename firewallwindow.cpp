@@ -1,3 +1,24 @@
+/**************************************************************************
+ * Copyright (C) 2014  - Christian Richter                                *
+ *                     - Daniel Niedermeyer                               *
+ *                     - Benjamin Hiefner                                 *
+ *                                                                        *
+ * This program is free software: you can redistribute it and/or modify   *
+ * it under the terms of the GNU General Public License as published by   *
+ * the Free Software Foundation, either version 3 of the License, or      *
+ * (at your option) any later version.                                    *
+ *                                                                        *
+ * This program is distributed in the hope that it will be useful,        *
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of         *
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the          *
+ * GNU General Public License for more details.                           *
+ *                                                                        *
+ * You should have received a copy of the GNU General Public License      *
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>   *
+ **************************************************************************
+ * File: firewallwindow.cpp                                               *
+ **************************************************************************/
+
 #include "firewallwindow.h"
 #include "ui_firewallwindow.h"
 
@@ -317,7 +338,7 @@ void fireWallWindow::on_actionDebploy_on_Boot_triggered()
  */
 bool fireWallWindow::osIsSupported() {
     if(SettingsManager::getSharedInstance()->getValue("settings/os_supported").compare("true") != 0) {
-        QMessageBox::StandardButton qm = QMessageBox::critical(this,FORTRESS_DIALOG_TITLE_CRITICAL_ERROR,FORTRESS_DIALOG_TEXT_OS_UNSUPPORTED,QMessageBox::Ok);
+        QMessageBox::critical(this,FORTRESS_DIALOG_TITLE_CRITICAL_ERROR,FORTRESS_DIALOG_TEXT_OS_UNSUPPORTED,QMessageBox::Ok);
         this->ui->actionDeploy->setEnabled(false);
         this->ui->actionDebploy_on_Boot->setEnabled(false);
         return false;
@@ -344,7 +365,7 @@ void fireWallWindow::on_actionRemove_from_Boot_triggered()
             OsDeploymentHelper::ubuntuRemove();
         }
         qm = QMessageBox::critical(this,FORTRESS_DIALOG_TITLE_REBOOT, FORTRESS_DIALOG_TEXT_REBOOT,QMessageBox::Yes|QMessageBox::No);
-        if(qm = QMessageBox::Yes) {
+        if(qm == QMessageBox::Yes) {
             QProcess process;
             process.execute(SettingsManager::getSharedInstance()->getValue("settings/os_supported"),QStringList() << QString::fromLatin1("reboot"));
         }
