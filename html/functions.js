@@ -54,15 +54,16 @@ function deleteUserRule(rulename) {
 function LoadUserRuleSet() {
   var presetJson = rmanager.LoadUserRules();
   var target = $("#rulesets-local");
+  var htmlCode = "";
+  alert(presetJson);
 
   if (presetJson.length > 0) {
     presetJson = JSON.parse(presetJson);
     if ((typeof presetJson == 'object')) {
       if (presetJson.hasOwnProperty('rulesets')) {
 
-        var htmlCode = "";
-        for (var i = 0; i < presetJson.rulesets.length; i++) {
 
+        for (var i = 0; i < presetJson.rulesets.length; i++) {
           htmlCode += '<li class="list-group-item presetLi">\n';
           htmlCode += '<div class="list-group-item-heading">' + presetJson.rulesets[i].name + '</div>\n';
           htmlCode += '<textarea id="userruleset' + i + '" style="display:none;">{"rules":' + JSON.stringify(presetJson.rulesets[i].rules) + '}</textarea>\n';
@@ -70,14 +71,13 @@ function LoadUserRuleSet() {
           htmlCode += '<a href="#" class="btn btn-danger pull-left trashButton" onclick="deleteUserRule(\'' + presetJson.rulesets[i].name + '\');"><div class="glyphicon glyphicon-trash"></div></a>';
           htmlCode += '</li>\n';
         }
-        target.html(htmlCode);
-        $('#countUserRules').html(presetJson.rulesets.length);
-        updateDraggables();
-
-
       }
     }
   }
+  target.html(htmlCode);
+  $('#countUserRules').html(presetJson.rulesets.length);
+  updateDraggables();
+
 }
 
 
