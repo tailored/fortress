@@ -44,8 +44,10 @@ function callBackUpdatePresets() {
 }
 
 function deleteUserRule(rulename) {
-  rmanager.DeleteUserRuleResponsive(rulename);
-  LoadUserRuleSet();
+  if (rmanager.DeleteUserRuleResponsive(rulename)) {
+    if (rulename == $('#headercaption').text()) $('#headercaption').text('unnamed');
+    LoadUserRuleSet();
+  }
 }
 
 /**
@@ -59,7 +61,6 @@ function LoadUserRuleSet() {
     presetJson = JSON.parse(presetJson);
     if ((typeof presetJson == 'object')) {
       if (presetJson.hasOwnProperty('rulesets')) {
-
 
         for (var i = 0; i < presetJson.rulesets.length; i++) {
           htmlCode += '<li class="list-group-item presetLi">\n';
