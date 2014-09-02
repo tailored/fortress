@@ -14,7 +14,6 @@ function onRuleDrop() {
  */
 function callBackUpdatePresets() {
   var presetJson = rmanager.LoadStashPresets();
-
   var target = $("#rulesets-remote");
   if (presetJson.length > 0) {
     presetJson = JSON.parse(presetJson);
@@ -50,6 +49,7 @@ function deleteUserRule(rulename) {
   }
 }
 
+
 /**
  * Populate the #rulesets-local-list
  */
@@ -69,6 +69,14 @@ function LoadUserRuleSet() {
           htmlCode += '<a href="#" class="btn btn-success pull-left presetButton" onclick="loadRuleset(\'#userruleset' + i + '\')"><div class="glyphicon glyphicon-arrow-left"></div></a>';
           htmlCode += '<a href="#" class="btn btn-danger pull-left trashButton" onclick="deleteUserRule(\'' + presetJson.rulesets[i].name + '\');"><div class="glyphicon glyphicon-trash"></div></a>';
           htmlCode += '</li>\n';
+
+
+          if (presetJson.rulesets[i].name == rmanager.GetCurrentRulesetName()) {
+            $('#rules-active').html('');
+            for (var j = 0; j < presetJson.rulesets[i].rules.length; j++) {
+              insertRule(presetJson.rulesets[i].rules[j].name, presetJson.rulesets[i].rules[j].protocol, presetJson.rulesets[i].rules[j].addr, presetJson.rulesets[i].rules[j].port, true);
+            }
+          }
         }
       }
     }
@@ -86,6 +94,7 @@ function LoadUserRuleSet() {
  */
 function loadRuleset(element) {
   if (confirm("This will replace your current ruleset! Are you sure?")) {
+
     rulesJson = JSON.parse($(element).val());
     if ((typeof rulesJson) == 'object') {
       if (rulesJson.hasOwnProperty('rules')) {
@@ -147,7 +156,6 @@ function insertRule(name, protocol, addr, port, collapsed, list) {
     target = '#rulesets-local';
   } else if (list == 4) {
     target = '#rules-remote';
-
   } else {
     target = '#rules-active';
   }
@@ -156,32 +164,35 @@ function insertRule(name, protocol, addr, port, collapsed, list) {
     '<li class="list-group-item"><a class="accordion-toggle" data-toggle="collapse-next">' +
       '<div class="list-group-item-heading">' + name + '</div></a>' +
       '<div class="ruleMoveButton"><span class="glyphicon glyphicon-resize-vertical"></span></div>' +
-      '<div class="list-group-item-text ruleConfigForm collapse' + col + '"><form role="form">' +
+      '<div class="list-group-item-text ruleConfigForm collapse' + col + '">' +
+      '<form class="ruleform">' +
       '<div class="form-group input-group">' +
       '<label class="input-group-addon"><div class="formLabel">Name</div></label>' +
-      '<input type="text" class="form-control rulename" placeholder="Rule Name" value="' + name + '">' +
+      '<input type="text" name="rulename" class="form-control rulename" placeholder="Rule Name" value="' + name + '">' +
       '</div>' +
-      '<div class="form-group clearBoth">' +
       '<div class="input-group form-group">' +
       '<label class="input-group-addon"><div class="formLabel">Source Address</div></label>' +
-      '<input type="text" class="form-control address" placeholder="Any" value="' + addr + '">' +
+      '<input type="text" name="sourceaddress" class="form-control address" placeholder="Any" value="' + addr + '">' +
       '</div>' +
       '<div class="form-group input-group">' +
       '<label class="input-group-addon"><div class="formLabel">Port</div></label>' +
-      '<input type="text" class="form-control ports" placeholder="All" value="' + port + '">' +
+      '<input type="text" name="ports" class="form-control ports" placeholder="All" value="' + port + '">' +
       '</div>' +
-      '</div>' +
-      '<div class="form-group">' +
+      '<div class="form-group input-group">' +
       '<div class="checkbox">' +
-      '<label class="checkbox-inline"><input type="checkbox" value="tcp"' + tcp + '> TCP</label>' +
-      '</div><div class="checkbox">' +
-      '<label class="checkbox-inline"><input type="checkbox" value="udp" ' + udp + '> UDP</label>' +
-      '</div></div>&nbsp;&nbsp;' +
-      '<button type="button" class="btn btn-primary saverule float-right">Save</button>' +
+      '<label class="checkbox-inline"><input type="checkbox" name="protocol[]" value="tcp"' + tcp + '> TCP</label>' +
+      '</div>' +
+      '<div class="checkbox">' +
+      '<label class="checkbox-inline"><input type="checkbox" name="protocol[]" value="udp" ' + udp + '> UDP</label>' +
+      '</div>' +
+      '</div>&nbsp;&nbsp;' +
+      '<button type="submit" class="btn btn-primary saverule float-right">Save</button>' +
       '<button type="button" class="btn btn-danger delrule float-right cbtn">Delete Rule</button>' +
       '<textarea name="json" style="display:none;">' + JSON.stringify(rulejson) + '</textarea>' +
       '</form></div>' +
       '</li>');
+
+  validateRules();
 }
 
 
@@ -196,11 +207,11 @@ function updateDraggables() {
   }).disableSelection();
   $(".delrule")
     .click(function () {
-      $(this).parent().parent().parent().hide("puff", null, 400, function () {
+      $(this).parent().parent().parent().hide("puff", null, 200, function () {
         $(this).remove();
       });
 
-    })
+    });
   $(".saverule")
     .click(function () {
       $container = $(this).parent().parent().parent();
@@ -219,7 +230,9 @@ function updateDraggables() {
       var protocoljson = {"tcp": form_tcp, "udp": form_udp};
       var rulejson = {"name": form_title, "protocol": protocoljson, "port": form_port, "addr": form_addr};
       $jsonstore.text(JSON.stringify(rulejson));
+      return false;
     });
+
 }
 
 
@@ -242,8 +255,9 @@ function getCurrentRules() {
 }
 
 function initGui() {
-  setCurrentRulesetName();
-  insertRule("TCP/UDP", {"tcp": true, "udp": true}, '', '', false, 1);
+//  setCurrentRulesetName();
+
+//  insertRule("TCP/UDP", {"tcp": true, "udp": true}, '', '', false, 1);
   $('#toolTipPresets').tooltip();
   $('#toolTipUserPresets').tooltip();
   $('#toolTipRules').tooltip();
@@ -261,6 +275,7 @@ function initGui() {
   $('#rules-active').on('click.collapse-next.data-api', '[data-toggle=collapse-next]', function (e) {
     var $target = $(this).parent().find('.collapse');
     $target.collapse('toggle');
+    validateRules();
   });
 
   validateSettings();
@@ -272,6 +287,63 @@ function initGui() {
 }
 
 
-function validateRule() {
+function validateRules() {
+  $('.ruleform').bootstrapValidator({
+    // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
+    feedbackIcons: {
+      valid: 'glyphicon glyphicon-ok',
+      invalid: 'glyphicon glyphicon-remove',
+      validating: 'glyphicon glyphicon-refresh'
+    },
+    fields: {
+      rulename: {
+        message: 'The rule name is not valid',
+        validators: {
+          notEmpty: {
+            message: 'The rule name is required and cannot be empty'
+          },
+          stringLength: {
+            min: 3,
+            max: 50,
+            message: 'The rule name must be more than 3 and less than 50 characters long'
+          }
+        }
+      },
+      sourceaddress: {
+        message: 'The source address is not valid',
+        validators: {
+          ip: {
+            ipv4: true,
+            ipv6: false,
+            message: 'The source address must be an ip address'
+          }
+        }
+      },
+      ports: {
+        message: 'The port is not valid',
+        validators: {
+          notEmpty: {
+            message: 'Port must not be empty'
+          },
+          regexp: {
+            message: 'The port is invalid',
+            regexp: /^[1-9]([0-9,\- ]+)?$/
+          }
 
+
+        }
+      },
+      'protocol[]': {
+        message: 'The protocol is not valid',
+        validators: {
+          choice: {
+            min: 1,
+            message: 'Please select a protocol'
+          }
+        }
+
+      }
+
+    }
+  }).bootstrapValidator('validate');
 }
