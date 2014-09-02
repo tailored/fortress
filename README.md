@@ -4,7 +4,7 @@ fortress is an easy-to-use GUI for configuring a client firewall using iptables.
 
 License
 =======
-The project is licensed under <a href="LICENSE">GPLv2</a>.<br>
+The project is licensed under <a href="LICENSE">GPLv3</a>.<br>
 The bundled Twitter Bootstap uses <a href="https://raw.githubusercontent.com/twbs/bootstrap/master/LICENSE">MIT - Licence</a>
 
 Contributors
