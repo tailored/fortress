@@ -178,11 +178,18 @@ void fireWallWindow::on_actionSave_triggered()
             bool ok = false;
             QString qi = QInputDialog::getText(this, FORTRESS_RULESET_SAVE_DIALOG_TITLE, FORTRESS_RULESET_SAVE_DIALOG_TEXT,QLineEdit::Normal,QString::null,&ok);
             if(!ok) return;
-            if( ok && !qi.isEmpty() ) rn = qi;
+            QFile tmpFile(SettingsManager::getSharedInstance()->getFullSettingsPath().append(FORTRESS_RULES_MANAGER_RULES_REL_PATH_USER_PRESETS).append(qi));
+            if(tmpFile.exists()) {
+                qDebug()<< "narf";
+                QMessageBox::StandardButton reply = QMessageBox::question(this,"Overwrite","The selected filename already exists. Overwrite?", QMessageBox::Yes|QMessageBox::No);
+                if(reply == QMessageBox::No) ok = false;
+            }
+            if( ok && !qi.isEmpty()) rn = qi;
         }
     } else {
         rn = RulesManager::getSharedInstance()->GetCurrentRulesetName();
     }
+    rn = QRegExp::escape(rn);
     QString tmpPath = SettingsManager::getSharedInstance()->getFullSettingsPath().append(FORTRESS_RULES_MANAGER_RULES_REL_PATH_USER_PRESETS).append(rn);
     QFileInfo tmpFile = tmpPath;
     RulesManager::getSharedInstance()->SaveRule(tmpPath,r,true);
@@ -253,8 +260,14 @@ void fireWallWindow::on_actionSaveAs_triggered()
         bool ok = false;
         QString qi = QInputDialog::getText(this, FORTRESS_RULESET_SAVE_DIALOG_TITLE, FORTRESS_RULESET_SAVE_DIALOG_TEXT,QLineEdit::Normal,QString::null,&ok);
         if(!ok) return;
+        QFile tmpFile(SettingsManager::getSharedInstance()->getFullSettingsPath().append(FORTRESS_RULES_MANAGER_RULES_REL_PATH_USER_PRESETS).append(qi));
+        if(tmpFile.exists()) {
+            QMessageBox::StandardButton reply = QMessageBox::question(this,"Overwrite","The selected filename already exists. Overwrite?", QMessageBox::Yes|QMessageBox::No);
+            if(reply == QMessageBox::No) ok = false;
+        }
         if( ok && !qi.isEmpty() ) rn = qi;
     }
+    rn = QRegExp::escape(rn);
     QString tmpPath = SettingsManager::getSharedInstance()->getFullSettingsPath().append(FORTRESS_RULES_MANAGER_RULES_REL_PATH_USER_PRESETS).append(rn);
     QFileInfo tmpFile = tmpPath;
     RulesManager::getSharedInstance()->SaveRule(tmpPath,r,true);
@@ -275,12 +288,12 @@ void fireWallWindow::on_actionDebploy_on_Boot_triggered()
         SettingsManager::getSharedInstance()->detectOS();
 
         if(this->osIsSupported()) {
-            /*QDir qDir = new QDir(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH);
+            QDir qDir(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH);
             if(!qDir.exists()) {
                 QProcess process;
                 process.startDetached(SettingsManager::getSharedInstance()->getValue("settings/sudoprovider"),
                                       QStringList() << QString::fromLatin1("mkdir -p -m a+rwx ").append(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH));
-            }*/
+            }
             this->exportFileChoosen(QString::fromLatin1(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH).append("firewall.sh"));
             QString os = SettingsManager::getSharedInstance()->getValue("settings/os");
         }
