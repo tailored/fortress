@@ -124,6 +124,7 @@ QString RulesManager::LoadUserRules() {
             retVal.append("},");
         }
     }
+    // remove last comma if list is not empty
     if(retVal.at(retVal.length()-1) == ',') {
         retVal = retVal.remove(retVal.length()-1,1);
     }
