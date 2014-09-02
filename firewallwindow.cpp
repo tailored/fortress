@@ -275,7 +275,13 @@ void fireWallWindow::on_actionDebploy_on_Boot_triggered()
         SettingsManager::getSharedInstance()->detectOS();
 
         if(this->osIsSupported()) {
-            this->exportFileChoosen(QString::fromLatin1("/tmp/firewall.sh"));
+            /*QDir qDir = new QDir(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH);
+            if(!qDir.exists()) {
+                QProcess process;
+                process.startDetached(SettingsManager::getSharedInstance()->getValue("settings/sudoprovider"),
+                                      QStringList() << QString::fromLatin1("mkdir -p -m a+rwx ").append(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH));
+            }*/
+            this->exportFileChoosen(QString::fromLatin1(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH).append("firewall.sh"));
             QString os = SettingsManager::getSharedInstance()->getValue("settings/os");
         }
     }

@@ -124,7 +124,9 @@ QString RulesManager::LoadUserRules() {
             retVal.append("},");
         }
     }
-    retVal = retVal.remove(retVal.length()-1,1);
+    if(retVal.at(retVal.length()-1) == ',') {
+        retVal = retVal.remove(retVal.length()-1,1);
+    }
     retVal.append("]}");
     return retVal;
 }
