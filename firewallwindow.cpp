@@ -99,7 +99,6 @@ void fireWallWindow::setStashesList() {
  * @brief fireWallWindow::updateStashesContent
  */
 void fireWallWindow::updateStashesContent() {
-    qDebug() << "foobar";
     QFileInfo tmp(SettingsManager::getSharedInstance()->getValue("settings/stashurl"));
     rDl = new FileDownloader(tmp.path().append('/').append(FORTRESS_STASHES_RULES_FILENAME));
     connect(rDl,SIGNAL(downloaded()),SLOT(setRulesList()));
