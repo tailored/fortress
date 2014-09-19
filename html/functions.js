@@ -96,6 +96,7 @@ function LoadUserRuleSet() {
   target.html(htmlCode);
   $('#countUserRules').html(presetJson.rulesets.length);
   updateDraggables();
+  mwindow.on_actionSaveAs_triggered();
 
 }
 
@@ -118,6 +119,7 @@ function loadRuleset(element) {
 
         rmanager.SetCurrentRulesetname(rname);
         setCurrentRulesetName();
+        mwindow.on_actionSaveAs_triggered();
       }
     }
   }
