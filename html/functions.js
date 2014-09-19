@@ -198,7 +198,7 @@ function insertRule(name, protocol, addr, port, collapsed, list) {
       '<label class="input-group-addon"><div class="formLabel">Port</div></label>' +
       '<input type="text" name="ports" class="form-control ports" placeholder="All" value="' + port + '">' +
       '</div>' +
-      '<div class="form-group input-group">' +
+      '<div class="form-group input-group inputcheckbox">' +
       '<div class="checkbox">' +
       '<label class="checkbox-inline"><input type="checkbox" name="protocol[]" value="tcp"' + tcp + '> TCP</label>' +
       '</div>' +

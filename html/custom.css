@@ -246,11 +246,11 @@ body {
 }
 
 .has-feedback .form-control-feedback {
-  top: 25px;
-  right: 0px;
+  top: 0;
+  right: 0;
+  z-index: 1000;
 }
 
-.form-horizontal .has-feedback .form-control-feedback {
-  top: 0;
-  right: 15px;
+.inputcheckbox .form-control-feedback {
+  visibility: hidden;
 }
