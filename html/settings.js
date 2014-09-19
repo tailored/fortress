@@ -76,6 +76,7 @@ function autoDetectSettings() {
   }
   validateSettings();
   getSettings();
+    console.log("narf");
   mwindow.updateStashesContent();
 }
 

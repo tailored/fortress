@@ -31,8 +31,13 @@ fireWallWindow::fireWallWindow(QWidget *parent) :
     ui(new Ui::fireWallWindow)
 {
     ui->setupUi(this);
+    //inspector
+    this->ui->fireWallWebView->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled,true);
+    //QWebInspector inspector;
+    //inspector.setPage(this->ui->fireWallWebView->page());
+    //inspector.setVisible(true);
     // disable context menus
-    this->ui->fireWallWebView->setContextMenuPolicy(Qt::NoContextMenu);
+    //this->ui->fireWallWebView->setContextMenuPolicy(Qt::NoContextMenu);
     // download stashes list
     fdl = new FileDownloader(QUrl::fromUserInput(FORTRESS_GITHUB_STASHLIST_URL), this);
     connect(fdl,SIGNAL(downloaded()),SLOT(setStashesList()));
@@ -97,6 +102,7 @@ void fireWallWindow::setStashesList() {
  * @brief fireWallWindow::updateStashesContent
  */
 void fireWallWindow::updateStashesContent() {
+    qDebug() << "foobar";
     QFileInfo tmp(SettingsManager::getSharedInstance()->getValue("settings/stashurl"));
     rDl = new FileDownloader(tmp.path().append('/').append(FORTRESS_STASHES_RULES_FILENAME));
     connect(rDl,SIGNAL(downloaded()),SLOT(setRulesList()));

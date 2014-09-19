@@ -34,6 +34,7 @@
 #include <QProcess>
 #include <QStringList>
 #include <QMessageBox>
+#include <QWebInspector>
 
 #include "settingsmanager.h"
 #include "defines.h"
@@ -122,6 +123,11 @@ private slots:
      */
     Q_INVOKABLE QString getCurrentConfig();
     /**
+     * @brief saveAs
+     * @param proposedName
+     */
+    Q_INVOKABLE void saveAs(QString proposedName);
+    /**
      * @brief on_actionDeploy_triggered
      */
     void on_actionDeploy_triggered();
@@ -137,11 +143,6 @@ private slots:
      * @brief on_actionSaveAs_triggered
      */
     void on_actionSaveAs_triggered();
-    /**
-     * @brief saveAs
-     * @param proposedName
-     */
-    Q_INVOKABLE void saveAs(QString proposedName);
     /**
      * @brief on_actionDebploy_on_Boot_triggered
      */
