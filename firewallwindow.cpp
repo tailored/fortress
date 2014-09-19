@@ -277,12 +277,22 @@ void fireWallWindow::on_actionQuit_triggered()
  */
 void fireWallWindow::on_actionSaveAs_triggered()
 {
+    this->saveAs("");
+}
+
+/**
+ * @brief fireWallWindow::saveAs
+ * @param proposedName
+ */
+void fireWallWindow::saveAs(QString proposedName)
+{
+    if(proposedName == NULL) proposedName = "";
     QString rn = NULL;
     QString tmpRn = RulesManager::getSharedInstance()->GetCurrentRulesetName();
     QString r = this->getCurrentConfig();
     while(rn == NULL) {
         bool ok = false;
-        QString qi = QInputDialog::getText(this, FORTRESS_RULESET_SAVE_DIALOG_TITLE, FORTRESS_RULESET_SAVE_DIALOG_TEXT,QLineEdit::Normal,QString::null,&ok);
+        QString qi = QInputDialog::getText(this, FORTRESS_RULESET_SAVE_DIALOG_TITLE, FORTRESS_RULESET_SAVE_DIALOG_TEXT,QLineEdit::Normal,proposedName,&ok);
         if(!ok) return;
         QFile tmpFile(SettingsManager::getSharedInstance()->getFullSettingsPath().append(FORTRESS_RULES_MANAGER_RULES_REL_PATH_USER_PRESETS).append(qi));
         if(tmpFile.exists()) {

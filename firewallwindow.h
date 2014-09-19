@@ -136,7 +136,12 @@ private slots:
     /**
      * @brief on_actionSaveAs_triggered
      */
-    Q_INVOKABLE void on_actionSaveAs_triggered();
+    void on_actionSaveAs_triggered();
+    /**
+     * @brief saveAs
+     * @param proposedName
+     */
+    Q_INVOKABLE void saveAs(QString proposedName);
     /**
      * @brief on_actionDebploy_on_Boot_triggered
      */
