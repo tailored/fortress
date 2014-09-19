@@ -69,6 +69,31 @@ public:
      * @brief updateWebView
      */
     void updateWebView();
+
+public slots:
+    /**
+     * @brief updateStashesContent
+     */
+    Q_INVOKABLE void updateStashesContent();
+    /**
+     * @brief on_actionUpdateRemote_triggered
+     */
+    Q_INVOKABLE void on_actionUpdateRemote_triggered();
+    /**
+     * @brief on_actionSave_triggered
+     */
+    Q_INVOKABLE void on_actionSave_triggered();
+    /**
+     * @brief getCurrentConfig
+     * @return
+     */
+    Q_INVOKABLE QString getCurrentConfig();
+    /**
+     * @brief saveAs
+     * @param proposedName
+     */
+    Q_INVOKABLE void saveAs(QString proposedName);
+
 private slots:
     /**
      * @brief on_fireWallWebView_loadFinished
@@ -104,29 +129,6 @@ private slots:
      * @return
      */
     bool osIsSupported();
-
-    /**
-     * @brief updateStashesContent
-     */
-    Q_INVOKABLE void updateStashesContent();
-    /**
-     * @brief on_actionUpdateRemote_triggered
-     */
-    Q_INVOKABLE void on_actionUpdateRemote_triggered();
-    /**
-     * @brief on_actionSave_triggered
-     */
-    Q_INVOKABLE void on_actionSave_triggered();
-    /**
-     * @brief getCurrentConfig
-     * @return
-     */
-    Q_INVOKABLE QString getCurrentConfig();
-    /**
-     * @brief saveAs
-     * @param proposedName
-     */
-    Q_INVOKABLE void saveAs(QString proposedName);
     /**
      * @brief on_actionDeploy_triggered
      */

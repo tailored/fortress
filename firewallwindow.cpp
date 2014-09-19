@@ -33,9 +33,6 @@ fireWallWindow::fireWallWindow(QWidget *parent) :
     ui->setupUi(this);
     //inspector
     this->ui->fireWallWebView->settings()->setAttribute(QWebSettings::DeveloperExtrasEnabled,true);
-    //QWebInspector inspector;
-    //inspector.setPage(this->ui->fireWallWebView->page());
-    //inspector.setVisible(true);
     // disable context menus
     //this->ui->fireWallWebView->setContextMenuPolicy(Qt::NoContextMenu);
     // download stashes list
