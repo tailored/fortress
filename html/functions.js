@@ -19,16 +19,6 @@
  * File: functions.js                                                     *
  **************************************************************************/
 
-/**
- *
- */
-function onRuleDrop() {
-  //var form = callToSomeCPPFunctionWhichProvidesFormData(ruleType);
-  // - form target will trigger another c++ function to store form value to ruleset according to ruletype
-  // - ruletype can be either tcp, udp or icmp
-  // - i'll implement this tomorrow i am tired now :)
-  //alert("on drop function triggered");
-}
 
 /**
  * Populate the #rulesets-remote-list
@@ -51,8 +41,6 @@ function callBackUpdatePresets() {
           htmlCode += '</div>\n';
           htmlCode += '<a href="#" class="btn btn-success pull-left presetButton" onclick="loadRuleset(\'#remoterule' + i + '\')"><div class="glyphicon glyphicon-arrow-left"></div></a>';
           htmlCode += '</li>\n';
-
-          //insertRule(rulesJson.rules[i].name, {"tcp":1, "udp":1}, "127.0.0.1", 0, 0, true, 2);
         }
         target.html(htmlCode);
         $('#countPresets').html(presetJson.rulesets.length);

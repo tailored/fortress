@@ -244,3 +244,13 @@ body {
     border-bottom-right-radius: 4px;
     border-bottom-left-radius: 4px;
 }
+
+.has-feedback .form-control-feedback {
+  top: 25px;
+  right: 0px;
+}
+
+.form-horizontal .has-feedback .form-control-feedback {
+  top: 0;
+  right: 15px;
+}
