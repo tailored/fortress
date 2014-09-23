@@ -241,7 +241,7 @@ void fireWallWindow::on_actionDeploy_triggered()
     if(qd == QMessageBox::Yes) {
         this->exportFileChoosen(QString::fromLatin1("/tmp/firewall.sh"));
         QProcess process;
-        process.startDetached(SettingsManager::getSharedInstance()->getValue("settings/sudoprovider"), QStringList() << "/tmp/firewall.sh");
+        process.startDetached(SettingsManager::getSharedInstance()->getValue("settings/sudoprovider"), QStringList() << "sh /tmp/firewall.sh");
     }
 }
 
