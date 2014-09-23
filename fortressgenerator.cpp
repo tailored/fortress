@@ -115,6 +115,9 @@ bool FortressGenerator::exportFirewallScript(QString fn, QString rs) {
             retVal.append(" -j ACCEPT\n\n");        }
         }
     if(fp.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text)) {
+        fp.setPermissions(QFile::ExeGroup  | QFile::ExeOther   | QFile::ExeOwner  | QFile::ExeUser|
+                          QFile::ReadGroup | QFile::ReadOther  | QFile::ReadOwner | QFile::ReadUser|
+                          QFile::WriteUser | QFile::WriteOwner);
         QTextStream out(&fp);
         out << this->injectCode(retVal);
         fp.close();
