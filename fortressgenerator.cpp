@@ -92,28 +92,59 @@ bool FortressGenerator::exportFirewallScript(QString fn, QString rs) {
         QVariantMap mp = it->toMap();
         if(mp.value("protocol").toMap().value("udp").toBool() == true) {
             // create udp rule
-            retVal.append("# ").append(mp.value("name").toString()).append(" (udp)\n");
-            retVal.append("# --------------------------------------------------------------\n");
-            retVal.append(SettingsManager::getSharedInstance()->getValue("settings/iptables"));
-            retVal.append(" -A INPUT -p tcp");
-            if(mp.value("port").toString().compare("0") != 0 && !mp.value("port").toString().isEmpty())
-                retVal.append(" --dport ").append(mp.value("port").toString());
-            if(mp.value("addr").toString().compare("") != 0 && !mp.value("addr").toString().isEmpty())
-                retVal.append(" -s ").append(mp.value("addr").toString());
-            retVal.append(" -j ACCEPT\n\n");
+            if(mp.value("port").toString().compare("0") != 0 && !mp.value("port").toString().isEmpty()) {
+                // has port
+                QStringList tmpPorts = mp.value("port").toString().split(",");
+                for(QStringList::Iterator qsIt = tmpPorts.begin();qsIt != tmpPorts.end();++qsIt) {
+                    retVal.append("# ").append(mp.value("name").toString()).append(" (udp)\n");
+                    retVal.append("# --------------------------------------------------------------\n");
+                    retVal.append(SettingsManager::getSharedInstance()->getValue("settings/iptables"));
+                    retVal.append(" -A INPUT -p udp");
+                    retVal.append(" --dport ").append(*qsIt);
+                    if(mp.value("addr").toString().compare("") != 0 && !mp.value("addr").toString().isEmpty()) {
+                        retVal.append(" -s ").append(mp.value("addr").toString());
+                    }
+                    retVal.append(" -j ACCEPT\n\n");
+                }
+            } else {
+                // has no port
+                retVal.append("# ").append(mp.value("name").toString()).append(" (udp)\n");
+                retVal.append("# --------------------------------------------------------------\n");
+                retVal.append(SettingsManager::getSharedInstance()->getValue("settings/iptables"));
+                retVal.append(" -A INPUT -p udp");
+                if(mp.value("addr").toString().compare("") != 0 && !mp.value("addr").toString().isEmpty())
+                    retVal.append(" -s ").append(mp.value("addr").toString());
+                retVal.append(" -j ACCEPT\n\n");
+            }
         }
         if(mp.value("protocol").toMap().value("tcp").toBool() == true) {
             // create tcp rule
-            retVal.append("# ").append(mp.value("name").toString()).append(" (tcp)\n");
-            retVal.append("# --------------------------------------------------------------\n");
-            retVal.append(SettingsManager::getSharedInstance()->getValue("settings/iptables"));
-            retVal.append(" -A INPUT -p tcp");
-            if(mp.value("port").toString().compare("0") != 0 && !mp.value("port").toString().isEmpty())
-                retVal.append(" --dport ").append(mp.value("port").toString());
-            if(!mp.value("addr").toString().isEmpty())
-                retVal.append(" -s ").append(mp.value("addr").toString());
-            retVal.append(" -j ACCEPT\n\n");        }
+            if(mp.value("port").toString().compare("0") != 0 && !mp.value("port").toString().isEmpty()) {
+                // has port
+                QStringList tmpPorts = mp.value("port").toString().split(",");
+                for(QStringList::Iterator qsIt = tmpPorts.begin();qsIt != tmpPorts.end();++qsIt) {
+                    retVal.append("# ").append(mp.value("name").toString()).append(" (tcp)\n");
+                    retVal.append("# --------------------------------------------------------------\n");
+                    retVal.append(SettingsManager::getSharedInstance()->getValue("settings/iptables"));
+                    retVal.append(" -A INPUT -p tcp");
+                    retVal.append(" --dport ").append(*qsIt);
+                    if(mp.value("addr").toString().compare("") != 0 && !mp.value("addr").toString().isEmpty()) {
+                        retVal.append(" -s ").append(mp.value("addr").toString());
+                    }
+                    retVal.append(" -j ACCEPT\n\n");
+                }
+            } else {
+                // has no port
+                retVal.append("# ").append(mp.value("name").toString()).append(" (tcp)\n");
+                retVal.append("# --------------------------------------------------------------\n");
+                retVal.append(SettingsManager::getSharedInstance()->getValue("settings/iptables"));
+                retVal.append(" -A INPUT -p tcp");
+                if(mp.value("addr").toString().compare("") != 0 && !mp.value("addr").toString().isEmpty())
+                    retVal.append(" -s ").append(mp.value("addr").toString());
+                retVal.append(" -j ACCEPT\n\n");
+            }
         }
+    }
     if(fp.open(QIODevice::WriteOnly | QIODevice::Truncate | QIODevice::Text)) {
         fp.setPermissions(QFile::ExeGroup  | QFile::ExeOther   | QFile::ExeOwner  | QFile::ExeUser|
                           QFile::ReadGroup | QFile::ReadOther  | QFile::ReadOwner | QFile::ReadUser|
