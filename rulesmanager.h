@@ -100,6 +100,16 @@ public:
      */
     Q_INVOKABLE bool DeleteUserRuleResponsive(QString);
     /**
+     * @brief setIsDeployAble
+     * @return
+     */
+    Q_INVOKABLE void setIsDeployAble(bool);
+    /**
+     * @brief getIsDeployAble
+     * @return
+     */
+    Q_INVOKABLE bool getIsDeployAble();
+    /**
      * @brief ClearStashPresets
      * @return
      */
@@ -149,6 +159,10 @@ private:
      * @brief currentRulesetName
      */
     QString currentRulesetName;
+    /**
+     * @brief isDeployable
+     */
+    bool isDeployable;
 };
 
 #endif // RULESMANAGER_H

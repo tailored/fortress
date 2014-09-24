@@ -35,6 +35,7 @@
 #include <QStringList>
 #include <QMessageBox>
 #include <QWebInspector>
+#include <QTimer>
 
 #include "settingsmanager.h"
 #include "defines.h"
@@ -93,6 +94,10 @@ public slots:
      * @param proposedName
      */
     Q_INVOKABLE void saveAs(QString proposedName);
+    /**
+     * @brief checkDeploymentability
+     */
+    Q_INVOKABLE void checkDeploymentability();
 
 private slots:
     /**
@@ -171,7 +176,10 @@ private:
      * @brief presetsDone
      */
     bool presetsDone;
-
+    /**
+     * @brief timer
+     */
+    QTimer *timer;
 protected:
     /**
      * @brief resizeEvent
