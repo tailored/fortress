@@ -228,6 +228,7 @@ function updateDraggables() {
         .click(function () {
             $(this).parent().parent().parent().hide("puff", null, 200, function () {
                 $(this).remove();
+              rulesChanged();
             });
 
         });
@@ -242,14 +243,16 @@ function updateDraggables() {
             form_port = $(this).parent().find("input.ports").val();
             form_addr = $(this).parent().find("input.address").val();
 
-            if (form_title) {
+
+        if (form_title) {
                 $container.find(".list-group-item-heading").text(form_title);
             }
 
             var protocoljson = {"tcp": form_tcp, "udp": form_udp};
             var rulejson = {"name": form_title, "protocol": protocoljson, "port": form_port, "addr": form_addr};
             $jsonstore.text(JSON.stringify(rulejson));
-            return false;
+        rulesChanged();
+        return false;
         });
 
 }
@@ -300,19 +303,19 @@ function initGui() {
     });
 
     validateSettings();
-    if (smanager.getValue("settings/firstrun").length < 1) {
-        alert("Fortress has not been configured yet, please go to settings and run autodetect or configure manually!");
-        $("#settingsTab").highlight();
-    }
     getSettings();
 }
 
-/**
- *
- */
+
+function rulesChanged() {
+  rf = $('.ruleform');
+  rf.data('bootstrapValidator').validate();
+  rmanager.setIsDeployAble(rf.data('bootstrapValidator').isValid());
+}
+
+
 function validateRules() {
     $('.ruleform').bootstrapValidator({
-        // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
         feedbackIcons: {
             valid: 'glyphicon glyphicon-ok',
             invalid: 'glyphicon glyphicon-remove',
@@ -369,4 +372,5 @@ function validateRules() {
 
         }
     }).bootstrapValidator('validate');
+  rulesChanged();
 }
