@@ -33,6 +33,7 @@ static RulesManager* rulesMangerInstance = NULL;
 RulesManager::RulesManager(QObject *parent) :
     QObject(parent)
 {
+    this->isDeployable = false;
     this->configBasePath = SettingsManager::getSharedInstance()->getFullSettingsPath();
     this->fullRulePath = SettingsManager::getSharedInstance()->getFullSettingsPath()
             + FORTRESS_RULES_MANAGER_RULES_REL_PATH;
@@ -238,4 +239,20 @@ bool RulesManager::DeleteUserRuleResponsive(QString rule) {
 bool RulesManager::DeleteUserRule(QString rule) {
     if(QFile::remove(SettingsManager::getSharedInstance()->getFullSettingsPath().append(FORTRESS_RULES_MANAGER_RULES_REL_PATH_USER_PRESETS).append(rule))) return true;
     else return false;
+}
+
+/**
+ * @brief RulesManager::setIsDeployAble
+ * @param b
+ */
+void RulesManager::setIsDeployAble(bool b) {
+    this->isDeployable = b;
+}
+
+/**
+ * @brief RulesManager::getIsDeployAble
+ * @return
+ */
+bool RulesManager::getIsDeployAble() {
+    return this->isDeployable;
 }

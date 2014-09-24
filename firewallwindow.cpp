@@ -56,7 +56,9 @@ fireWallWindow::fireWallWindow(QWidget *parent) :
     FortressGenerator::getSharedInstance();
     RulesManager::getSharedInstance();
     SettingsManager::getSharedInstance()->detectOS();
-    this->osIsSupported();
+    this->timer = new QTimer(this);
+    connect(timer, SIGNAL(timeout()), this, SLOT(checkDeploymentability()));
+    this->timer->start(1000);
 }
 
 /**
@@ -64,6 +66,7 @@ fireWallWindow::fireWallWindow(QWidget *parent) :
  */
 fireWallWindow::~fireWallWindow()
 {
+    this->timer->stop();
     delete ui;
 }
 
@@ -381,5 +384,18 @@ void fireWallWindow::on_actionRemove_from_Boot_triggered()
             QProcess process;
             process.execute(SettingsManager::getSharedInstance()->getValue("settings/os_supported"),QStringList() << QString::fromLatin1("reboot"));
         }
+    }
+}
+
+/**
+ * @brief fireWallWindow::checkDeploymentability
+ */
+void fireWallWindow::checkDeploymentability() {
+    if(RulesManager::getSharedInstance()->getIsDeployAble() && this->osIsSupported()) {
+        this->ui->actionDeploy->setEnabled(true);
+        this->ui->actionDebploy_on_Boot->setEnabled(true);
+    } else {
+        this->ui->actionDeploy->setEnabled(false);
+        this->ui->actionDebploy_on_Boot->setEnabled(false);
     }
 }
