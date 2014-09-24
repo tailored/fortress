@@ -65,7 +65,8 @@ function deleteUserRule(rulename) {
  * Populate the #rulesets-local-list
  */
 function LoadUserRuleSet() {
-    var presetJson = rmanager.LoadUserRules();
+  rmanager.setIsDeployAble(false);
+  var presetJson = rmanager.LoadUserRules();
     var target = $("#rulesets-local");
     var htmlCode = "";
     if (presetJson.length > 0) {
@@ -95,6 +96,7 @@ function LoadUserRuleSet() {
     target.html(htmlCode);
     $('#countUserRules').html(presetJson.rulesets.length);
     updateDraggables();
+  rmanager.setIsDeployAble(true);
 }
 
 
@@ -102,7 +104,8 @@ function LoadUserRuleSet() {
  * Load a ruleset from a given html element
  */
 function loadRuleset(element) {
-    if (confirm("This will replace your current ruleset! Are you sure?")) {
+  rmanager.setIsDeployAble(false);
+  if (confirm("This will replace your current ruleset! Are you sure?")) {
 
         rulesJson = JSON.parse($(element).val());
         if ((typeof rulesJson) == 'object') {
@@ -120,6 +123,7 @@ function loadRuleset(element) {
             }
         }
     }
+  rmanager.setIsDeployAble(true);
 }
 
 /**
@@ -228,7 +232,6 @@ function updateDraggables() {
         .click(function () {
             $(this).parent().parent().parent().hide("puff", null, 200, function () {
                 $(this).remove();
-              rulesChanged();
             });
 
         });
@@ -251,7 +254,6 @@ function updateDraggables() {
             var protocoljson = {"tcp": form_tcp, "udp": form_udp};
             var rulejson = {"name": form_title, "protocol": protocoljson, "port": form_port, "addr": form_addr};
             $jsonstore.text(JSON.stringify(rulejson));
-        rulesChanged();
         return false;
         });
 
@@ -282,9 +284,6 @@ function getCurrentRules() {
  *
  */
 function initGui() {
-    $('#toolTipPresets').tooltip();
-    $('#toolTipUserPresets').tooltip();
-    $('#toolTipRules').tooltip();
 
     $("#rules-active")
         .sortable({
@@ -302,7 +301,8 @@ function initGui() {
         validateRules();
     });
 
-    validateSettings();
+
+  validateSettings();
     getSettings();
 }
 
@@ -372,5 +372,4 @@ function validateRules() {
 
         }
     }).bootstrapValidator('validate');
-  rulesChanged();
 }
