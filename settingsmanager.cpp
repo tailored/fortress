@@ -73,6 +73,7 @@ bool SettingsManager::setValue(QString key, QString val) {
 void SettingsManager::initConfig() {
     this->detectSudoProvider();
     this->detectIptables();
+    this->setValue("settings/stashurl",FORTRESS_GITHUB_STASHLIST_URL);
     this->setValue("settings/firstrun", "false");
 }
 
