@@ -58,7 +58,7 @@ fireWallWindow::fireWallWindow(QWidget *parent) :
     SettingsManager::getSharedInstance()->detectOS();
     this->timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(checkDeploymentability()));
-    this->timer->start(1000);
+    this->timer->start(100);
 }
 
 /**
