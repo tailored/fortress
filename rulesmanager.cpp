@@ -33,7 +33,7 @@ static RulesManager* rulesMangerInstance = NULL;
 RulesManager::RulesManager(QObject *parent) :
     QObject(parent)
 {
-    this->isDeployable = false;
+    this->isDeployable = true;
     this->configBasePath = SettingsManager::getSharedInstance()->getFullSettingsPath();
     this->fullRulePath = SettingsManager::getSharedInstance()->getFullSettingsPath()
             + FORTRESS_RULES_MANAGER_RULES_REL_PATH;
