@@ -40,6 +40,7 @@ void OsDeploymentHelper::ubuntuDeploy() {
     QFile file("/etc/rc.local");
     file.open(QIODevice::ReadOnly|QIODevice::Text);
     QString rcLocalContents = file.readAll();
+    qDebug() << rcLocalContents;
     file.close();
     if(rcLocalContents.contains("/exit 0/") && !rcLocalContents.contains(QString("/").append(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH).append("firewall.sh").append("/"))) {
         qDebug() << "inside!";
