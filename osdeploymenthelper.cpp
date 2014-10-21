@@ -42,6 +42,7 @@ void OsDeploymentHelper::ubuntuDeploy() {
     qDebug() << "deploymentcontents: " << rcLocalContents;
     qDebug() << "contains : " << QString("/").append(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH).append("firewall.sh").append("/") << " => "
            << rcLocalContents.contains(QString("/").append(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH).append("firewall.sh").append("/"));
+    qDebug() << "contains : /exit 0/" << rcLocalContents.contains("/exit 0/");
     if(rcLocalContents.contains("/exit 0/") && !rcLocalContents.contains(QString("/").append(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH).append("firewall.sh").append("/"))) {
         qDebug() << "we have entered the loop";
         rcLocalContents.replace("/exit 0/",QString(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH).append("firewall.sh\nexit 0"));
