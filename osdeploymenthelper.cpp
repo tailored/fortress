@@ -42,7 +42,7 @@ void OsDeploymentHelper::ubuntuDeploy() {
     QString rcLocalContents = file.readAll();
     file.close();
     if(rcLocalContents.contains("exit 0") && !rcLocalContents.contains(QString("").append(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH).append("firewall.sh").append(""))) {
-        rcLocalContents.replace(QRegExp("/exit 0$/"),QString(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH).append("firewall.sh\nexit 0"));
+        rcLocalContents.replace(QRegExp("[^\"]exit 0[^\"]"),QString(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH).append("firewall.sh\nexit 0"));
         process.execute(SettingsManager::getSharedInstance()->getValue("settings/sudoprovider"),
                         QStringList() << QString("echo \"").append(rcLocalContents).append("\" > /etc/rc.local"));
     }
