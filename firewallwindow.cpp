@@ -382,7 +382,7 @@ void fireWallWindow::on_actionRemove_from_Boot_triggered()
         qm = QMessageBox::critical(this,FORTRESS_DIALOG_TITLE_REBOOT, FORTRESS_DIALOG_TEXT_REBOOT,QMessageBox::Yes|QMessageBox::No);
         if(qm == QMessageBox::Yes) {
             QProcess process;
-            process.execute(SettingsManager::getSharedInstance()->getValue("settings/os_supported"),QStringList() << QString::fromLatin1("reboot"));
+            process.execute(SettingsManager::getSharedInstance()->getValue("settings/sudoprovider"),QStringList() << QString::fromLatin1("reboot"));
         }
     }
 }
