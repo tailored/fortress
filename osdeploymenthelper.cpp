@@ -43,8 +43,6 @@ void OsDeploymentHelper::ubuntuDeploy() {
     file.close();
     if(rcLocalContents.contains("exit 0") && !rcLocalContents.contains(QString("").append(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH).append("firewall.sh").append(""))) {
         rcLocalContents.replace(QRegExp("[^\"]exit 0[^\"]"),QString(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH).append("firewall.sh\nexit 0"));
-        //process.execute(SettingsManager::getSharedInstance()->getValue("settings/sudoprovider"),
-        //                QStringList() << QString("echo \"").append(rcLocalContents).append("\" \> /etc/rc.local"));
         QFile file("/tmp/rc.local");
         file.open(QIODevice::WriteOnly|QIODevice::Text);
         file.write(rcLocalContents.toLocal8Bit());
@@ -72,9 +70,14 @@ void OsDeploymentHelper::ubuntuRemove() {
     QFile file("/etc/rc.local");
     file.open(QIODevice::ReadOnly|QIODevice::Text);
     QString rcLocalContents = file.readAll();
+    file.close();
     if(rcLocalContents.contains(QString("").append(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH).append("firewall.sh").append(""))) {
         rcLocalContents.replace(QString("").append(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH).append("firewall.sh").append(""),"");
+        QFile file("/tmp/rc.local");
+        file.open(QIODevice::WriteOnly|QIODevice::Text);
+        file.write(rcLocalContents.toLocal8Bit());
+        file.close();
         process.execute(SettingsManager::getSharedInstance()->getValue("settings/sudoprovider"),
-                        QStringList() << QString("echo \"").append(rcLocalContents).append("\" \> /etc/rc.local"));
+                        QStringList() << QString("mv /tmp/rc.local /etc/rc.local"));
     }
 }
