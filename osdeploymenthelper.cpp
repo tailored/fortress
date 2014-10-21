@@ -40,6 +40,7 @@ void OsDeploymentHelper::ubuntuDeploy() {
     QFile file("/etc/rc.local");
     file.open(QIODevice::ReadOnly|QIODevice::Text);
     QString rcLocalContents = file.readAll();
+    file.close();
     if(rcLocalContents.contains("/exit 0/") && !rcLocalContents.contains(QString("/").append(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH).append("firewall.sh").append("/"))) {
         rcLocalContents.replace("/exit 0/",QString(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH).append("firewall.sh\nexit 0"));
         process.execute(SettingsManager::getSharedInstance()->getValue("settings/sudoprovider"),
@@ -63,6 +64,7 @@ void OsDeploymentHelper::gentooRemove() {
 void OsDeploymentHelper::ubuntuRemove() {
     QProcess process;
     QFile file("/etc/rc.local");
+    file.open(QIODevice::ReadOnly|QIODevice::Text);
     QString rcLocalContents = file.readAll();
     if(rcLocalContents.contains(QString("/").append(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH).append("firewall.sh").append("/"))) {
         rcLocalContents.replace(QString("/").append(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH).append("firewall.sh").append("/"),"");
