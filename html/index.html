@@ -26,7 +26,7 @@
   <div class="tab-content">
     <div class="tab-pane fade in active" id="rules">
       <div class="page-header headerpadding"><h2 id="headercaption"></h2></div>
-      <div class="div-content float-left eightypercent" id="ruleslist">
+      <div class="div-content float-left" id="ruleslist">
         <div class="list-group-item list-group-item-info listSingleItem">
           <div class="list-group-item-heading">Deny from all</div>
           <div class="list-group-item-text">
@@ -40,7 +40,7 @@
         </ul>
       </div>
 
-      <div class="float-left twentypercent paddingfive ruleslist">
+      <div class="sidebar">
         <div class="btn-group btn-block">
           <button class="btn btn-danger btn-block"
                   onclick="insertRule('New Rule', {'tcp': true, 'udp': true}, '', '', false, 0); updateDraggables(); validateRules();">

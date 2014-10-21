@@ -30,7 +30,7 @@ body {
   border-radius: 5px;
   border: 1px solid lightgrey !important;
   padding: 5px;
-  margin: 5px;
+  margin: 5px 250px 5px 5px;
 }
 
 .float-left {
@@ -253,4 +253,12 @@ body {
 
 .inputcheckbox .form-control-feedback {
   visibility: hidden;
+}
+
+.sidebar {
+  position: absolute;
+  right: 0;
+  width: 240px;
+  padding-left: 10px;
+  padding-right: 10px;
 }

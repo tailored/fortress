@@ -106,7 +106,6 @@ function LoadUserRuleSet() {
 function loadRuleset(element) {
   rmanager.setIsDeployAble(false);
   if (confirm("This will replace your current ruleset! Are you sure?")) {
-
     rulesJson = JSON.parse($(element).val());
     if ((typeof rulesJson) == 'object') {
       if (rulesJson.hasOwnProperty('rules')) {
