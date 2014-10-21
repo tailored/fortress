@@ -19,6 +19,10 @@
  * File: custom.css                                                       *
  **************************************************************************/
 
+html {
+  overflow-y: scroll;
+}
+
 body {
   padding: 10px 0 0 0;
   -webkit-user-select: none;
@@ -118,7 +122,15 @@ body {
 .list-group-item-heading {
   font-weight: bold;
   font-size: 20px;
-  padding-left: 10px;
+  padding: 10px;
+}
+
+.list-group-item {
+  padding: 0;
+}
+
+.list-group-item:hover {
+  /*background-color: #eee;*/
 }
 
 #rules-active .list-group-item-heading:hover {
