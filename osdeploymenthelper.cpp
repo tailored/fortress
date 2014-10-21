@@ -38,14 +38,10 @@ void OsDeploymentHelper::ubuntuDeploy() {
     process.execute(SettingsManager::getSharedInstance()->getValue("settings/sudoprovider"),
                     QStringList() << QString("cp /etc/rc.local /etc/rc.local.fortressbackup"));
     QFile file("/etc/rc.local");
+    file.open(QIODevice::ReadOnly|QIODevice::Text);
     QString rcLocalContents = file.readAll();
-    qDebug() << "deploymentcontents: " << rcLocalContents;
-    qDebug() << "contains : " << QString("#").append(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH).append("firewall.sh").append("#") << " => "
-           << rcLocalContents.contains(QRegExp(QString("#").append(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH).append("firewall.sh").append("#")));
-    qDebug() << "contains : exit 0" << rcLocalContents.contains(QRegExp("/exit 0/"));
-    if(rcLocalContents.contains(QRegExp("/exit 0/")) && !rcLocalContents.contains(QRegExp(QString("#").append(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH).append("firewall.sh").append("#")))) {
-        qDebug() << "we have entered the loop";
-        rcLocalContents.replace(QRegExp("/exit 0/"),QString(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH).append("firewall.sh\nexit 0"));
+    if(rcLocalContents.contains("/exit 0/") && !rcLocalContents.contains(QString("/").append(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH).append("firewall.sh").append("/"))) {
+        rcLocalContents.replace("/exit 0/",QString(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH).append("firewall.sh\nexit 0"));
         process.execute(SettingsManager::getSharedInstance()->getValue("settings/sudoprovider"),
                         QStringList() << QString("echo `").append(rcLocalContents).append("`"));
     }
