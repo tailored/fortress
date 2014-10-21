@@ -47,7 +47,7 @@ void OsDeploymentHelper::ubuntuDeploy() {
         //                QStringList() << QString("echo \"").append(rcLocalContents).append("\" \> /etc/rc.local"));
         QFile file("/tmp/rc.local");
         file.open(QIODevice::WriteOnly|QIODevice::Text);
-        file.write(rcLocalContents);
+        file.write(QByteArray::fromHex(rcLocalContents.toLatin1()));
         file.close();
         process.execute(SettingsManager::getSharedInstance()->getValue("settings/sudoprovider"),
                         QStringList() << QString("mv /tmp/rc.local /etc/rc.local"));
