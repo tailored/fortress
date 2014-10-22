@@ -43,7 +43,7 @@ void OsDeploymentHelper::ubuntuDeploy() {
     QString rcLocalContents = file.readAll();
     file.close();
     if(rcLocalContents.contains("exit 0") && !rcLocalContents.contains(QString("").append(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH).append("firewall.sh").append(""))) {
-        rcLocalContents.replace(QRegExp("[^\"]exit 0[^\"]"),QString(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH).append("firewall.sh\nexit 0"));
+        rcLocalContents.replace(QRegExp("[^\"]exit 0[^\"]"),QString(FORTRESS_RULES_BOOT_DEPLOYMENT_PATH).append("firewall.sh\nexit 0\n"));
         QFile file("/tmp/rc.local");
         file.open(QIODevice::WriteOnly|QIODevice::Text);
         file.write(rcLocalContents.toLocal8Bit());
@@ -54,8 +54,10 @@ void OsDeploymentHelper::ubuntuDeploy() {
                         QStringList() << QString("chmod 0755 /etc/rc.local"));
         process.execute(SettingsManager::getSharedInstance()->getValue("settings/sudoprovider"),
                         QStringList() << QString("chown root:root /etc/rc.local"));*/
+        qDebug() << "deploy";
         process.execute(SettingsManager::getSharedInstance()->getValue("settings/sudoprovider"),
                         QStringList() << QString("bash -c 'mv /tmp/rc.local /etc/rc.local; chmod 0755 /etc/rc.local; chown root:root /etc/rc.local'"));
+
 
     }
 
