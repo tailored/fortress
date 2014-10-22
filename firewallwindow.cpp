@@ -340,6 +340,7 @@ void fireWallWindow::on_actionDebploy_on_Boot_triggered()
                 OsDeploymentHelper::gentooDeploy();
             } else if(os.compare("Ubuntu") == 0
                       || os.compare("Debian") == 0
+                      || os.compare("Arch Linux") == 0
                       || os.compare("Fedora") == 0) {
                 OsDeploymentHelper::ubuntuDeploy();
             }
