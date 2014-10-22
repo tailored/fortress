@@ -51,6 +51,8 @@ void OsDeploymentHelper::ubuntuDeploy() {
                         QStringList() << QString("mv /tmp/rc.local /etc/rc.local"));
         process.execute(SettingsManager::getSharedInstance()->getValue("settings/sudoprovider"),
                         QStringList() << QString("chmod 0755 /etc/rc.local"));
+        process.execute(SettingsManager::getSharedInstance()->getValue("settings/sudoprovider"),
+                        QStringList() << QString("chown root:root /etc/rc.local"));
     }
 
 }
@@ -83,5 +85,7 @@ void OsDeploymentHelper::ubuntuRemove() {
                         QStringList() << QString("mv /tmp/rc.local /etc/rc.local"));
         process.execute(SettingsManager::getSharedInstance()->getValue("settings/sudoprovider"),
                         QStringList() << QString("chmod 0755 /etc/rc.local"));
+        process.execute(SettingsManager::getSharedInstance()->getValue("settings/sudoprovider"),
+                        QStringList() << QString("chown root:root /etc/rc.local"));
     }
 }
